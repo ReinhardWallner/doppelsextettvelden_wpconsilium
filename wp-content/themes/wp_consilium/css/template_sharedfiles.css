@@ -60,15 +60,6 @@ select[aria-disabled="true"] {
   border: 1px solid #ccc;
 }
 
-.shared-files-pagination-improved {
-  flex-shrink: 0;
-  position: sticky;
-  bottom: 0;
-  background: #fff;
-  padding: 8px;
-  border-top: 1px solid #ddd;
-}
-
 .row1 {
   display: flex;          /* Zeilen als Flexbox */
   min-width: max-content; /* Breite richtet sich nach Inhalt */
@@ -368,14 +359,20 @@ margin-bottom: .25rem;
   }
 
   /* Styles for Modify template */
-  .search-row-top,
+  .search-row-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 7fr auto; /* erste Spalte fix, zweite nimmt Rest */
+    gap: 1rem;
+	align-items: center;
+	margin-bottom: 0.5rem;
+  }
   .search-row-bottom {
-      display: flex !important;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      width: auto !important;      /* override 100% width */
+    display: grid;
+    grid-template-columns: 1fr 2fr 7fr auto; /* erste Spalte fix, zweite nimmt Rest */
+    gap: 1rem;
+	align-items: center;
+	margin-bottom: 0.5rem;
+															
   }
 
   /* Eingabeelemente in diesen Zeilen nicht auf volle Breite */
@@ -396,21 +393,9 @@ margin-bottom: .25rem;
   .search-input {
     padding-top: 4px !important;
     padding-bottom: 3px !important;
+    min-width: 250px;
   }
-
-  .search-row-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px; /* Abstand zwischen den Blöcken */
-  }
-  
-  .search-row-bottom > * {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
+ 
   .option-checkbox,
   .option-select {
     display: flex;
