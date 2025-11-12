@@ -1,0 +1,299 @@
+/*
+Style Only Theme Unblemished
+*/
+
+/* ==========================================================================
+    Start Header
+========================================================================== */
+#wp-consilium-unblemished.home #cshero-header {
+    border-bottom: 1px solid #d9d9d9;
+    -webkit-box-shadow: 0 1px 2px #d9d9d9;
+       -moz-box-shadow: 0 1px 2px #d9d9d9;
+        -ms-box-shadow: 0 1px 2px #d9d9d9;
+         -o-box-shadow: 0 1px 2px #d9d9d9;
+            box-shadow: 0 1px 2px #d9d9d9;
+}
+.button-down {
+    outline: none;
+}
+.button-down:before {
+    font-size: 32px;
+    color: #fff;
+}
+/* ==========================================================================
+    End Header
+========================================================================== */
+/*================== Start Style Widget ================*/
+h3.ww-title, h3.cs-title {
+    line-height: 1;
+    margin: 0 0 50px;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.ww-subtitle {
+    color: #333;
+    font-size: 25px;
+    text-transform: none;
+}
+.ww-desc, .cs-desc {
+    text-transform: none;
+}
+a.read-more-link.btn {
+    text-transform: uppercase;
+}
+/**** Newsletterwidget ***/
+[id^="newsletterwidget-"], [id*="newsletterwidget-"] {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+[id^="newsletterwidget-"] form, [id*="newsletterwidget-"] form {
+    margin-top: 15px;
+    position: relative;
+}
+.newsletter .newsletter-email {
+    border: 1px solid #777;
+    color: #ccc;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    text-indent: 10px;
+    width: 100%;
+    font-weight: 400;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+        -ms-border-radius: 0;
+         -o-border-radius: 0;
+            border-radius: 0;
+}
+.newsletter .newsletter-submit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none !important;
+    border: none;
+    text-indent: -9999px;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    opacity: 0;
+}
+.newsletter .newsletter-submit:focus, .newsletter .newsletter-submit:hover  {
+    background: none !important;
+    border: none !important;
+    opacity:0;
+}
+.newsletter form:before {
+    content: "\f0e0";
+    font-family: FontAwesome;
+    font-size: 17px;
+    color: #ccc;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+/**** End Newsletterwidget ***/
+/*================== End Style Widget ================*/
+
+/* ==========================================================================
+   Start Shortcode
+========================================================================== */
+#wp-consilium-unblemished .cs-fancy-box.fancy-box-style-5 .cs-fancy-box-title i {
+    background: none !important;
+}
+#wp-consilium-unblemished .cs-fancy-box.fancy-box-style-4 .cs-fancy-box-icon i {
+    background: none;
+    font-size: 28px;
+    line-height: 1;
+}
+#wp-consilium-unblemished .cs-fancy-box.fancy-box-style-4 .cs-fancy-box-content {
+    padding: 0;     
+}
+#wp-consilium-unblemished h3.cs-team-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+#wp-consilium-unblemished .cs-team.cs-team-style-3 .cs-carousel-container {
+    border: 1px solid #ebebeb;
+    padding: 20px;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+         -o-border-radius: 3px;
+            border-radius: 3px;
+}
+#wp-consilium-unblemished .cs-team.cs-team-style-3 .cs-team-category {
+    border-bottom: 1px solid #ebebeb;
+    margin: 0 0 8px;
+    padding: 0 0 8px;
+}
+#wp-consilium-unblemished .cs-team.cs-team-style-3 .cs-team-description {
+    border-bottom: 1px solid #ebebeb;
+}
+#wp-consilium-unblemished .cs-team.cs-team-style-3 .cs-team-content .cs-team-social i {
+    font-size: 14px;
+    height: 34px;
+    width: 34px;
+    line-height: 34px;
+    color: #666;
+    border: 1px solid #ededed;
+    background: padding-box;
+    -webkit-border-radius: 50px;
+       -moz-border-radius: 50px;
+        -ms-border-radius: 50px;
+         -o-border-radius: 50px;
+            border-radius: 50px;
+}
+#wp-consilium-unblemished .cs-team.cs-team-style-3 .cs-team-content .cs-team-social i:hover {
+    -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+        -ms-transform: scale(1);
+         -o-transform: scale(1);
+            transform: scale(1);
+            color: #fff !important;
+}
+#wp-consilium-unblemished .q_counter_holder.boxed_counter {
+    border: none;
+    background: rgba(0,0,0,0.4);
+}
+#wp-consilium-unblemished #cs_portfolio_filters ul li {
+    margin: 0 15px 15px 0;
+}
+#wp-consilium-unblemished.rtl #cs_portfolio_filters ul li {
+    margin: 0 0 15px 15px;
+}
+#wp-consilium-unblemished #cs_portfolio_filters ul li a {
+    background: none !important;
+    color: inherit !important;
+    border-width: 0;
+    font-size: 14px;
+    padding: 0;
+}
+#wp-consilium-unblemished #cs_portfolio_filters ul li a:after {
+    content: "/";
+    padding-left: 15px;
+    color: #888 !important;
+}
+#wp-consilium-unblemished #cs_portfolio_filters ul li:last-child a:after {
+    content: "";
+}
+.cs-carousel-client .cs-carousel-item {
+    margin-bottom: 0 !important;
+}
+#wp-consilium-unblemished .cs-nav ul li {
+    margin: 0 1px;
+}
+#wp-consilium-unblemished .cs-nav ul li a {
+    display: block;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    -webkit-border-radius: 2px;
+       -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+         -o-border-radius: 2px;
+            border-radius: 2px;
+	text-align:center;
+}
+#wp-consilium-unblemished .cs-nav ul li a i,
+#wp-consilium-unblemished .cs-nav ul li a i:before {
+    color: #fff;
+    font-size: 14px;
+}
+#wp-consilium-unblemished .cs-testimonial.cs-testimonial-style-4 .cs-nav {
+    margin: 30px 0 0;
+    padding: 30px 0 0;
+    border-top: 1px solid rgba(255,255,255,0.3);
+}
+#wp-consilium-unblemished .cs-testimonial.cs-testimonial-style-4 .cs-testimonial-title-style {
+    display: none;
+}
+#wp-consilium-unblemished .cs-testimonial.cs-testimonial-style-4 .cs-testimonial-text {
+    padding-top: 45px;
+    position: relative;
+}
+#wp-consilium-unblemished .cs-testimonial.cs-testimonial-style-4 .cs-testimonial-text:before {
+    content: "\f10d";
+    font-family: FontAwesome;
+    font-size: 28px;
+    font-style: normal;
+    height: 30px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+/* ==========================================================================
+   End Shortcode
+========================================================================== */
+#wp-consilium-unblemished .getTouch {
+    background: #fff;
+    border: 1px solid #eeeeee;
+    padding: 30px;
+    color: #666;
+}
+#wp-consilium-unblemished .getTouch li.title-first {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    padding: 0;
+    margin: 0 0 25px;
+}
+#wp-consilium-unblemished .getTouch li i {
+    color: #999999;
+    font-size: 14px;
+}
+/* ==========================================================================
+   Start Footer Top
+========================================================================== */
+
+/* ==========================================================================
+   End Footer Top
+========================================================================== */
+
+/* ==========================================================================
+   Start Footer Bottom
+========================================================================== */
+#footer-bottom .footer-bottom {
+    text-align: center;
+}
+#footer-bottom .cs-social {
+    margin: 0 0 20px;
+}
+#footer-bottom .cs-social li a i {
+    font-size: 28px;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    border: 1px solid #fff;
+    border-radius: 100%;
+}
+/* ==========================================================================
+   End Footer End
+========================================================================== */
+/*================== Custom Css Only Theme ================*/
+.entry-title {text-transform: uppercase;}
+input[type='text'],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+textarea {
+    background: #fff;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+         -o-border-radius: 3px;
+            border-radius: 3px;
+}
+/*================== End Custom Css Only Theme ================*/

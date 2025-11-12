@@ -1,0 +1,21 @@
+/* Start: CONTROL BAR */
+.tag-audio .mejs-container {
+	background: #f5f5f5;
+    height: 67px !important;
+}
+.tag-audio .mejs-container .mejs-controls {
+	background: #f6f6f6;
+	margin-bottom: 18px;
+}
+.tag-audio .mejs-controls .mejs-button button {
+	background: url("../images/play.png") no-repeat center top;
+}
+.tag-audio .mejs-controls .mejs-button.mejs-pause button {
+	background: url("../images/pause.png") no-repeat center top;
+}
+.tag-audio .mejs-controls .mejs-volume-button button {
+	background: url("../images/volume.png") no-repeat center top;
+}
+.tag-audio .mejs-controls .mejs-volume-button.mejs-unmute button {
+	background: url("../images/mute.png") no-repeat center top;
+}

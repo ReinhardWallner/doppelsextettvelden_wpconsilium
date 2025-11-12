@@ -1,0 +1,331 @@
+/*
+Style Only Theme Mainpage
+*/
+
+/* ==========================================================================
+  Start Button
+========================================================================== */
+a.read-more-link.btn {
+    text-transform: uppercase;
+}
+/* ==========================================================================
+  End Button
+========================================================================== */
+/* ==========================================================================
+    Start Header
+========================================================================== */
+
+.meny-arrow {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-family: FontAwesome;   
+    cursor: pointer;
+    z-index: 1000;
+    width: 100%;
+    padding: 17px 0;
+    padding: 17px 0;
+    line-height: normal;
+}
+.back-to-demo {
+    float: left;
+    left: 0;
+    margin: 0 20px;
+    padding: 0 14px;
+    position: absolute;
+    top: 8px;
+}
+.back-to-demo i:before {
+    left: 0;
+    position: absolute;
+    top: 6px;
+}
+.back-to-demo a {
+    color: #fff;
+}
+.back-to-demo i {
+    font-size: 22px;
+}
+.meny-arrow i {
+    margin: 0 8px;
+}
+.meny-active .meny-arrow {
+    display: none;
+}
+.meny-active #wrapper{
+    margin-top: 0;
+}
+.meny-top .meny-sidebar .control {
+    text-align: center;
+    width: 100% !important;
+} 
+.meny-top .meny-sidebar .cs_close {
+    display: inline-block;
+    position: relative;
+    font-size: 0;
+}
+.meny-top .meny-sidebar .cs_close:before {
+    content: "\f2bd";
+    font-family: "Ionicons";
+    font-size: 28px;
+    left: -22px;
+    position: absolute;
+    top: 0;
+}
+.meny-top .meny-sidebar .cs_close:after {
+    content: "ELEMENTS & TOOLS MENU";
+    font-size: 13px;
+    font-family: 'Novecentowide-Bold';
+}
+.meny-top .cs_close i {
+    display: none;
+}
+#sticky-nav-wrap .menu-item-open {
+    display: none !important;
+}
+/* ==========================================================================
+    End Header
+========================================================================== */
+
+/* ==========================================================================
+    Start Feature Slider
+========================================================================== */
+/*** Font Default ***/
+.novecento-regular {
+    font-family: 'Novecentowide-Regular' !important;
+}
+.novecento-light-regular {
+    font-family: 'Novecentowide-Light' !important;
+}
+.novecento-medium {
+    font-family: 'Novecentowide-Medium' !important;
+}
+.novecento-bold {
+    font-family: 'Novecentowide-Bold' !important;
+}
+.tp-leftarrow.tparrows, .tp-rightarrow.tparrows {
+    background: url(../images/leftarrow.png) no-repeat center center rgba(255,255,255,1);
+    top: 43% !important;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+
+}
+.tp-leftarrow.tparrows {
+    left: 0 !important;
+}
+.tp-leftarrow.tparrows:hover, .tp-rightarrow.tparrows:hover {
+    height: 65px;
+    width: 65px;
+    line-height: 65px;
+}
+.tp-rightarrow.tparrows {
+    right: 0 !important;
+    background: url(../images/rightarrow.png) no-repeat center center rgba(255,255,255,1);
+}
+/* ==========================================================================
+    End Feature Slider
+========================================================================== */
+/*================== Start Style Widget ================*/
+h3.ww-title, h3.cs-title {
+    line-height: 1;
+    margin: 0 0 15px;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.ww-subtitle {
+    color: #333;
+    font-size: 25px;
+    text-transform: none;
+}
+.ww-desc, .cs-desc {
+    text-transform: none;
+}
+.fix-absolute [class*="vc_col-"], .fix-absolute .stripe-video-content {
+    position: inherit;
+}
+.fix-absolute #cs_portfolio_filters {  
+    left: 0;
+    position: absolute;
+    top: 398px;
+    width: 100%;
+}
+.fix-absolute #cs_portfolio_filters ul {
+    line-height: 1;
+    padding: 17px 0;
+}
+.fix-absolute #cs_portfolio_filters ul li {
+    margin: 0;
+}
+/*================== End Style Widget ================*/
+
+/* ==========================================================================
+   Start Porfolio
+========================================================================== */
+
+#cs_portfolio_filters {
+    background: #000000;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    position: relative;
+}
+#cs_portfolio_filters:before {
+    background: #000;
+    color: #fff;
+    content: "FILTER";
+    font-size: 10px;
+    height: 20px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: -20px;
+    width: 60px;
+    z-index: 1;
+}
+#cs_portfolio_filters ul {
+    margin: 0;
+    padding: 30px 0 25px;
+}
+#cs_portfolio_filters ul li {
+    margin-right: 0px;
+}
+#cs_portfolio_filters ul li a {
+    background: none !important;
+    border: medium none;
+    line-height: 1;
+    padding: 0 10px 0 5px;
+    text-transform: uppercase;
+    color: #a3a3a3 !important;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+        -ms-border-radius: 0;
+         -o-border-radius: 0;
+            border-radius: 0;
+    border-right: 1px solid #a3a3a3;
+}
+#cs_portfolio_filters ul li.active a {
+    color: #a3a3a3 !important;
+}
+#cs_portfolio_filters ul li:last-child a {
+    border-right: none;
+}
+#cs_portfolio_filters ul li.active a {
+    background: transparent !important;
+}
+#cs_portfolio_filters ul li a:hover {
+    background: transparent !important;
+}
+.cs-portfolio.cs-portfolio-style3 {
+    max-width: 1170px;
+    margin: auto;
+}
+.cs-portfolio-container.style-3 {
+    margin: 60px 0 0;
+}
+.cs-portfolio-container.style-3 .cs-portfolio-title a {
+    color: #ddd;
+}
+.cs-portfolio .cs-portfolio-item .cs-portfolio-header a {
+    text-align: center;
+    display: block;
+}
+.cs-portfolio .cs-portfolio-item .cs-portfolio-header img {
+    width: inherit;
+}
+.cs-portfolio.cs-portfolio-style3  .cs-portfolio-header {
+    overflow: hidden;
+}
+.cs-portfolio.cs-portfolio-style3 .cs-mainpage {
+    position: relative;
+    overflow: hidden;
+}
+.cs-portfolio.cs-portfolio-style3 .cs-mainpage img {
+    display: block;
+}
+.cs-portfolio.cs-portfolio-style3 .cs-mainpage:before {
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    -webkit-transition: all 300ms linear 0ms;
+       -moz-transition: all 300ms linear 0ms;
+         -o-transition: all 300ms linear 0ms;
+        -ms-transition: all 300ms linear 0ms;
+            transition: all 300ms linear 0ms;
+}
+.cs-portfolio.cs-portfolio-style3 .cs-mainpage a {
+    bottom: 0;
+    color: #fff;
+    font-size: 46px;
+    height: 46px;
+    line-height: 46px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 46px;
+    display: block;
+    text-align: center;
+    outline: none;
+    -webkit-transform: translateY(-600px);
+       -moz-transform: translateY(-600px);
+        -ms-transform: translateY(-600px);
+         -o-transform: translateY(-600px);
+            transform: translateY(-600px);
+    -webkit-transition: all 300ms linear 0ms;
+       -moz-transition: all 300ms linear 0ms;
+         -o-transition: all 300ms linear 0ms;
+        -ms-transition: all 300ms linear 0ms;
+            transition: all 300ms linear 0ms;
+}
+.cs-portfolio.cs-portfolio-style3 .cs-mainpage:hover a {
+    -webkit-transform: translateY(0);
+       -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+         -o-transform: translateY(0);
+            transform: translateY(0);
+}
+/* ==========================================================================
+   End Porfolio
+========================================================================== */
+
+/* ==========================================================================
+   Start Footer Top
+========================================================================== */
+#footer-top h3.wg-title {
+    font-size: 24px;
+    letter-spacing: 0;;
+}
+#wp-consilium-mainpage #footer-top [class*="footer-top-"], 
+#wp-consilium-mainpage #footer-top [class^="footer-top-"] {
+    margin-bottom: 0;
+    min-height: 0;
+}
+/* ==========================================================================
+   End Footer Top
+========================================================================== */
+
+/* ==========================================================================
+   Start Footer Bottom
+========================================================================== */
+#wp-consilium #footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 20px;
+    color: #fff;
+}
+/* ==========================================================================
+   End Footer End
+========================================================================== */
+/*================== Custom Css Only Theme ================*/
+.entry-title {text-transform: uppercase;}
+/*================== End Custom Css Only Theme ================*/

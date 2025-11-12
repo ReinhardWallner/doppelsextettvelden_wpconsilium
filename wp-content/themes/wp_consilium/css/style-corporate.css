@@ -1,0 +1,429 @@
+/*
+Style Only Theme Corporate
+*/
+
+/* ==========================================================================
+  Start Button
+========================================================================== */
+#wp-consilium-corporate input[type="submit"] {
+  background: #3d4345;
+  border-radius: 1px;
+  box-shadow: 1px 1px 0 #8a8c8d inset;
+  font-size: 14px;
+  line-height: 1;
+  padding: 14px 30px;
+  text-transform: uppercase;
+}
+#wp-consilium-corporate input[type="submit"]:hover {
+  border: none !important;
+}
+
+/* ==========================================================================
+  End Start Button
+========================================================================== */
+
+/* ==========================================================================
+   Style VC Row & Body
+========================================================================== */
+body#wp-consilium-corporate {
+  
+}
+.cs-time {
+	border-bottom: 1px solid #888;
+  border-top: 1px solid #888;
+  display: inline-block;
+  text-transform: uppercase;
+  line-height: 36px;
+  font-size: 14px;
+  padding: 15px 55px;
+}
+.cs-fancy-box.fancy-box-style-5 .cs-fancy-box-title i:hover,.cs-fancy-box.fancy-box-style-5:hover .cs-fancy-box-title i{
+	background:#E9E9E9;
+	color:#444;
+}
+/* ==========================================================================
+  Start Header
+========================================================================== */
+
+
+/**** Main Menu ****/
+
+#header-sticky   .sticky-menu    .cshero-menu-dropdown ul  {
+    float: right;
+}
+
+/* ==========================================================================
+  End Header
+========================================================================== */
+
+/* ==========================================================================
+   Blog
+========================================================================== */
+#wp-consilium-corporate .cs-blog {
+  padding: 0;
+  margin: 0 0 40px;
+  border: none;
+}
+#wp-consilium-corporate .cs-blog .readmore {
+  margin: 30px 0 0;
+}
+#wp-consilium-corporate .cs-blog  .cs-blog-list-meta {
+    position: relative;
+}
+#wp-consilium-corporate .cs-blog-list-meta.unliststyle > li:before {
+  content: "-";
+  padding: 0 3px 0 2px;
+}
+#wp-consilium-corporate .cs-blog-list-meta.unliststyle > li:first-child:before,
+#wp-consilium-corporate .cs-blog-list-meta.unliststyle > li:last-child:before {
+  padding: 0;
+  content: "";
+}
+#wp-consilium-corporate .cs-blog-list-meta.unliststyle > li .cs_social:before {
+  content: "-";
+  padding: 0 2px;
+}
+#wp-consilium-corporate .cs-blog  .cs-blog-list-meta:before {
+    position: absolute;
+    width: 130px;
+    height: 1px ;
+    content: "";
+    bottom: 0;
+    left: 0;
+    margin-bottom: -1px;
+}
+#wp-consilium-corporate .cs-blog .cs-blog-quote .cs-blog-list-meta:before {
+  background: none;
+}
+#wp-consilium-corporate .cs-blog .cs-blog-info li + li {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+#wp-consilium-corporate .btn.btn-readmore {
+  font-size: 18px;
+  padding: 12px 54px;
+  line-height: 1;
+}
+#wp-consilium-corporate .cs_social .popover {
+  z-index: 10;
+}
+#wp-consilium-corporate ul.cs_social_items_show {
+  padding: 0;
+  line-height: 26px;
+  border: none;
+  padding: 10px;
+}
+#wp-consilium-corporate ul.cs_social_items_show li {
+  margin: 0 !important;
+  line-height: 24px;
+}
+#wp-consilium-corporate ul.cs_social_items_show li a {
+  cursor: pointer;
+}
+/* ==========================================================================
+   End Blog
+========================================================================== */
+
+/* ==========================================================================
+  Shortcode
+========================================================================== */
+.wpcf7-form .wpcf7-submit{margin:0;}
+.wpcf7-form input[type="text"], .wpcf7-form input[type="email"], .wpcf7-form textarea {
+  width: 90%;
+  padding: 0;
+}
+.wpcf7-form textarea {
+	max-height: 120px;
+  padding: 5px 0;
+}
+#wp-consilium-corporate .getTouch > li, 
+#wp-consilium-corporate .getTouchSidebar > li {
+  line-height: 20px;
+  margin-bottom: 20px;
+  padding: 0 0 0 45px;
+  position: relative;
+}
+.rtl #wp-consilium-corporate .getTouch > li, 
+.rtl #wp-consilium-corporate .getTouchSidebar > li {
+  padding: 0 45px 0 0;
+}
+/*================== Start Style Input ================*/
+input[type='text'],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+    background: #f5f5f5;
+    background: -webkit-linear-gradient(#f5f5f5, #fff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f5f5f5, #fff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f5f5f5, #fff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f5f5f5, #fff); /* Standard syntax (must be last) */
+    border: 1px solid #e9e9e9;
+    border-radius: 0;
+    box-shadow: none;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    text-indent: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+.form-control::-moz-placeholder, .form-textarea::-moz-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-webkit-placeholder, .form-textarea::-webkit-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-o-placeholder, .form-textarea::-o-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-ms-placeholder, .form-textarea::-ms-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+
+input[type='text']:active,
+input[type='text']:focus,
+input[type="password"]:active,
+input[type="password"]:focus,
+input[type="datetime"]:active,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:active,
+input[type="datetime-local"]:focus,
+input[type="date"]:active,
+input[type="date"]:focus,
+input[type="month"]:active,
+input[type="month"]:focus,
+input[type="time"]:active,
+input[type="time"]:focus,
+input[type="week"]:active,
+input[type="week"]:focus,
+input[type="number"]:active,
+input[type="number"]:focus,
+input[type="email"]:active,
+input[type="email"]:focus,
+input[type="url"]:active,
+input[type="url"]:focus,
+input[type="search"]:active,
+input[type="search"]:focus,
+input[type="tel"]:active,
+input[type="tel"]:focus,
+input[type="color"]:active,
+input[type="color"]:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0;
+}
+textarea {
+    background: #f5f5f5;
+    background: -webkit-linear-gradient(#f5f5f5, #fff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f5f5f5, #fff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f5f5f5, #fff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f5f5f5, #fff); /* Standard syntax (must be last) */
+    border: 1px solid #e9e9e9;
+    width: 100%;
+    height: 180px;
+    padding: 6px 0;
+    text-indent: 10px;
+    color: #372f2b;
+    padding: 5px 0;
+    font-weight: normal;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+}
+textarea:active,
+textarea:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #113a52;
+}
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #113a52;
+}
+select {
+    background: #fff;
+    background-image: linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -o-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -moz-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -ms-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-gradient(top, #fff 0%, #f5f5f5 100%);
+    border: 1px solid #e5e5e5;
+    font-size: 15px;
+    color: #372f2b;
+    padding: 5px;
+    height: 37px;
+    line-height: 37px;
+    width: 100%;
+}
+.styleSelect {
+    margin-bottom: 20px;
+ }
+.styleSelect select {
+    margin: 0;
+    -webkit-border-radius:4px;
+       -moz-border-radius:4px;
+            border-radius:4px;
+    -webkit-box-shadow: 0 1px 3px #e5e5e5;
+    -moz-box-shadow: 0 1px 3px #e5e5e5;
+    box-shadow: 0 1px 3px #e5e5e5;
+    color: #372f2b;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    min-width: 135px;
+}
+.styleSelect label {position:relative}
+.styleSelect label:after {
+    content:'\f0d9   \f0da';
+    font:13px "Consolas", monospace;
+    color: #5f5f5f;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:7px;
+    top: 11px;
+    padding:0 0 2px;
+    position:absolute;
+    pointer-events:none;
+    font-family: FontAwesome;
+}
+.styleSelect label:before {
+    background: #fff;
+    background-image: linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -o-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -moz-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -ms-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-gradient(top, #fff 0%, #f5f5f5 100%);
+    content: "";
+    display: block;
+    height: 30px;
+    pointer-events: none;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 24px
+}
+.wpb_single_image img{display:block;}
+/*================== End Style Input ================*/
+/*================== Custom Css Only Theme ================*/
+.entry-title {text-transform: uppercase;}
+
+#wp-consilium-corporate  .primary-sidebar [class*="widget_"],#wp-consilium-corporate  .primary-sidebar [class^="widget_"],#wp-consilium-corporate  .primary-sidebar .widget {
+    border-bottom: 0px solid #ebebeb;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+li.eg-washington-wrapper{background:none !important;}
+.cs_icons.style1 {padding:0 10px 0 0;}
+.widget-area .widget_recent_comments ul li a{
+	display: inline!important;
+}
+#cs-breadcrumb-wrapper .cs-breadcrumbs{margin-top:10px;}
+.cs_icons.style2 + a {
+  vertical-align: super;
+  margin-left:10px;
+}
+.cs-time {display:block;}
+/*================== End Custom Css Only Theme ================*/
+/*================== Begin resposive Theme ================*/
+@media (max-width: 1200px) {
+	.header-v4 #header-top .cs-social{ margin-right: 10px;}
+	.vc_responsive   .cshero-menu-dropdown > ul > li > a,.vc_responsive   .menu-pages .menu > ul > li > a {
+		padding: 0 10px !important;
+	}
+}
+@media (max-width: 768px) {
+	.vc_empty_space {
+		max-height: 40px;
+	}
+	.cs-quote-style-1:before, .cs-quote-style-1:after {
+		font-size: 100px;
+	}
+	html.vc_transform {
+		margin-top: 0px !important;
+	}
+	body.admin-bar {
+		margin-top: 0;
+		padding-top: 46px;
+	}
+	.cs-full-piechart .cs-main-canvas {
+		margin: auto;
+		max-width: 100%;
+	}
+	.vc_responsive  .cs-full-piechart.style-5 .cs-main-style-5 .cs-full-piechart-content.title,.vc_responsive  .cs-full-piechart.style-5 .cs-main-style-5 #canvas-holder {
+	  display: block;
+	  margin: 10px 0 30px;
+	} 
+	.vc_responsive  #wrapper .q_counter_holder {
+		padding: 20px 0 !important;
+	}
+	.vc_responsive  .cs-full-piechart.style-5 .cs-piechart-list{
+		 margin: 0 auto;
+		 display:table;	 
+	}
+	.vc_responsive .cs-full-piechart.style-5 .cs-piechart-list li{
+		margin-right: 15px;
+		float: none;
+		display: inline-block;
+	}
+	.vc_responsive .cs-full-piechart.style-5 .cs-full-piechart-description{ text-align:center;}
+	h1{font-size:200%!important;}
+	h2{font-size:180%!important;}
+	h3{font-size:150%!important;}
+	h4{font-size:130%!important;}
+	.vc_responsive .vc_separator .vc_sep_holder{display: none;}
+	.cs-full-piechart.style-5 .cs-main-style-5 {
+		margin: 0 auto;
+	}
+	.vc_responsive #footer-top [class*="footer-top-"],.vc_responsive #footer-top [class^="footer-top-"] {
+		margin-bottom: 0;
+	}
+	.vc_responsive .cs-pricing .cs-pricing-item.cs-pricing-feature {
+		margin-top: 0px;
+	}
+}
+/*================== Begin resposive Theme ================*/
+

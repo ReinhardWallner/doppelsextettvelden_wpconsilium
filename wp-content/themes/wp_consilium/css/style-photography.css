@@ -1,0 +1,31 @@
+/*
+Style Only Theme Photography
+*/
+
+/* ==========================================================================
+   Slider
+========================================================================== */
+#wp-consilium-photography .tp-leftarrow.default {
+    background: url("../images/slider_nav_left.png") no-repeat;
+    height: 104px;
+    width: 43px;
+    z-index: 100;
+    left: 0!important;
+    margin-top: -52px!important;
+}
+#wp-consilium-photography .tp-rightarrow.default {
+    background: url("../images/slider_nav_right.png") no-repeat;
+    height: 104px;
+    width: 43px;
+    z-index: 100;
+    right: 0!important;
+    margin-top: -52px!important;
+}
+
+/* ==========================================================================
+   Footer
+========================================================================== */
+#footer-bottom .footer-bottom-2{
+    text-align:right;
+}
+

@@ -1,0 +1,562 @@
+/*
+Style Responsive
+*/
+@media (max-width: 1024px) {
+    /*---- Call to action ----*/
+    #wrapper .cs_call_to_action.cs_align_right .cs-button-call, 
+    #wrapper .cs_call_to_action.cs_align_left .wpb_call_text,
+    #wrapper .cs_call_to_action.cs_align_left .cs-button-call, 
+    #wrapper .cs_call_to_action.cs_align_right .wpb_call_text {
+        float: none;
+    }
+    #wrapper .cs_call_to_action {
+        text-align: center;
+    }
+    #wrapper .cs_call_to_action .wpb_call_text {
+        line-height: 24px;
+        margin: 0 0 20px;
+        display: inline-block;
+    }
+    #wrapper .menu-item-open {
+        display: none;
+    }
+}
+@media (max-width: 992px) and (min-width: 767px) {
+    .header-v4 .navbar-toggle {position: absolute;right: 15px;top: 20px;}
+    .header-v4  div.header-top {  position: relative; padding-right:60px;}
+    #wp-consilium-retro .logo .normal-logo {
+        max-height: 86px !important;
+    }
+    .wpb_row .col-sm-6 {
+        width: 50%;
+    }
+    #wp-consilium-mainpage #wrapper #cshero-header .logo {
+        padding-left: 15px;
+        text-align: left;
+    }
+}
+@media (max-width: 992px) {
+    #header-sticky .btn.btn-navbar {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        padding: 10px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    #wp-consilium-retro #header-sticky .btn.btn-navbar {
+        position: inherit;
+        top: 0;
+    }
+    #wp-consilium-agency #header-sticky .btn.btn-navbar {
+        position: inherit;
+        top: 10px;
+        padding: 10px 15px;
+    }
+    #wp-consilium-retro #header-sticky .btn.btn-navbar,
+    #wp-consilium-retro #header-sticky .btn.btn-navbar:hover,
+    #wp-consilium-retro #header-sticky .btn.btn-navbar:focus {
+        color: #fff !important;
+    }
+    #wp-consilium .sticky-header.fixed {
+        border-bottom: none;
+    }
+    #wp-consilium #header-sticky li.menu-item-cart-search {
+        display: none !important;
+    }
+    /*** Menu Cart ***/
+    #wrapper .menu-mobile-cart-search {
+        line-height: 75px;
+        position: absolute;
+        right: 15px;
+    }
+    #wrapper .menu-mobile-cart-search li {
+        float: left;
+    }
+    #wp-consilium #wrapper .header-cart-search,
+    #wp-consilium #wrapper .menu-mobile-cart-search .menu-item-open  {
+        line-height: 75px;
+    }
+    #wrapper .menu-item-cart-search .header-cart-search .widget_searchform_content, 
+    #wrapper .menu-item-cart-search .header-cart-search .shopping_cart_dropdown {
+        top: 75px;
+    }
+    #wrapper .cshero-mmenu .cshero-mobile-menu li.menu-item-cart-search,
+    #wrapper .cshero-mmenu .cshero-mobile-menu li.menu-item-open {
+        display: none !important;
+    } 
+    /*---- Shortcode ------*/
+    #wrapper .cs-coverBoxs-grid {
+        height: inherit !important;
+    }
+    #wrapper #cshero-header .logo {
+        text-align: center;
+    }
+    #wrapper .menu-mobile-cart-search .widget_cart_search_wrap .header a,
+    #wrapper .menu-mobile-cart-search .menu-item-open a {
+        padding: 0 7px !important;
+        line-height: 75px;
+    }
+    .header-cart-search a.cs_open {
+        padding: 0 0 0 7px !important;
+    }
+    #wrapper ul.mega-bg-image {
+        background: none !important;
+    }
+    /**** Cover Box ***/
+    #wrapper .cover_boxes ul {
+        margin: 0;
+        padding: 0;
+        width: inherit;
+    }
+    #wrapper .cover_boxes ul li, 
+    #wrapper .cover_boxes ul li.active {
+        width: 46%;
+        margin: 0 2%;
+    }
+    #wrapper .cover_boxes ul li .box {
+        width: 100%;
+    }
+    #wrapper .cover_boxes ul li .box .thumb {
+        float: none;
+        margin: 0;
+        display: block;
+        width: 100%;
+    }
+    #wrapper .cover_boxes ul li .box .thumb img {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    #wrapper .cover_boxes ul li .box .box_content {
+        left: inherit;
+        padding: 0;
+        position: inherit;
+        top: 0;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    #wp-consilium-agency .cs-header-custom .cs-logo {
+        text-align: center;
+        line-height: 70px;
+    }   
+    #wp-consilium-agency .cs-header-custom .cs-logo a {
+        padding: 0 !important;
+    }
+    #wp-consilium-agency .cs-header-custom .cs-logo a img {
+        vertical-align: middle;
+    }
+    #wp-consilium-agency .cs-header-custom .navbar-toggle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    #wp-consilium-agency .cs-header-custom .navbar-toggle i:before {
+        color: #fff !important;
+    }
+    #wp-consilium-agency .cs-main-logo {
+        width: 100%;
+    }
+    #wp-consilium-agency .cs-main-menu {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        width: 100%;
+        padding-top: 30px;
+    }
+    #wp-consilium-agency #cshero-header .wpb_row .cs-main-menu {
+        padding-right: 0 !important;
+    }
+    /* ==========================================================================
+    Style Main Page
+    ========================================================================== */
+    #wp-consilium-mainpage #cshero-header {
+        background: #fff;
+        padding: 0;
+    }
+    #wp-consilium-mainpage .btn-navbar.navbar-toggle {
+        padding: 7px;
+    }
+    #wp-consilium-mainpage #cshero-header header {
+        border: none !important;
+    }
+    #wp-consilium-mainpage .cshero-mmenu ul li a {
+        display: block;
+        font-family: "OpenSans-Regular";
+        line-height: 40px;
+        text-align: left;
+    }
+    /* ==========================================================================
+    Style Retro
+    ========================================================================== */
+    #wp-consilium-retro #wrapper .header-wrapper .logo a {
+        width: 100%;
+    }
+    #wp-consilium-retro .btn.btn-navbar {
+        margin: 18px 0;
+    }
+    #wp-consilium-retro .cshero-mmenu{
+        position: absolute;
+        top: 120px;
+    }
+    /* ==========================================================================
+    End Style Retro
+    ========================================================================== */
+    #wp-consilium-unblemished .btn.btn-navbar {
+        position: absolute;
+        right: 15px;
+        top: 11px;
+    }
+    #wp-consilium-unblemished .container {
+        padding: 0;
+    }
+}
+@media (max-width: 768px) {
+    /* ==========================================================================
+    Style Retro
+    ========================================================================== */
+    #wp-consilium-retro .btn.btn-navbar {
+        margin: 12px 0;
+    }
+    /* ==========================================================================
+    End Style Retro
+    ========================================================================== */
+}
+@media (max-width: 767px) {
+    /* set custom VC col to 0 */
+    .cs-row-container [class*="vc_custom_"]{
+        margin: 0!important;
+        padding: 0!important;
+    }
+    /*---- Start Header ----*/
+    .sticky-menu {
+        display: none;
+    }
+    /*** Social Top ***/
+    #wrapper .socialTop, #wrapper .textContact {
+        text-align: center;
+    }
+    .header-v1 #cshero-header div.logo {
+        text-align: center;
+    }
+    .header-wrapper  .header-v4 .logo a,
+    .header-v4 .tagline,.header-v4 #header-top .cs-social{display:block;text-align: center;}
+    .header-v4 .navbar-toggle {    float: none;     margin: 20px auto;  position:relative;}
+    /*---- End Header ----*/
+
+    /*---- Start breadcrumb ----*/
+    #wrapper .page-title-container, 
+    #wrapper .breadcrumb h1.entry-title {
+        text-align: center;
+    }
+    /*---- End breadcrumb ----*/
+
+    /*** Form Comment ***/
+    #wrapper blockquote {
+        margin: 0;
+    }
+    #wrapper .welcome  {
+        font-size: 26px;
+        line-height: 28px;
+        text-align: center;
+    }
+    /*---- VC ----*/
+    #wrapper .column_container {
+        margin-bottom: 35px;
+    }
+    /*---- Navigation ----*/
+    #wrapper .navigation .nav-previous, #wrapper .navigation .nav-next {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    /*---- Widget Sidebar ----*/
+    .primary-sidebar [class*="widget_"], .primary-sidebar [class^="widget_"] {
+        margin-top: 40px;
+    }
+    .primary-sidebar [class*="widget_"]:last-child, .primary-sidebar [class^="widget_"]:last-child {
+        margin-bottom: 30px;
+    }
+    /*---- Team ----*/
+    #wrapper .cs-team-content {
+        margin-bottom: 25px;
+    }
+    #wrapper .team .cs-team-meta {
+        padding: 28px;
+    }
+    /*---- Testimonial ----*/
+    #wrapper .cs-testimonial .cs-testimonial-content {
+        margin-bottom: 25px;
+    }
+
+    /*---- Pricing ----*/
+    #wrapper .cs-pricing .cs-pricing-item {
+        width: 50% !important;
+        margin-bottom: 30px;
+    }
+    #wrapper .cs-pricing .cs-pricing-item.cs-pricing-feature {
+        margin-top: 0;
+    }
+
+    /*---- Pie Chart ----*/
+    .cs-full-piechart {
+        margin-bottom: 60px;
+    }
+    #wrapper .cs-full-piechart .cs-main-canvas {
+        width: 300px !important;
+        height: 300px !important;
+    }
+     /*---- Progress ----*/
+    #wrapper .cs-progress-item .progress.vertical {
+        margin-bottom: 30px;
+    }
+
+    /*--- Fancy Icons Box ----*/
+    #wrapper .cs-fancy-box.fancy-box-style-10 {
+        padding: 0;
+    }
+    /*---- Comment Form ------*/
+    #commentform [class^="comment-"], #commentform [class*="comment-"] {
+        padding: 0;
+    }
+    /*---- Shortcode ------*/
+    #wrapper .cs-quote-style-1, #wrapper .cs-quote-style-2, #wrapper .cs-quote-style-3 {
+        margin: 20px;
+    }
+    #wrapper .q_counter_holder {
+        padding: 50px 0px !important;
+    }
+    #wrapper .vc_separator {
+        display: inline;
+    }
+    #wrapper #wp-consilium-retro .btn.btn-large {
+        padding: 10px 85px;
+    }
+    #wrapper .vc_separator.no-text .vc_sep_holder,
+    #wrapper .vc_separator .cs_separator_title h1,
+    #wrapper .vc_separator .cs_separator_title h2,
+    #wrapper .vc_separator .cs_separator_title h3,
+    #wrapper .vc_separator .cs_separator_title h4,
+    #wrapper .vc_separator .cs_separator_title h5,
+    #wrapper .vc_separator .cs_separator_title h6 {
+        display: inherit !important;
+        white-space: pre-line;
+        text-align: center;
+        line-height: 24px;
+    }
+    /**** Cover Box ***/
+    #wrapper .cover_boxes ul li, 
+    #wrapper .cover_boxes ul li.active {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    /*---- End Shortcode ------*/
+
+    /*---- Twitter Bottom ----*/
+    #wrapper .cs-latest-twitter {
+        padding: 0px 35px;
+    }
+    /**** Footer Top ***/
+    #footer-top [class*="footer-top-"], 
+    #footer-top [class^="footer-top-"] { 
+        margin-bottom: 30px;
+    }
+    #wrapper #footer-top [class*="footer-top-"] h3.wg-title, 
+    #footer-top [class^="footer-top-"] h3.wg-title {
+        text-align: center;
+    }
+    #wrapper #footer-bottom ul.menu {
+        margin-top: 5px;
+        text-align: center;
+    }
+    /*** Single Portfolio ***/
+    .single-portfolio #wrapper .cs-portfolio-item .cs-portfolio-details {
+        padding-right: 15px;
+    }
+    .single-portfolio #wrapper .cs-portfolio-item #cs-portfolio-media {
+        padding-left: 15px;
+        margin-top: 20px;
+    }
+    /*---- Start Menu Footer ----*/
+    #wrapper .menuFooter  {
+        text-align: center;
+        margin-top: 10px;
+    }
+    #wrapper .footer-bottom-1 {
+        text-align: center;
+    }
+    #wrapper .wpb_row [class^="vc_col-"],
+    #wrapper .wpb_row [class*="vc_col-"] {
+        padding-top: 30px;
+    }
+    #wrapper .wpb_row [class^="vc_col-"]:first-child,
+    #wrapper .wpb_row [class*="vc_col-"]:first-child,
+    #wp-consilium-unblemished #header-unblemished [class*="vc_col-"] {
+        padding-top: 0;
+    }
+    /*---- End Menu Footer ----*/
+    #wp-consilium-unblemished .wpcf7-form [class*="col-"]{
+        padding: 0 !important;
+    } 
+    #wp-consilium-unblemished .btn.btn-navbar {
+        position: absolute;
+        right: 15px;
+        top: -47px;
+    }
+    #wp-consilium-mainpage.meny-top {
+        overflow-x: hidden;
+    } 
+    /* ==========================================================================
+    Style Retro
+    ========================================================================== */
+    #wp-consilium-retro .retro-row-padding .container {
+      padding: 0 15px;
+    }
+    #wp-consilium-retro #wrapper .wpb_row .container > [class^="vc_col-"]:first-child,
+    #wp-consilium-retro #wrapper .wpb_row .container > [class*="vc_col-"]:first-child {
+        padding-left: inherit !important;
+        padding-right: inherit !important;
+    }
+    #wp-consilium-retro .logo .normal-logo {
+        max-height: 68px !important;
+    }
+    #wp-consilium-retro .page-title {
+        margin: 40px 0 0px;
+        text-align: center;
+    }
+    /* ==========================================================================
+    End Style Retro
+    ========================================================================== */
+    
+    /* ==========================================================================
+    Style Agency
+    ========================================================================== */
+    .cs-border-column .wpb_column {
+        border: none;
+    }
+    .cs-more-features a {
+        margin: 10px 0 0;
+    }
+    .cs-testimonial-featured-img-style2 {
+        margin-bottom: 30px;
+    }
+    #wp-consilium-agency.single-portfolio #primary-sidebar {
+        margin-top: 30px;
+    }
+    /** Menu Mobile Agency ****/
+    #wp-consilium-agency .header-v1 #cshero-header .logo img {
+        max-height: inherit;
+        vertical-align: middle;
+    } 
+    #wp-consilium-agency #header-sticky .btn.btn-navbar {
+        position: absolute;
+        top: 10px;
+        left: inherit;
+        margin: 0;
+    }
+    /* ==========================================================================
+    End Style Agency
+    ========================================================================== */   
+    #wp-consilium-mainpage #cshero-header .logo a img {
+        height: 35px !important;
+    }
+    #wp-consilium-mainpage .btn-navbar.navbar-toggle {
+        background: none;
+        border: none !important;
+        margin: auto;
+        padding: 0 !important;
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        color: #113a52 !important;
+        -webkit-box-shadow: 0 2px 3px #f5f5f5;
+       -moz-box-shadow: none;
+        -ms-box-shadow: none;
+         -o-box-shadow: none;
+            box-shadow: none;
+    }
+    #wp-consilium-mainpage .cs-portfolio.cs-portfolio-style3 .cs-mainpage img {
+        margin: auto;
+    }
+    #wp-consilium-mainpage .cs-portfolio.cs-portfolio-style3 {
+        max-width: 360px;
+    }
+    /* ==========================================================================
+    VS Responsive
+    ========================================================================== */
+    .wpb_row [class*="vc_col-"], .wpb_row [class^="vc_col-"] {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .wpb_row .no-container [class^="vc_col-"], .wpb_row .no-container [class*="vc_col-"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+@media (max-width: 640px) { 
+    /*---- Pricing ----*/
+    #wrapper .cs-pricing .cs-pricing-item {
+        width: 100% !important;
+    }
+    /*---- Comment ----*/
+    .comment-body .comment-meta + p {
+        margin-bottom: 60px;
+    }
+    #comments .comment-list .reply {
+        top: inherit;
+        bottom: 20px;
+        position: absolute;
+        right: 20px;
+    }
+    /*---- Button Size ----*/
+    #wrapper .btn.btn-large {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    #wrapper .btn.btn-medium {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+    #wrapper .btn.btn-small {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    /* ==========================================================================
+    Style Retro
+    ========================================================================== */
+    .title-style-colorprimary-retro h3, .title-style-colorwhite-retro h3, .title-style-colorprimary-retro2 h3 {
+        font-size: 62px;
+    }
+    /* ==========================================================================
+    End Style Retro
+    ========================================================================== */
+}
+@media (max-width: 480px) { 
+    .header-v1 #cshero-header .logo a {
+        line-height: 75px;
+        padding: 0;
+    }
+    .header-v1 #cshero-header .logo img {
+        max-height: 40px;
+    }
+    #wrapper .btn.btn-large {
+        font-size: 13px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+@media (max-width: 320px) { 
+    .header-v1 #cshero-header .logo img {
+        max-height: 30px;
+    }
+    #wrapper .menu-mobile-cart-search .widget_cart_search_wrap .header a,
+    #wrapper .menu-mobile-cart-search .menu-item-open a {
+        padding: 0 3px !important;
+    }
+    #wrapper .header-cart-search .widget_searchform_content,
+    #wrapper .header-cart-search .shopping_cart_dropdown {
+        width: 255px;
+    }
+}

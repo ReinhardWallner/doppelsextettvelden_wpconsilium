@@ -1,0 +1,343 @@
+/*
+Style Only Theme University
+*/
+
+/* ==========================================================================
+  Start Button
+========================================================================== */
+
+/* ==========================================================================
+  End Button
+========================================================================== */
+/* ==========================================================================
+    Start Feature Slider
+========================================================================== */
+.tp-leftarrow.tparrows, .tp-rightarrow.tparrows {
+    background: url(../images/leftarrow-university.png) no-repeat center center rgba(255,255,255,1);
+    top: 43% !important;
+    width: 41px;
+    height: 41px;
+    line-height: 41px;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+
+}
+.tp-leftarrow.tparrows {
+    left: 0 !important;
+}
+.tp-leftarrow.tparrows:hover, .tp-rightarrow.tparrows:hover {
+    height: 55px;
+    width: 55px;
+    line-height: 55px;
+}
+.tp-rightarrow.tparrows {
+    right: 0 !important;
+    background: url(../images/rightarrow-university.png) no-repeat center center rgba(255,255,255,1);
+}
+a:focus, a:hover, a:active{
+    outline: none;
+}
+/*** Search Slider ****/
+.cs-search-slider-wrap {
+  position: relative;
+}
+.cs-search-slider-wrap .cs-search-slider {
+  max-width: 494px;
+  position: absolute;
+  right: 30px;
+  bottom: 115px;
+  z-index: 10001;
+}
+.cs-search-slider-wrap .cs-search-slider .wg-title {
+  color: #fff;
+}
+.cs-search-slider-wrap .cs-search-slider input[type="text"] {
+  height: 51px;
+  line-height: 51px;
+}
+.cs-search-slider-wrap .cs-search-slider .searchform, 
+.cs-search-slider-wrap .cs-search-slider input[type="text"] {
+  background: #fff;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+       -o-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+      -ms-box-shadow: none;
+       -o-box-shadow: none;
+          box-shadow: none;
+}
+.cs-search-slider-wrap .cs-search-slider .searchform:before {
+  color: #fff;
+  font-size: 16px;
+  right: -1px;
+  top: 0;
+  height: 51px;
+  width: 51px;
+  line-height: 51px;
+  text-align: center;
+  border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+     -moz-border-radius: 0 5px 5px 0;
+      -ms-border-radius: 0 5px 5px 0;
+       -o-border-radius: 0 5px 5px 0;
+          border-radius: 0 5px 5px 0;
+}
+/* ==========================================================================
+    End Feature Slider
+========================================================================== */
+/* ==========================================================================
+   Style VC Row & Body
+========================================================================== */
+
+/* ==========================================================================
+  Start Header
+========================================================================== */
+#wp-consilium-university #cshero-header,
+#wp-consilium-university #header-sticky {
+  position: relative;
+}
+/**** Main Menu ****/
+#wp-consilium-university .main-menu-left,
+#wp-consilium-university .main-menu-left .cshero-menu-dropdown ul {
+  float: left !important;
+}
+#wp-consilium-university .main-menu-right,
+#wp-consilium-university .main-menu-right .cshero-menu-dropdown ul {
+  float: right !important;
+}
+
+/**** Logo ****/
+#wp-consilium-university .logo-center {
+  margin: 0 0 -100%;
+  text-align: center;
+}
+#wp-consilium-university .cshero-logo.logo-sticky {
+  padding-top: 0 !important;
+}
+/* ==========================================================================
+  End Header
+========================================================================== */
+
+/* ==========================================================================
+  Start Style Row Background Only theme
+========================================================================== */
+#wp-consilium-university #cs-page-title-wrapper .page-title {
+  max-width: 35%;
+}
+/* ==========================================================================
+   Module Title Type Style
+========================================================================== */
+.cs-feature-icons ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.cs-feature-icons ul li {
+  display: inline-block;
+  margin: 0 10px;
+  width: 110px;
+  overflow: hidden;
+}
+.cs-feature-icons ul li i {
+  width: 87px;
+  height: 87px;
+  font-size: 48px;
+  border-radius: 100%;
+  line-height: 87px;
+  margin: 0 0 10px;
+  color: #fff;
+  -webkit-transition: all 300ms linear 0ms;
+     -moz-transition: all 300ms linear 0ms;
+       -o-transition: all 300ms linear 0ms;
+      -ms-transition: all 300ms linear 0ms;
+          transition: all 300ms linear 0ms;
+}
+.cs-feature-icons ul li:hover i {
+  background: #fff;
+}
+.cs-feature-icons ul li a {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  -webkit-transform: translateY(100%);
+     -moz-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+       -o-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-transition: all 300ms linear 0ms;
+     -moz-transition: all 300ms linear 0ms;
+       -o-transition: all 300ms linear 0ms;
+      -ms-transition: all 300ms linear 0ms;
+          transition: all 300ms linear 0ms;
+}
+.cs-feature-icons ul li:hover a {
+  -webkit-transform: translateY(0%);
+     -moz-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+       -o-transform: translateY(0%);
+          transform: translateY(0%);
+}
+/* ==========================================================================
+  End Module Title Type Style
+========================================================================== */
+
+/* ==========================================================================
+  Shortcode
+========================================================================== */
+#wp-consilium-university .wpb_accordion_section .wpb_accordion_header a {
+  font-size: 18px;
+}
+#wp-consilium-university .wpb_accordion_section .wpb_accordion_header a:after {
+  color: #013b53;
+}
+#wp-consilium-university .vc_pie_chart .wpb_pie_chart_heading {
+  font-family: "Novecentowide-Bold" !important;
+}
+#wp-consilium-university .vc_pie_chart .vc_pie_chart_back, .vc_pie_chart canvas {
+  border-width: 10px !important;
+}
+#wp-consilium-university .vc_pie_chart .vc_pie_wrapper .vc_pie_chart_value {
+  font-weight: normal;
+  font-family: "Novecentowide-Bold";
+}
+/* ==========================================================================
+  End Shortcode
+========================================================================== */
+
+/* ==========================================================================
+  Main Site
+========================================================================== */
+.cs-find-us .vc_column_container > .wpb_wrapper {
+  max-width: 379px;
+  margin: -381px 0px 0;
+  position: relative;
+  overflow: hidden;
+  padding: 15px;
+}
+.cs-find-us .vc_column_container .wpb_text_column > .wpb_wrapper {
+  padding: 30px;
+  background: #fff;
+}
+.cs-find-us ul {
+  padding: 0;
+  margin: 0 0 20px;
+  list-style: none;
+}
+.cs-find-us ul li b {
+  color: #07182a;
+  font-weight: normal;
+}
+/* ==========================================================================
+  ESS 
+========================================================================== */
+
+/* ==========================================================================
+   Maps
+========================================================================== */
+
+/* ==========================================================================
+   Contact Form 7
+========================================================================== */
+
+/* ==========================================================================
+   Testimonial
+========================================================================== */
+
+/* ==========================================================================
+   Start Footer Top
+========================================================================== */
+
+/* ==========================================================================
+   End Footer End
+========================================================================== */
+
+/*** End Contact Form 7 ***/
+/*================== End Style Input ================*/
+/*================== Custom Css Only Theme ================*/
+#wp-consilium-university .title-preset2 h3 {
+  text-transform: none;
+}
+/*================== End Custom Css Only Theme ================*/
+/*
+Style Responsive
+*/
+@media (max-width: 1170px) and (min-width: 992px) {
+    #wp-consilium-university .cshero-menu-dropdown > ul > li > a, .menu-pages .menu > ul > li > a {
+        font-size: 16px;
+        padding: 0 20px !important;
+    }
+}
+@media (max-width: 993px) and (min-width: 767px) {
+    #wp-consilium-university .logo .normal-logo {
+        max-height: 86px !important;
+    }
+    #wp-consilium-university .btn.btn-navbar {
+        right: 15px;
+    }
+    #wp-consilium-university #wrapper .header-wrapper .logo a {
+        padding: 25px 0;
+    }
+}
+@media (max-width: 992px) {
+    #wp-consilium-university #header-sticky .btn.btn-navbar {
+        position: inherit;
+        top: 0;
+    }
+    #wp-consilium-university #header-sticky .btn.btn-navbar,
+    #wp-consilium-university #header-sticky .btn.btn-navbar:hover,
+    #wp-consilium-university #header-sticky .btn.btn-navbar:focus {
+        color: #fff !important;
+    }
+    /* ==========================================================================
+    Style university
+    ========================================================================== */
+    #wp-consilium-university #wrapper .header-wrapper .logo a {
+        width: 100%;
+    }
+    #wp-consilium-university .btn.btn-navbar {
+        margin: 16px 0;
+    }
+    #wp-consilium-university .cshero-mmenu {
+        position: absolute;
+        top: 120px;
+    }
+}
+@media (max-width: 767px) {
+    /* ==========================================================================
+    Style university
+    ========================================================================== */
+    #wp-consilium-university .btn.btn-navbar {
+        right: 15px;
+        margin: 10px 0;
+    }
+    #wp-consilium-university #wrapper .header-wrapper .logo a {
+        padding: 21px 0;
+    }
+    #wp-consilium-university .cshero-mmenu {
+        top: 90px;
+    }
+    #wp-consilium-university .logo .normal-logo {
+        max-height: 68px !important;
+    }
+    /* ==========================================================================
+    End Style Retro
+    ========================================================================== */
+}
+@media (max-width: 640px) {   
+  .cs-search-slider-wrap .cs-search-slider {
+    bottom: 30px;
+  } 
+}
+@media (max-width: 480px) { 
+
+}
+@media (max-width: 320px) { 
+
+}

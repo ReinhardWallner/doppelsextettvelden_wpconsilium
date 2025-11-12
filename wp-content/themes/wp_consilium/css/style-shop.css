@@ -1,0 +1,533 @@
+/*
+Style Only Theme Shop
+*/
+
+h1, h2,h3, h4,h4, h6{
+    text-transform: uppercase;
+}
+a, a:active, a:focus, a:visited, a:hover {
+    outline:none
+}
+.btn, .button, button, input[type="submit"], .main-menu-left > ul li a{
+    text-transform: uppercase;
+}
+#wp-consilium-shop select {
+    font-size: 13px;
+}
+.csbody .container{
+    width: 100%;
+    padding: 0;
+}
+.page-header{
+    border: none;
+    margin: 0;
+    padding: 0 60px;
+}
+
+.page-header .page-title{
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+@media (min-width: 993px) {
+    .no-container .wpb_row{
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 260px !important;
+    }
+    .container .site-main {
+        padding-left: 260px !important;
+    }
+    .container .site-main > article{
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .right-wrap,
+    .primary-sidebar{
+        padding-right: 75px;
+    }
+    .rtl .right-wrap,
+    .rtl .primary-sidebar{
+        padding-right: 15px;
+        padding-left: 75px;
+    }
+    .right-wrap .primary-sidebar{
+        padding-right: 0!important;
+    }
+
+    .wpb_row > .container {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .cs-full-width.wpb_row,
+    .cs-full-width .site-main{
+        padding-left: 0!important;
+    }
+    .csbody #footer-top, .csbody #footer-bottom, .csbody #cs-page-title-wrapper,
+    .csbody #cs-breadcrumb-wrapper,
+    .csbody #container,
+    .csbody #cs-bottom-wrap{
+        padding-left: 305px!important;
+        padding-right: 45px!important;
+    }
+}
+#wp-consilium-shop #footer-top .container .row,
+#wp-consilium-shop #cs-breadcrumb-wrapper .container .row,
+#wp-consilium-shop #cs-bottom-wrap .container .row,
+#wp-consilium-shop #cs-page-title-wrapper .container .row,
+#wp-consilium-shop #footer-bottom .container .row, .csbody #container .container .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media (max-width: 992px) {
+    .no-container .content-wrap.col-md-12 {
+        padding: 0;
+    }
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .page-header{
+        padding: 0 ;
+    }
+    .btn-navbar{
+        position: absolute;
+        right: 25px;
+        top: 30px;
+        border: none!important;
+    }
+    .header-cart-search{
+        padding: 0;
+        position: absolute;
+        top: 30px!important;
+        left: 25px;
+    }
+    #wrapper .header-wrapper .logo a{
+        margin: 0!important;
+        padding: 10px 15px!important;
+    }
+    .csbody #footer-top, .csbody #footer-bottom, .csbody #cs-page-title-wrapper, .csbody #cs-bottom-wrap{
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+    #wp-consilium-shop #wrapper .header-cart-search{
+        padding: 0;
+        top: 0;
+    }
+}
+.bx-wrapper{
+    width: 100%;
+    max-width: 100%!important;
+}
+
+.entry-title, .ww-title{
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+  Start Button
+========================================================================== */
+button, .button, .btn,
+input[type="submit"],
+#submit,
+a.comment-reply-link{
+    padding: 10px 25px;
+}
+a.comment-reply-link{
+    padding: 5px 10px;
+    color: #2d2c2c;
+    font-size: 10px;
+}
+.btn-white .btn, .btn.btn-white{
+    border-color: #fff!important;
+    color: #fff!important;
+    background: none!important;
+    border-width: 1px!important;
+}
+/* ==========================================================================
+  End Button
+========================================================================== */
+
+/* ==========================================================================
+   Header
+========================================================================== */
+@media (min-width: 993px) {
+    .header-wrapper{
+        position: fixed;
+        width: 260px;
+        top: 0;
+        left: 0;
+        padding-left: 40px;
+        height: 100%;
+        z-index: 101;
+        -webkit-backface-visibility: hidden;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition: background-color .3s ease;
+        -moz-transition: background-color .3s ease;
+        -o-transition: background-color .3s ease;
+        -ms-transition: background-color .3s ease;
+        transition: background-color .3s ease;
+        outline: 0;
+    }
+}
+/* ==========================================================================
+   sticky header left
+========================================================================== */
+@media (min-width: 993px) {
+    #cshero-header{
+        z-index: 100;
+        position: fixed;
+        width: 220px;
+        height: auto!important;
+        box-shadow:0px 1px 2px rgba(100, 100, 100, 0.2);
+        -moz-box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.2);
+        -webkit-box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.2);
+    }
+    #wp-consilium-shop .cs-sticky.fixed{
+        box-shadow:0px 1px 2px rgba(100, 100, 100, 0.2);
+        -moz-box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.2);
+        -webkit-box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.2);
+    }
+    #wp-consilium-shop .sticky-header-left:before, #wp-consilium-shop .sticky-header-left:after,
+    #wp-consilium-shop .header-left:before, #wp-consilium-shop .header-left:after {
+        box-shadow: 1px 2px 2px rgba(100, 100, 100, 0.1);
+        -moz-box-shadow: 1px 2px 2px rgba(100, 100, 100, 0.1);
+        -webkit-box-shadow: 1px 2px 2px rgba(100, 100, 100, 0.1);
+    }
+    .header-v2{
+        z-index: 101;
+        position: relative;
+    }
+    .sticky-wrapper{
+        z-index: 102;
+        position: fixed;
+        width: 220px;
+        height: auto!important;
+    }
+    .sticky-header-left{
+        border: none!important;
+        padding: 50px 0 140px;
+    }
+    .header-left{
+        border: none!important;
+        padding: 0 0 140px;
+    }
+    .sticky-header-left:before,
+    .header-left:before {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        height: 40px;
+        width: 51%;
+        -webkit-transform: skew(0deg, -20deg);
+        -moz-transform: skew(0deg, -20deg);
+        -ms-transform: skew(0deg, -20deg);
+        -o-transform: skew(0deg, -20deg);
+        transform: skew(0deg, -20deg);
+    }
+    .sticky-header-left:after,
+    .header-left:after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+        height: 40px;
+        width: 50%;
+        -webkit-transform: skew(0deg, 20deg);
+        -moz-transform: skew(0deg, 20deg);
+        -ms-transform: skew(0deg, 20deg);
+        -o-transform: skew(0deg, 20deg);
+        transform: skew(0deg, 20deg);
+    }
+
+    .logo-sticky-left{
+        padding-left: 60px;
+    }
+    .cshero-menu-left{
+        padding-left: 50px;
+    }
+    .cshero-menu-left{
+        margin-top: 100px;
+    }
+    .header-cart-search{
+        padding: 0 60px;
+        color: #fff;
+    }
+}
+.header-cart-search{
+    color: #fff;
+}
+#comments {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+/* cart and search */
+.icon_search_wrap{
+    margin-left: 25px;
+    display: inline-block;
+}
+.icon_cart_wrap, .icon_search_wrap{
+    font-size: 16px;
+}
+.widget_searchform_content, .shopping_cart_dropdown{
+    background: #2d2b2c;
+    padding: 10px;
+    z-index: 99;
+    width: 340px;
+}
+.widget_searchform_content a, .shopping_cart_dropdown a{
+    color: #fff;
+}
+.widget_searchform_content #searchform:before{
+    color: #ffffff;
+    content: "\f002";
+    font-family: FontAwesome;
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+.widget_searchform_content #s{
+    background: none;
+    border: none!important;
+    color: #ffffff;
+    margin: 0;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 15px;
+}
+.product_list_widget .variation-Size{
+    float: left!important;
+}
+.product_list_widget .variation-Size p{
+    margin: 0 20px 0 0;
+}
+.widget_searchform_content #searchsubmit{
+    display: none;
+}
+.shopping_cart_dropdown_inner{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+ul li.cart-list, ul.cart_list.product_list_widget li{
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.attachment-shop_thumbnail.wp-post-image {
+    margin: 0 20px 0 0!important;
+    width: 55px!important;
+    height: auto!important;
+    float: left!important;
+}
+.rtl .attachment-shop_thumbnail.wp-post-image {
+    margin: 0 0 0 20px!important;
+    float: right!important;
+}
+.header-cart-search .total{
+    line-height: 40px;
+}
+.shopping_cart_dropdown a, .shopping_cart_dropdown .total{
+    text-transform: uppercase;
+}
+
+/* mobile menu */
+.btn-navbar.navbar-toggle {
+    padding: 7px 16px!important;
+    color: #2c2c2d;
+}
+#wp-consilium-shop .span.cs-menu-toggle{
+    color: #fff;
+    right: 15px;
+}
+/* ==========================================================================
+   flyout menu
+========================================================================== */
+.main-menu-left > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    line-height: 1;
+}
+/* The container */
+.main-menu-left > ul {
+    display: block;
+    position: relative;
+    width: 170px;
+}
+/* The list elements which contain the links */
+.main-menu-left > ul li {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+/* General link styling */
+.main-menu-left > ul li a {
+    /* Layout */
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 10px 12px;
+}
+/* Rounded corners for the first link of the menu/submenus */
+.main-menu-left > ul li:first-child > a {}
+/* Rounded corners for the last link of the menu/submenus */
+.main-menu-left > ul li:last-child > a {}
+/* The hover state of the menu/submenu links */
+.main-menu-left > ul li a:hover,
+.main-menu-left > ul li:hover > a {}
+/* The arrow indicating a submenu */
+.main-menu-left > ul .sub-menu > a::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    width: 0px;
+    height: 0px;
+    /* Creating the arrow using borders */
+
+    border: 4px solid transparent;
+    border-left: 4px solid #2d2c2c;
+}
+/* The same arrow, but with a darker color, to create the shadow effect */
+.main-menu-left > ul .sub-menu > a::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    width: 0px;
+    height: 0px;
+    /* Creating the arrow using borders */
+
+    border: 4px solid transparent;
+    border-left: 4px solid #fff;
+}
+/* Changing the color of the arrow on hover */
+.main-menu-left > ul li > a:hover::after,
+.main-menu-left > ul li:hover > a::after {
+    border-left: 4px solid #fff;
+}
+.main-menu-left > ul li > a:hover::before,
+.main-menu-left > ul li:hover > a::before {
+    border-left: 4px solid rgba(0, 0, 0, 0.25);
+}
+/* THE SUBMENUS */
+.main-menu-left > ul ul {
+    position: absolute;
+    left: 100%;
+    top: -9999px;
+    padding-left: 1px;
+    opacity: 0;
+    width: 170px;
+    /* The fade effect, created using an opacity transition */
+
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    transition: opacity 0.3s ease-in;
+}
+.main-menu-left > ul ul li a {}
+/* Showing the submenu when the user is hovering the parent link */
+.main-menu-left > ul li:hover > ul {
+    top: 0px;
+    opacity: 1;
+    z-index: 1;
+}
+/* ==========================================================================
+   // flyout menu
+========================================================================== */
+
+/* ==========================================================================
+   widget newsletter
+========================================================================== */
+.custom-newsletter .newsletter-email{
+    border: none!important;
+    color: #000;
+    height: 44px;
+    margin: 0;
+    padding: 0 15px;
+    width: 75%;
+    box-shadow: none;
+}
+.custom-newsletter .newsletter-email:hover,
+.custom-newsletter .newsletter-email:focus{
+    outline: none;
+    border: none!important;
+    color: #000;
+}
+.custom-newsletter .newsletter-submit{
+    width: 25%;
+    height: 44px;
+}
+/* ==========================================================================
+   Footer
+========================================================================== */
+#wp-consilium-shop #footer-top h3.wg-title{
+    text-transform: uppercase;
+    margin: 0 0 45px;
+}
+#footer-top ul li{
+    width: 50%;
+    float: left;
+}
+#footer-top ul li a{
+    display: block;
+    line-height: 40px;
+}
+#footer-top .cs_icons{
+    display: inline-block;
+    padding: 8px 10px;
+    color: #2d2c2c;
+    line-height: 1;
+}
+#footer-top .cs_icons:hover{
+    color: #fff!important;
+}
+#wp-consilium-shop #footer-bottom {
+    border-top: 1px solid #dcdcdc;
+}
+.bottom-top-2 .widget_newslettercustomwidget{
+    margin-top: 12px;
+}
+
+/* title bar */
+#wp-consilium-shop #cs-page-title-wrapper .page-title{
+    border-top: 1px solid #efefef;
+    text-transform: uppercase;
+}
+#wp-consilium-shop #cs-page-title-wrapper .page-title{
+    padding: 30px 0;
+}
+#wp-consilium-shop .price ins{
+    background: none!important;
+    color: #2d2c2c;
+}
+#wp-consilium-shop .woocommerce-breadcrumb, #wp-consilium-shop .woocommerce-breadcrumb a{
+    font-size: 12px;
+}
+
+@media (max-width: 992px) {
+    .logo-sticky{
+        margin: 0;
+        padding: 0 15px;
+        text-align: left;
+    }
+    .sticky-header.fixed .cshero-logo img {
+        height: 35px!important;
+    }
+}
+
+@media (max-width: 767px) {
+    .mobile-align-center{
+        text-align: center!important;
+    }
+    .mobile-align-center h3{
+        text-align: center!important;
+    }
+}

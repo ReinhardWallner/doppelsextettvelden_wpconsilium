@@ -1,0 +1,205 @@
+/*
+Style Only Theme Agency
+*/
+
+/* ==========================================================================
+    Start Feature Slider
+========================================================================== */
+/*** Font Default ***/
+.novecento-regular {
+    font-family: 'Novecentowide-Regular' !important;
+}
+.novecento-light-regular {
+    font-family: 'Novecentowide-Light' !important;
+}
+.novecento-medium {
+    font-family: 'Novecentowide-Medium' !important;
+}
+.novecento-bold {
+    font-family: 'Novecentowide-Bold' !important;
+}
+.tp-leftarrow.tparrows, .tp-rightarrow.tparrows {
+    background: url(../images/leftarrow.png) no-repeat center center rgba(255,255,255,1);
+    top: 43% !important;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+.tp-leftarrow.tparrows {
+    left: 0 !important;
+}
+.tp-leftarrow.tparrows:hover, .tp-rightarrow.tparrows:hover {
+    height: 65px;
+    width: 65px;
+    line-height: 65px;
+}
+.tp-rightarrow.tparrows {
+    right: 0 !important;
+    background: url(../images/rightarrow.png) no-repeat center center rgba(255,255,255,1);
+}
+/* ==========================================================================
+    End Feature Slider
+========================================================================== */
+/* ==========================================================================
+   Style VC Row
+========================================================================== */
+.wpb_row, .wpb_content_element, ul.wpb_thumbnails-fluid > li, .last_toggle_el_margin, .wpb_button {
+	margin-bottom: 0 !important;
+}
+/* ==========================================================================
+   Button
+========================================================================== */
+/*** Size Button ***/
+#wp-consilium-agency .btn {
+    text-transform: uppercase;
+}
+#wp-consilium-agency .btn.btn-Xlarge {
+    padding: 17px 46px;
+}
+#wp-consilium-agency .btn-primary-alt.btn-Xlarge {
+    padding: 14px 17px;
+}
+#wp-consilium-agency .btn.btn-default-alt,
+#wp-consilium-agency .btn.btn-primary-alt {
+    border-width: 1px !important;
+}
+/**** Newsletterwidget ***/
+[id^="newsletterwidget-"], [id*="newsletterwidget-"] {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+[id^="newsletterwidget-"] form, [id*="newsletterwidget-"] form {
+    margin-top: 15px;
+    position: relative;
+}
+.newsletter .newsletter-email {
+    border: 1px solid #777;
+    color: #ccc;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    text-indent: 10px;
+    width: 100%;
+    font-weight: 400;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+        -ms-border-radius: 0;
+         -o-border-radius: 0;
+            border-radius: 0;
+}
+.newsletter .newsletter-submit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none !important;
+    border: none;
+    text-indent: -9999px;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    opacity: 0;
+}
+.newsletter .newsletter-submit:focus, .newsletter .newsletter-submit:hover  {
+    background: none !important;
+    border: none !important;
+    opacity:0;
+}
+.newsletter form:before {
+    content: "\f0e0";
+    font-family: FontAwesome;
+    font-size: 17px;
+    color: #ccc;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+/**** End Newsletterwidget ***/
+/* ==========================================================================
+   Header
+========================================================================== */
+#wp-consilium-agency .sticky-header.fixed {
+    border-bottom: none;
+}
+#wp-consilium-agency .btn-navbar.navbar-toggle {
+    background: none;
+}
+
+/* ==========================================================================
+   Carousel Portfolio
+========================================================================== */
+#wp-consilium-agency .cs-carousel-portfolio-agency .cs-more-meta,
+#wp-consilium-agency .cs-carousel-portfolio-agency .cs-carousel-category {
+    font-size: 16px;
+}
+#wp-consilium-agency .cs-carousel-portfolio-agency .cs-nav li {
+    margin: 0;
+}
+#wp-consilium-agency .cs-portfolio-item .title-pt {
+    margin-bottom: 20px;
+}
+/* ==========================================================================
+   End Carousel Portfolio
+========================================================================== */
+
+/* ==========================================================================
+   Fancy Icons Box
+========================================================================== */
+#wp-consilium-agency .cs-fancy-box .cs-title-main {
+	font-family: inherit;
+}
+#wp-consilium-agency .fancy-box-style-4 .table-cell {
+    display: inherit;
+    vertical-align: inherit;
+}
+#wp-consilium-agency .fancy-box-style-4 .cs-fancy-box-icon {
+    float: left;
+    width: 70px;
+}
+/* ==========================================================================
+   Testimonial
+========================================================================== */
+.cs-testimonial-wrapper .cs-testimonial-content .cs-title:after {
+    display: none;
+}
+#wp-consilium-agency .cs-testimonial .cs-testimonial-header .cs-title {
+    font-size: 26px;
+    color: inherit !important;
+} 
+#wp-consilium-agency .cs-testimonial.cs-testimonial-style-5 .cs-testimonial-title {
+    font-size: 16px;
+}
+/* ==========================================================================
+   Start Footer Top
+========================================================================== */
+#wp-consilium-agency #footer-top h3.wg-title {
+	font-size: 24px;
+}
+#wp-consilium-agency #footer-bottom {
+    color: #d7d7d7;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+#wp-consilium-agency #footer-bottom ul.menu li a, 
+#wp-consilium-agency #footer-bottom ul.obtheme_mega_menu li a {
+    color: #d7d7d7;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+#wp-consilium-agency .cs-carousel-portfolio .cs-carousel-header:hover:before {
+    background: rgba(155, 168, 172, 0.8);
+}
+/* ==========================================================================
+   End Footer End
+========================================================================== */
+/*================== Custom Css Only Theme ================*/
+.entry-title {text-transform: uppercase;}
+/*================== End Custom Css Only Theme ================*/

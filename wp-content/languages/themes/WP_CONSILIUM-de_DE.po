@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-27 17:06+0000\n"
+"PO-Revision-Date: 2025-07-28 18:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.0.30"
+
+#. Author of the theme
+msgid "Anonym"
+msgstr ""
+
+#. Name of the theme
+msgid "WP CONSILIUM Child"
+msgstr ""
+
+msgid "Modify categories only"
+msgstr "Nur Kategorien bearbeiten"
+
+msgid "Show only categories"
+msgstr "Nur Kategorien anzeigen"
+
+msgid "Rows per page"
+msgstr "Zeilen pro Seite"
+
+msgid "Download ZIP"
+msgstr "Download ZIP"
+
+msgid "Excel Export"
+msgstr "Excel(csv) exportieren"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Beschreibung"
+msgstr "Description"
+
+msgid "Speichern"
+msgstr "Save"
+
+msgid "Choose category (inactive if search filter inserted or changes exist):"
+msgstr "Kategorie wählen (inaktiv wenn Suchfilter ein oder Änderungen):"
+
+msgid "Create category"
+msgstr "Kategorie anlegen"
+
+msgid "Delete category"
+msgstr "Kategorie löschen"
+
+msgid "Available titles"
+msgstr "Verfügbare Einträge"
+
+msgid "Mapped titles"
+msgstr "Zugeordnete Einträge"
+
+msgid "Create"
+msgstr "Neu"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Discard changes"
+msgstr "Änderungen verwerfen"
+
+msgid "Modify single field:"
+msgstr "Einzelnes Feld ändern:"
+
+msgid "Show single field:"
+msgstr "Einzelnes Feld anzeigen:"
+
+msgid "please select (optional)"
+msgstr "bitte wählen (optional)"
+
+msgid "Select single field to modify"
+msgstr "Einzelnes Feld zur Bearbeitung auswählen"

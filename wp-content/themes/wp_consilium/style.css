@@ -1,0 +1,162 @@
+/*
+Theme Name: WP CONSILIUM
+Theme URI: http://cmssuperheroes.com/wordpress/cshero
+Author: Cmssuperheroes Team
+Author URI: http://cmssuperheroes.com/
+Version: 2.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: black, green, white, light, dark, two-columns, three-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready, accessibility-ready
+Description: In 2014, Creating a magazine website with WordPress has never been easier.
+Text Domain: WP_CONSILIUM
+*/
+
+/**
+ * Table of Contents:
+ *
+*/
+
+/** Used to describe fonts for site **/
+@import "css/fonts.css";
+
+/** Style all button site **/
+@import "css/buttons.css";
+
+/** Style mobule and type title module **/
+@import "css/module.css";
+
+/** Style all menu site **/
+@import "css/menu.css";
+
+/** Style all shortcode site **/
+@import "css/shortcodes.css";
+
+/** Style base consilium site **/
+@import "css/style.min.css";
+
+/** Style RTL **/
+@import "style-rtl.css";
+
+/** Style reponsive **/
+@import "css/responsive.css";
+
+
+/* KONTAKTFORMULAR */
+
+.wpcf7-form span.wpcf7-form-control-wrap {
+    display: block;
+    margin-bottom: 0px;
+}
+
+#responsive-form{
+	/* max-width:600px */ /*-- change this to get your desired form width --*/;
+	margin:0 auto;
+        width:100%;
+}
+.form-row{
+	width: 100%;
+}
+.column-half, .column-full{
+	float: left;
+	position: relative;
+	padding: 0.65rem;
+	width:100%;
+	-webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box
+}
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/**---------------- single event ----------------**/
+img.attachment-post-thumbnail.size-post-thumbnail.wp-post-image {
+    height: 300px;
+    width: auto;
+	margin-top: 45px;
+}
+
+.cs-blog .cs-blog-thumbnail {
+    margin-bottom: 20px;
+  /*  float: left; */
+    margin-right: 20px;
+}
+
+
+
+/**---------------- Media query ----------------**/
+@media only screen and (min-width: 48em) { 
+	.column-half{
+		width: 50%;
+	}
+}
+
+
+.wpcf7 input[type="text"], .wpcf7 input[type="email"], .wpcf7 textarea {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 0px;
+	-webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	      box-sizing: border-box
+}
+.wpcf7 input[type="text"]:focus{
+	background: #fff;
+}
+.wpcf7-submit{
+	float: right;
+	background: #CA0002;
+	color: #fff;
+	text-transform: uppercase;
+	border: none;
+	padding: 8px 20px;
+	cursor: pointer;
+}
+.wpcf7-submit:hover{
+	background: #ff0000;
+}
+span.wpcf7-not-valid-tip{
+	text-shadow: none;
+	font-size: 12px;
+	color: #fff;
+	background: #ff0000;
+	padding: 5px;
+}
+div.wpcf7-validation-errors { 
+	text-shadow: none;
+	border: transparent;
+	background: #f9cd00;
+	padding: 5px;
+	color: #9C6533;
+	text-align: center;
+	margin: 0;
+	font-size: 12px;
+}
+div.wpcf7-mail-sent-ok{
+	text-align: center;
+	text-shadow: none;
+	padding: 5px;
+	font-size: 12px;
+	background: #59a80f;
+	border-color: #59a80f;
+	color: #fff;
+	margin: 0;
+}
+
+
+/**---------------- team nicht verlinkt ----------------**/
+
+
+h4.cs-team-title {
+    pointer-events: none;
+    cursor: default;
+}
+
+
+article#post-62 h4 {
+	font-size: 14px;
+	margin-bottom: 19px;
+}

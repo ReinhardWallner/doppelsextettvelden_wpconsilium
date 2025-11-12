@@ -1,0 +1,650 @@
+/*
+Style Only Theme Retro
+*/
+
+#wp-consilium-retro h1, #wp-consilium-retro h2, #wp-consilium-retro h3, #wp-consilium-retroh4, #wp-consilium-retro h5, #wp-consilium-retro h6 {
+  text-transform: none;
+}
+/* ==========================================================================
+  Start Button
+========================================================================== */
+#wp-consilium-retro .btn, #wp-consilium-retro .button, #wp-consilium-retro button, #wp-consilium-retro input[type="submit"], #wp-consilium-retro a.comment-reply-link {
+  border: none;
+  line-height: 1;
+  padding: 16px;
+  font-size: 18px;
+  background-image: url(../images/theme-retro/noise-for-light-background.png);
+  background-repeat: repeat;
+  text-transform: uppercase; 
+}
+a.comment-reply-link {
+  padding: 10px !important;
+}
+#wp-consilium-retro .btn.btn-navbar {
+  padding: 7px 16px;
+  right: 15px;
+}
+#wp-consilium-retro .btn.btn-large {
+  padding: 10px 150px;
+}
+#wp-consilium-retro .btn.btn-medium {
+  padding: 10px 90px;
+}
+#wp-consilium-retro .btn.btn-small {
+  padding: 10px 50px;
+}
+#wp-consilium-retro .btn.btn-mini {
+  padding: 2px 6px;
+}
+/* ==========================================================================
+  End Button
+========================================================================== */
+/* ==========================================================================
+    Start Feature Slider
+========================================================================== */
+/*** Font Default ***/
+.novecento-regular {
+    font-family: 'Novecentowide-Regular' !important;
+}
+.novecento-light-regular {
+    font-family: 'Novecentowide-Light' !important;
+}
+.novecento-medium {
+    font-family: 'Novecentowide-Medium' !important;
+}
+.novecento-bold {
+    font-family: 'Novecentowide-Bold' !important;
+}
+.tp-leftarrow.tparrows, .tp-rightarrow.tparrows {
+    top: 43% !important;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+
+}
+.tp-leftarrow.tparrows {
+    left: 0 !important;
+}
+.tp-leftarrow.tparrows:hover, .tp-rightarrow.tparrows:hover {
+    height: 65px;
+    width: 65px;
+    line-height: 65px;
+}
+.tp-rightarrow.tparrows {
+    right: 0 !important;
+}
+/* ==========================================================================
+    End Feature Slider
+========================================================================== */
+/* ==========================================================================
+   Style VC Row & Body
+========================================================================== */
+body#wp-consilium-retro #wrapper {
+  background: url(../images/theme-retro/bg-body.jpg) repeat;
+}
+.wpb_row, .wpb_content_element, ul.wpb_thumbnails-fluid > li, .last_toggle_el_margin, .wpb_button {
+  margin-bottom: 0 !important;
+}
+.retro-row-padding .container {
+  padding: 0 130px;
+}
+/* ==========================================================================
+  Start Header
+========================================================================== */
+#wp-consilium-retro #cshero-header,
+#wp-consilium-retro #header-sticky {
+  position: relative;
+}
+#wp-consilium-retro #cshero-header:before,
+#wp-consilium-retro #header-sticky:before {
+  position: absolute;
+  bottom: -70px;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: url(../images/theme-retro/bg-mainmenu-bottom-retro.png) no-repeat center center;
+}
+#wp-consilium-retro #header-sticky {
+  background-attachment: scroll;
+  background-image: url(../images/theme-retro/bg-header-big.jpg);
+  background-repeat: repeat;
+}
+/**** Main Menu ****/
+#wp-consilium-retro .main-menu-left,
+#wp-consilium-retro .main-menu-left .cshero-menu-dropdown ul {
+  float: left !important;
+}
+#wp-consilium-retro .main-menu-right,
+#wp-consilium-retro .main-menu-right .cshero-menu-dropdown ul {
+  float: right !important;
+}
+/**** Logo ****/
+#wp-consilium-retro .logo-center {
+  margin: 0 0 -100%;
+  text-align: center;
+}
+#wp-consilium-retro .cshero-logo.logo-sticky {
+  padding-top: 0 !important;
+}
+/* ==========================================================================
+  End Header
+========================================================================== */
+
+/* ==========================================================================
+  Start Style Row Background Only theme
+========================================================================== */
+#wp-consilium-retro .bg-rowStyle-retro,
+#wp-consilium-retro .bg-rowStyle-retro-bottom,
+#wp-consilium-retro .bg-rowStyle-retro-top {
+  background-image: url(../images/theme-retro/noise-for-light-background.png);
+  background-repeat: repeat;
+  position: relative;
+}
+#wp-consilium-retro .bg-rowStyle-retro-bottom:after,
+#wp-consilium-retro .bg-rowStyle-retro:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 14px;
+  width: 100%;
+  background: url(../images/theme-retro/bg-line-bottom-retro.png) repeat-x;
+}
+#wp-consilium-retro .bg-rowStyle-retro-top:after,
+#wp-consilium-retro .bg-rowStyle-retro:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 100%;
+  background: url(../images/theme-retro/bg-line-top-retro.png) repeat-x;
+}
+#wp-consilium-retro .rev_slider_wrapper.fullwidthbanner-container {
+  background: url(../images/theme-retro/bg-slider-retro.jpg) repeat;
+  padding: 10px !important;
+  height: auto !important;
+  -webkit-box-shadow: 0 10px 38px #222;
+     -moz-box-shadow: 0 10px 38px #222;
+      -ms-box-shadow: 0 10px 38px #222;
+       -o-box-shadow: 0 10px 38px #222;
+          box-shadow: 0 10px 38px #222;
+}
+
+#wp-consilium-retro .tp-leftarrow.tparrows, #wp-consilium-retro .tp-rightarrow.tparrows {
+  height: 46px;
+  width: 23px;
+}
+#wp-consilium-retro .tp-leftarrow.tparrows {
+  position: absolute;
+  left: 10px !important;
+  background: url(../images/theme-retro/bg-slider-retro.jpg) repeat;
+  -webkit-border-radius: 0 100px 100px 0;
+     -moz-border-radius: 0 100px 100px 0;
+      -ms-border-radius: 0 100px 100px 0;
+       -o-border-radius: 0 100px 100px 0;
+          border-radius: 0 100px 100px 0;
+}
+#wp-consilium-retro .tp-rightarrow.tparrows {
+  position: absolute;
+  right: 10px !important;
+  background: url(../images/theme-retro/bg-slider-retro.jpg) repeat;
+  -webkit-border-radius: 100px 0 0 100px;
+     -moz-border-radius: 100px 0 0 100px;
+      -ms-border-radius: 100px 0 0 100px;
+       -o-border-radius: 100px 0 0 100px;
+          border-radius: 100px 0 0 100px;
+}
+#wp-consilium-retro .tp-rightarrow.tparrows .tp-arr-allwrapper {
+  background: url(../images/theme-retro/slider-arrow-rt-right.png) no-repeat right center;
+  position: absolute;
+  right: 0;
+  width: 23px;
+  height: 46px;
+}
+#wp-consilium-retro .tp-leftarrow.tparrows .tp-arr-allwrapper {
+  background: url(../images/theme-retro/slider-arrow-rt-left.png) no-repeat left center;
+  position: absolute;
+  left: 0;
+  width: 23px;
+  height: 46px;
+}
+#wp-consilium-retro .cs-carousel-portfolio h3.cs-title .line {
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+      -ms-box-shadow: none;
+       -o-box-shadow: none;
+          box-shadow: none;
+}
+/* ==========================================================================
+   Title Type Style
+========================================================================== */
+.title-style-colorprimary-retro h3, .title-style-colorwhite-retro h3, .title-style-colorprimary-retro2 h3 {
+  font-size: 82px;
+  line-height: 1;
+  margin: 0 0 30px !important;
+  -moz-text-shadow: 2px 2px 0px #fff, 3px 4px 2px #000;
+    -ms-text-shadow: 2px 2px 0px #fff, 3px 4px 2px #000;
+     -o-text-shadow: 2px 2px 0px #fff, 3px 4px 2px #000;
+        text-shadow: 2px 2px 0px #fff, 3px 4px 2px #000;
+
+}
+.title-style-colorwhite-retro h3 {
+  color: #fef7d5;
+}
+.title-style-colorwhite-retro h3 + p, .title-style-colorprimary-retro2 h3 + p {
+  font-size: 24px;
+  color: #fdf5d3;
+  line-height: normal;
+  font-family: 'Oswald-Light';
+  margin: 0 0 30px !important;
+}
+/* ==========================================================================
+  End Title Type Style
+========================================================================== */
+
+/* ==========================================================================
+  Fancy Box Icons
+========================================================================== */
+#wp-consilium-retro .cs-fancy-box.fancy-box-style-13 {
+  text-align: center;
+}
+#wp-consilium-retro .cs-fancy-box.fancy-box-style-13 .cs-title-main {
+  font-family: 'Oswald-Regular';
+}
+#wp-consilium-retro .cs-fancy-box.fancy-box-style-13 .cs-fancy-box-image img {
+  margin: 0 0 20px;
+  text-align: center;
+}
+#wp-consilium-retro .cs-fancy-box.title-upper .cs-title-main {
+  text-transform: uppercase;
+}
+#wp-consilium-retro #primary .comments-title {
+  color: #7A0001;
+}
+/* ==========================================================================
+  End Fancy Box Icons
+========================================================================== */
+
+/* ==========================================================================
+  Main Site
+========================================================================== */
+#wp-consilium-retro .cs-carousel-post .cs-carousel-body .cs-carousel-meta span + span {
+  margin-left: 26px;
+}
+#wp-consilium-retro .cs-portfolio-item .cs-portfolio-list-details li h5,
+#wp-consilium-retro .cs-portfolio-item h5.title-pt,
+#wp-consilium-retro .cs-portfolio-item .cs-portfolio-details .cs-portfolio-meta > h3 {
+  color: #fdf5d3 !important;
+}
+#wp-consilium-retro .cs-portfolio-item h5.title-pt {
+  font-family: inherit !important;
+  font-size: 22px;
+}
+.cs-portfolio-item .cs-portfolio-featured-img img {
+  width: 100%;
+}
+#wp-consilium-retro blockquote,
+#wp-consilium-retro #comments .comment-list li .comment-body  {
+  background: transparent;
+}
+#wp-consilium-retro .cs-recent-post-v1 ul li a, 
+#wp-consilium-retro .widget_recent_comments ul li a {
+  text-transform: none;
+  font-size: inherit;
+  display: inline !important;
+}
+#wp-consilium-retro .cs-fancy-box.fancy-box-style-5 .cs-fancy-box-content {
+  padding-left: 68px;
+  padding-top: 7px;
+}
+#wp-consilium-retro.rtl .cs-fancy-box.fancy-box-style-5 .cs-fancy-box-content {
+  padding-left: 0;
+  padding-right: 68px;
+}
+/* ==========================================================================
+  ESS 
+========================================================================== */
+#wp-consilium-retro .esg-filters {
+  margin-bottom: 30px !important;
+}
+#wp-consilium-retro .esg-filters .esg-filterbutton {
+  background: transparent;
+  border: 1px solid #fbf3d2;
+  color: #fbf3d2;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: normal;
+  padding: 5px 14px;
+  margin: 5px;
+  line-height: 1;
+}
+#wp-consilium-retro .esg-filters .esg-filterbutton.selected,
+#wp-consilium-retro .esg-filters .esg-filterbutton:hover {
+  background: #a53636;
+  border-color: #a53636;
+}
+#wp-consilium-retro .esg-container .tp-esg-item {
+  padding: 10px;
+  background: url(../images/theme-retro/bg-item-es.jpg) repeat;
+  -webkit-box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+}
+#wp-consilium-retro .esg-overflowtrick {
+  overflow: visible;
+}
+/* ==========================================================================
+   Maps
+========================================================================== */
+.wpb_gmaps_widget {
+  border: 1px solid #4a4949;
+}
+.wpb_wrapper {
+  padding: 0 !important;
+}
+/* ==========================================================================
+   Contact Form 7
+========================================================================== */
+.wpcf7-form .wpcf7-submit {
+  margin: 0 0 15px 0;
+}
+#wp-consilium-retro .wpcf7-form span.wpcf7-form-control-wrap {
+  margin-bottom: 0;
+}
+/* ==========================================================================
+   Testimonial
+========================================================================== */
+
+#wp-consilium-retro .tagcloud a {
+  color: #fff;
+}
+#wp-consilium-retro .primary-sidebar h3.wg-title {
+  border-bottom: none;
+}
+/* ==========================================================================
+   Start Footer Top
+========================================================================== */
+#wp-consilium-retro #footer-bottom {
+  background-image: url(../images/theme-retro/bg-rowStyle-retro.png);
+  background-repeat: repeat;
+  position: relative;
+}
+#wp-consilium-retro #footer-bottom:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 100%;
+  background: url(../images/theme-retro/bg-line-top-retro.png) repeat-x;
+}
+.retro-social-footer {
+  text-align: center;
+}
+.retro-social-footer li {
+  margin: 0 5px;
+}
+.retro-social-footer li a {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  text-indent: -99999px;
+  background-image: url(../images/theme-retro/retro-social-footer.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.retro-social-footer li.instagram a {
+  background-position: -54px 0;
+}
+.retro-social-footer li.linkedin a {
+  background-position: -110px 0;
+}
+.retro-social-footer li.pinterest a {
+  background-position: -164px 0;
+}
+.retro-social-footer li.twitter a {
+  background-position: -220px 0;
+}
+#wp-consilium-retro #footer-top [class*="footer-top-"], 
+#wp-consilium-retro #footer-top [class^="footer-top-"] {
+  margin-bottom: 0;
+}
+/* ==========================================================================
+   End Footer End
+========================================================================== */
+/*================== Start Style Input ================*/
+input[type='text'],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+    background: #fdf8d9;
+    border: 1px solid #4a4949;
+    border-radius: 0;
+    box-shadow: none;
+    height: 48px;
+    line-height: 48px;
+    padding: 0;
+    text-indent: 10px;
+    width: 100%;
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 19px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+.form-control::-moz-placeholder, .form-textarea::-moz-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-webkit-placeholder, .form-textarea::-webkit-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-o-placeholder, .form-textarea::-o-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+.form-control::-ms-placeholder, .form-textarea::-ms-placeholder {
+    color: #372f2b;
+    font-weight: 700;
+    opacity: 1;
+}
+
+input[type='text']:active,
+input[type='text']:focus,
+input[type="password"]:active,
+input[type="password"]:focus,
+input[type="datetime"]:active,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:active,
+input[type="datetime-local"]:focus,
+input[type="date"]:active,
+input[type="date"]:focus,
+input[type="month"]:active,
+input[type="month"]:focus,
+input[type="time"]:active,
+input[type="time"]:focus,
+input[type="week"]:active,
+input[type="week"]:focus,
+input[type="number"]:active,
+input[type="number"]:focus,
+input[type="email"]:active,
+input[type="email"]:focus,
+input[type="url"]:active,
+input[type="url"]:focus,
+input[type="search"]:active,
+input[type="search"]:focus,
+input[type="tel"]:active,
+input[type="tel"]:focus,
+input[type="color"]:active,
+input[type="color"]:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #c63f3f !important;
+    color: #c63f3f;
+}
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0;
+}
+textarea {
+    background: #fdf8d9;
+    border: 1px solid #4a4949;
+    width: 100%;
+    height: 180px;
+    padding: 6px 0;
+    text-indent: 10px;
+    color: #4a4949;
+    font-weight: 300;
+    font-size: 18px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
+}
+textarea:active,
+textarea:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #c63f3f !important;
+    color: #c63f3f;
+}
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #113a52;
+}
+select {
+    background: #fff;
+    background-image: linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -o-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -moz-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -ms-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-gradient(top, #fff 0%, #f5f5f5 100%);
+    border: 1px solid #e5e5e5;
+    font-size: 15px;
+    color: #372f2b;
+    padding: 5px;
+    height: 37px;
+    line-height: 37px;
+}
+.styleSelect {
+    margin-bottom: 20px;
+ }
+.styleSelect select {
+    margin: 0;
+    -webkit-border-radius:4px;
+       -moz-border-radius:4px;
+            border-radius:4px;
+    -webkit-box-shadow: 0 1px 3px #e5e5e5;
+    -moz-box-shadow: 0 1px 3px #e5e5e5;
+    box-shadow: 0 1px 3px #e5e5e5;
+    color: #372f2b;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    min-width: 135px;
+}
+.styleSelect label {position:relative}
+.styleSelect label:after {
+    content:'\f0d9   \f0da';
+    font:13px "Consolas", monospace;
+    color: #5f5f5f;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:7px;
+    top: 11px;
+    padding:0 0 2px;
+    position:absolute;
+    pointer-events:none;
+    font-family: FontAwesome;
+}
+.styleSelect label:before {
+    background: #fff;
+    background-image: linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -o-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -moz-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -ms-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+    background-image: -webkit-gradient(top, #fff 0%, #f5f5f5 100%);
+    content: "";
+    display: block;
+    height: 30px;
+    pointer-events: none;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 24px
+}
+#wp-consilium-retro form {
+  background-color: transparent;
+}
+.footer-top [class*="col-"], .footer-top [class^="col-"],
+.footer-bottom [class*="col-"], .footer-bottom [class^="col-"] {
+  min-height: 0;
+}
+/*** Start Contact Form 7 ***/
+.wpcf7-form label {
+    font-weight: normal;
+}
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form input[type="password"],
+.wpcf7-form textarea {
+  height: 48px;
+  background: #fdf8d9;
+  border: 1px solid #4a4949;
+  margin-bottom: 15px !important;
+}
+.wpcf7-form textarea {
+  height: 180px;
+}
+.wpcf7-form .wpcf7-submit {
+    margin: 0;
+}
+/*** End Contact Form 7 ***/
+/*================== End Style Input ================*/
+/*================== Custom Css Only Theme ================*/
+.entry-title {text-transform: uppercase;} 
+.cs_extra_map .map-render {
+  border: 1px solid #4a4949;
+}
+/*================== End Custom Css Only Theme ================*/

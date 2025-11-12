@@ -1,0 +1,621 @@
+/** Stylings für geänderte Zellen */
+.modified-input {
+    outline: 3px solid green;
+}
+
+/* Standard */
+input[type="checkbox"] {
+  outline: none;
+}
+
+/* Roter Rand bei Änderung */
+.modified-checkbox {
+  outline: 2px solid green !important;
+  outline-offset: 2px !important;
+  border-radius: 3px !important;
+}
+
+
+/** disabled stylings */
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+input:disabled {
+    background-color: #938a8d;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    /* oder z.B. 'default', 'help', 'wait', etc. */
+    opacity: 0.6;
+    /* optional zur besseren Erkennbarkeit */
+}
+
+input[type="submit"]:disabled {
+    cursor: not-allowed;
+    /* oder z.B. 'default', 'help', 'wait', etc. */
+    opacity: 0.6;
+    /* optional zur besseren Erkennbarkeit */
+}
+
+select[aria-disabled="true"] {
+    pointer-events: none;
+    /* verhindert Interaktion */
+    opacity: 0.5;
+    background-color: #eee;
+    cursor: not-allowed;
+    /* beliebiger Cursor funktioniert nur in manchen browsern */
+}
+
+
+/** Stylings Tabelle mit Scrollbar */
+.table-scroll-wrapper {
+  overflow-x: auto;       /* Scrollbar bei Überbreite */
+  border: 1px solid #ccc;
+  max-height: 60vh; /* oder feste Pixelzahl z. B. 600px */
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+}
+
+.shared-files-pagination-improved {
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+.row1 {
+  display: flex;          /* Zeilen als Flexbox */
+  min-width: max-content; /* Breite richtet sich nach Inhalt */
+  border-bottom: 1px solid #ddd;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 15px;   /* optional: Innen-Abstand einfügen */
+  padding-right: 15px;
+}
+
+.row1.header {
+  font-weight: bold;
+  background: #f7f7f7;
+}
+
+.cell {
+  flex: 0 0 200px;         /* feste Spaltenbreite */
+  padding: 6px;
+  box-sizing: border-box;
+  border-right: 1px solid #eee;
+}
+
+.cell:last-child {
+  border-right: none;
+}
+
+.cell input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cell input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Alternierende Zeilenfarbe für Tabelle */
+.row1:not(.header):nth-child(even) {
+  background-color: #f9f9f9;
+}
+.row1:not(.header):nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Mobile: Zeilen umbrechen */
+@media (max-width: 600px) {
+  .row1 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cell {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Beispiel: Label + Input zusammenhalten (falls du sowas einfügst) */
+  .rows-per-page {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .rows-per-page input {
+    flex: 1 1 auto;
+    min-width: 50px;
+  }
+}
+
+/** Formular stretch auf volle Breite */ 
+form,
+.shared-files-pagination-improved {
+display: block;
+width: 100%;
+max-width: 800px;
+margin: 2rem auto;
+padding: 1rem;
+background: #f9f9f9;
+border: 1px solid #ddd;
+border-radius: 8px;
+}
+
+/** Klare Trennung mit Abstand */
+hr.clear {
+margin: 2rem auto;
+width: 80%;
+border: none;
+border-top: 1px solid #ccc;
+}
+
+/** Pagination-Styling */
+.shared-files-pagination-improved {
+text-align: center;
+}
+
+.shared-files-pagination-improved a,
+.shared-files-pagination-improved span {
+display: inline-block;
+margin: 0.25rem 0.4rem;
+padding: 0.4rem 0.8rem;
+text-decoration: none;
+color: #005baa;
+border: 1px solid transparent;
+border-radius: 4px;
+transition: background 0.2s ease;
+}
+
+.shared-files-pagination-improved a:hover {
+background: #e6f0fa;
+border-color: #005baa;
+}
+
+.shared-files-pagination-improved .current {
+font-weight: bold;
+background: #005baa;
+color: white;
+border-color: #005baa;
+}	
+
+/* Container für Buttons nebeneinander */
+.button-group {
+  display: flex;
+  gap: 10px; /* Abstand zwischen Buttons */
+  margin-left: 20px; /* Abstand links von den Buttons */
+}
+
+/* Buttons optional etwas angleichen */
+.button-group button {
+  white-space: nowrap; /* verhindert Zeilenumbruch im Buttontext */
+}
+
+
+/** Button-Formular Border entfernen */
+#the-redirect-form,
+#the-redirect-form table,
+#the-redirect-form div,
+#the-redirect-form input,
+#the-redirect-form select,
+#the-redirect-form textarea {
+border: none !important;
+box-shadow: none !important; /* falls Schatten da sind */
+outline: none !important; /* falls Fokusrahmen da sind */
+}
+
+#the-redirect-form,
+#the-redirect-form table{
+    margin: 0px;
+}
+
+#the-redirect-form td{
+border-width: 0px !important;
+}
+
+/* Gesamte Seite stretchen Dein Wrapper: nimmt 100% Breite ein */
+#cpt-update-wrapper {
+width: 100%;
+padding: 0;
+margin: 0;
+}
+
+/* Direkt darin: alle Elemente auf volle Breite */
+#cpt-update-wrapper > * {
+display: block;
+width: 100% !important;
+max-width: none !important;
+margin: 0 auto 0 auto;
+box-sizing: border-box;
+}
+
+/* Formulare explizit */
+#cpt-update-wrapper form {
+display: block;
+width: 100% !important;
+}
+
+/* Pagination block auch dehnen */
+#cpt-update-wrapper .shared-files-pagination-improved {
+width: 100% !important;
+text-align: center;
+}
+
+/* Optional: Buttons und Inputs innerhalb der Formulare auch auf Breite bringen */
+#cpt-update-wrapper select,
+#cpt-update-wrapper button,
+#cpt-update-wrapper textarea {
+width: 100%;
+max-width: 100%;
+box-sizing: border-box;
+margin-bottom: .25rem;
+}
+
+/* Wrapper */
+.dual-listbox-wrapper {
+    margin: 20px 0;
+    width: 100%;
+  }
+  
+  /* Flexbox für die Listboxen */
+  .dual-listbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  /* Jede Liste */
+  .dual-list {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Select-Felder */
+  .dual-list select {
+    width: 100%;
+    min-height: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+  }
+  
+  /* Buttons in der Mitte */
+  .dual-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  /* Astra-kompatible Buttons */
+  .dual-buttons .button {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .category_wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /* Kategorie button rechts vom select */
+  .shared-files-category-select-container {
+    display: flex;
+    align-items: center; /* vertikal mittig */
+  }
+
+  .shared-files-category-select-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .shared-files-category-select-container label {
+    flex: 0 0 250px; /* fixe Breite, nach Bedarf anpassen */
+  }
+
+  .shared-files-category-select {
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+
+  .select-with-button {
+    display: flex;
+    align-items: center;
+    flex: 1; /* nimmt den restlichen Platz ein */
+    margin-left: 4px;
+    padding: 2px 6px; /* kompakter als Standard */
+    width: auto; /* oder feste Breite z. B. 60px, falls gleich groß sein sollen */
+  }
+  
+  .select-with-button select {
+    margin-right: 8px; /* Abstand zwischen Select und Buttons */
+  }
+
+  .select-with-button button {
+    margin-left: 4px; /* kleiner Abstand zwischen den Buttons */
+  }
+
+  /* DIV Style */
+  .ast-container {
+    display: flex;
+    flex-direction: column; /* Stapelt die Kinder vertikal */
+    gap: 1rem; /* Abstand zwischen den Forms */
+  }
+  
+  .ast-container form {
+    width: 100%; /* Forms nehmen volle Breite */
+  }
+
+  #categories-form,
+  #dataForm-categories {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Styles for Modify template */
+  .search-row-top,
+  .search-row-bottom {
+      display: flex !important;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      width: auto !important;      /* override 100% width */
+  }
+
+  /* Eingabeelemente in diesen Zeilen nicht auf volle Breite */
+  .search-row-top button {
+      width: auto !important;
+      max-width: none !important;
+  }
+
+  .search-row-top .search-field {
+    flex: 2 1 200px; /* deutlich mehr Platz für die Suche */
+    max-width: 400px;
+  }
+
+  .search-row-top .category-select {
+      flex: 0 0 250px;
+  }
+
+  .search-input {
+    padding-top: 4px !important;
+    padding-bottom: 3px !important;
+  }
+
+  .search-row-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px; /* Abstand zwischen den Blöcken */
+  }
+  
+  .search-row-bottom > * {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .option-checkbox,
+  .option-select {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .option-select {
+    margin-left: 50px;
+  }
+
+  .option-checkbox input {
+    margin-right: 0.5rem;
+  }
+  
+  .option-select select {
+    min-width: 250px;
+  }
+
+  .option-select label {
+    white-space: nowrap;
+  }
+  
+  .option-rows input {
+    width: 270px;
+  }
+  
+  .elements-group {
+    margin-left: auto; /* schiebt Buttons nach ganz rechts */
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .elements-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto; /* schiebt die gesamte Gruppe nach rechts */
+  }
+  
+  .elements-group label {
+    white-space: nowrap; /* verhindert Zeilenumbruch */
+  }
+
+  .elements-group input[type="text"] {
+    width: 70px;
+  }
+  
+  .elements-group button {
+    margin-left: 0.5rem;
+  }
+
+  .button-wrapper {
+    display: flex;
+    gap: 10px;
+  }
+
+  .button-wrapper button {
+    white-space: nowrap; /* verhindert Zeilenumbruch im Button selbst */
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 600px) {
+
+    /* Gesamte Suchzeilen flexen auf Spalten */
+    .search-row-top,
+    .search-row-bottom {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 0.5rem;
+    }
+
+    /* "Modify single field" margin entfernen */
+    .option-select {
+      margin-left: 0 !important;
+      width: 100%;
+    }
+
+    /* Zeilen pro Seite + Buttons in Elemente-Gruppe auf volle Breite */
+    .elements-group {
+      flex-direction: column !important;
+      flex-wrap: nowrap;  /* verhindert Zeilenumbruch */
+      margin-left: 0 !important;
+      width: 100%;
+    }
+
+    .elements-group label,
+    .elements-group input,
+    .elements-group button {
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .button-wrapper {
+      flex-direction: column !important;
+      width: 100%;
+    }
+
+    .button-wrapper button {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+
+    /* Suchfeld und Kategorie auf volle Breite */
+    .search-field,
+    .category-select {
+      flex: 1 1 100% !important;
+      max-width: 100% !important;
+    }
+
+    .search-catupdate-field,
+    .category-catupdate-select,
+    .reset-button {
+        flex: 1 1 100% !important;
+        min-width: 0 !important; /* vorher war 200px */
+        margin-left: 0 !important; /* entfernt Desktop-Abstand */
+    }
+  }
+
+  #dataForm input[type="submit"] {
+    margin-top: 20px; /* Abstand nach oben */
+  }
+  /* END of Styles for Modify template */
+
+  /* Styles for Modify category template */  
+  .search-row-top .search-field {
+    flex: 2 1 200px; /* deutlich mehr Platz für die Suche */
+    max-width: 400px;
+  }
+
+  .search-row-top .category-select {
+      flex: 0 0 250px;
+  }
+  .search-catupdate-field,
+  .category-catupdate-select
+  {
+    flex: 0 0 550px;
+    min-width: 200px;
+    margin-left: 1rem; /* Abstand zur Suche */
+  }
+  
+  .select-with-button {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .select-with-button select {
+    flex: 1;
+  }
+
+  .select-with-button button {
+    font-size: 0.85em;
+  }
+
+  #reloadCurrentPage {
+    font-size: 0.85em;
+  }
+
+
+  /* END of Styles for Modify category template */  
+
+  
+  .dual-listbox {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .dual-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dual-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* Kategorie modal */
+  .modal {
+    display: none; /* Versteckt, bis geöffnet */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+  }
+  
+  .modal-actions {
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  .modal-actions button {
+    margin-left: 8px;
+  }

@@ -1,0 +1,186 @@
+/*
+Theme Name: CmsSuperHero
+Theme URI: http://cmssuperheroes.com/wordpress/cshero
+Author: Cmssuperheroes Team
+Author URI: http://cmssuperheroes.com/
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenseswpcf7-form/gpl-2.0.html
+Tags: black, green, white, light, dark, two-columns, three-columns, left-sidebar, right-sidebar, fixed-layout, responsive-layout, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready, accessibility-ready
+Description: In 2014, Creating a magazine website with WordPress has never been easier.
+Text Domain: cshero
+*/
+
+
+/* ==========================================================================
+  Shortcode
+========================================================================== */
+.vc_separator .cs_separator_title h4 {
+    font-size: 26px;
+}
+
+/*================== End Style Input ================*/
+/*================== Custom Css Only Theme ================*/
+
+#footer-top h3.wg-title{
+    line-height: 1em;
+    white-space: pre;
+	margin-bottom:25px;
+	position:relative;
+	text-align:center;
+}
+#footer-top h3.wg-title:before{
+    display: table-cell;
+    height: 1px;
+    width: 100%;
+	content: "";
+	position:absolute;
+	top:50%;
+	background:url(../images/dot.jpg) repeat-x left center;
+}
+
+#footer-top h3.wg-title span{background:#fff;display:inline-block;padding: 0 15px; position: relative;}
+#footer-bottom ul.menu{text-align:left;}
+.tweets .tweets-container ul li {
+  margin: 0 0 15px;
+  padding: 0 0 15px 35px;
+  position: relative;
+  border-bottom: 1px solid  #eee;
+} 
+.footer-bottom {
+  font-style: italic;
+}
+#footer-bottom ul.menu li + li:before {
+  content: "/";
+  padding: 0 10px 0 0;
+}
+.cs-recent-post .date {
+    text-transform: uppercase;
+}
+.cs-recent-post.style-2 .cs-recent-post-title .entry-title {margin-top:20px;}
+.cs-recent-post.style-2 .cs-recent-post-item .cs-recent-post-container {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.cs-recent-post.style-2 .cs-recent-post > .row-fluid:last-child .cs-recent-post-container {
+	border-bottom: 0px solid #eee;
+}
+.tp-rightarrow.default,.tp-leftarrow.default {
+  background: none!important;
+  cursor: pointer;
+  height: 40px;
+  position: relative;
+  width: 40px;
+  z-index: 100;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  line-height: 35px;
+}
+.tp-rightarrow.default:before {
+  content: ">";
+   font-family: "lato";
+    font-weight: 100;
+}
+.tp-leftarrow.default:before {
+  content: "<";
+  font-family: "lato";
+    font-weight: 100;
+}
+.style2.widget_cs_social_widget  a{
+	border: 1px solid;
+	border-radius: 50%;
+	display: inline-block;
+	height: 50px;
+	padding-top: 10px;
+	width: 50px;
+}
+ .style2.widget_cs_social_widget  a i{
+    font-size: 30px;
+}
+ .style2.widget_cs_social_widget  a:hover i{
+	color:#f5f5f5!important; 
+}
+#cs-breadcrumb-wrapper .cs-breadcrumbs{margin:0; border-bottom: 0px solid #ddd;}
+.widget-area .widget_recent_comments ul li a{
+	display: inline!important;
+}
+.cs-testimonial .cs-nav ul{text-align:center;}
+.tp-caption a {
+    color: #fff;
+}
+.tp-caption a:hover {
+    color: #f5f5f5;
+}
+.tp-caption.Button {
+    background-color: rgba(0, 0, 0, 0.4)!important;
+}
+#cs-page-title-wrapper.page-title-style .page-title {
+    text-transform: capitalize;
+}
+.cs-social li + li {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/*================== End Custom Css Only Theme ================*/
+
+/* ==========================================================================
+  mobile
+========================================================================== */
+@media (max-width: 768px) {
+	.vc_empty_space {
+		max-height: 40px;
+	}
+	.cs-quote-style-1:before, .cs-quote-style-1:after {
+		font-size: 100px;
+	}
+	html.vc_transform {
+		margin-top: 0px !important;
+	}
+	body.admin-bar {
+		margin-top: 0;
+		padding-top: 46px;
+	}
+	.cs-full-piechart .cs-main-canvas {
+		margin: auto;
+		max-width: 100%;
+	}
+	.vc_responsive  .cs-full-piechart.style-5 .cs-main-style-5 .cs-full-piechart-content.title,.vc_responsive  .cs-full-piechart.style-5 .cs-main-style-5 #canvas-holder {
+	  display: block;
+	  margin: 10px 0 30px;
+	} 
+	.vc_responsive  #wrapper .q_counter_holder {
+		padding: 20px 0 !important;
+	}
+	.vc_responsive  .cs-full-piechart.style-5 .cs-piechart-list{
+		 margin: 0 auto;
+		 display:table;	 
+	}
+	.vc_responsive .cs-full-piechart.style-5 .cs-piechart-list li{
+		margin-right: 15px;
+		float: none;
+		display: inline-block;
+	}
+	.vc_responsive .cs-full-piechart.style-5 .cs-full-piechart-description{ text-align:center;}
+	h1{font-size:200%!important;}
+	h2{font-size:180%!important;}
+	h3{font-size:150%!important;}
+	h4{font-size:130%!important;}
+	.vc_responsive .vc_separator .vc_sep_holder{display: none;}
+	.cs-full-piechart.style-5 .cs-main-style-5 {
+		margin: 0 auto;
+	}
+	.vc_responsive #footer-top [class*="footer-top-"],.vc_responsive #footer-top [class^="footer-top-"] {
+		margin-bottom: 0;
+	}
+	.vc_responsive .cs-pricing .cs-pricing-item.cs-pricing-feature {
+		margin-top: 0px;
+	}
+	.csbody .vc_separator h1,.csbody  .vc_separator h2,.csbody  .vc_separator h3,.csbody  .vc_separator h4,.csbody  .vc_separator h5,.csbody  .vc_separator h6 {
+	  display: block;
+	  text-align: center;
+	}
+}
