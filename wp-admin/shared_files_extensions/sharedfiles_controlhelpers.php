@@ -58,7 +58,7 @@ function getCheckboxField($file_id, $cat_name, $name, $value, &$checkboxArray, $
 
 function addTitleField(&$table, $file_id, $title, &$inputArray, $isReadonlyUser)
 {
-	$table .= '<div class="cell">';
+	$table .= '<div class="cell_text">';
 	if($isReadonlyUser == true) {
 		$table .= $title;
 	}
@@ -72,7 +72,7 @@ function addTitleField(&$table, $file_id, $title, &$inputArray, $isReadonlyUser)
 
 function addDescriptionField(&$table, $file_id, $desc, &$inputArray, $isReadonlyUser)
 {
-	$table .= '<div class="cell">';
+	$table .= '<div class="cell_text">';
 	if($isReadonlyUser == true) {
 		$table .= $desc;
 	}
@@ -86,7 +86,7 @@ function addDescriptionField(&$table, $file_id, $desc, &$inputArray, $isReadonly
 
 function addCustomFieldField(&$table, $file_id, $n, $val, &$inputArray, $isReadonlyUser): void
 {
-	$table .= '<div class="cell">';
+	$table .= '<div class="cell_text">';
 	if($isReadonlyUser == true) {
 		$table .= $val;
 	}
@@ -100,7 +100,7 @@ function addCustomFieldField(&$table, $file_id, $n, $val, &$inputArray, $isReado
 
 function addTagsField(&$table, $file_id, $tagValue, &$inputArray, $isReadonlyUser): void
 {
-	$table .= '<div class="cell">';
+	$table .= '<div class="cell_text">';
 	if($isReadonlyUser == true) {
 		$table .= $tagValue;
 	}
@@ -115,7 +115,7 @@ function addTagsField(&$table, $file_id, $tagValue, &$inputArray, $isReadonlyUse
 function addCategoryField(&$table, $file_id, &$category, $catValue, &$checkboxArray, $isReadonlyUser): void
 {
 	// error_log("addCategoryField " . $file_id . ": " . print_r($category, true) . ", catvalue " . $catValue . ", inputArr " . print_r($inputArray, true));
-	$table .= '<div class="cell">';
+	$table .= '<div class="cell_text cell_cat">';
 	$table .= getCheckboxField($file_id, $category->name, '_sf_file_cat_' . $file_id . '_' . $category->term_id, $catValue, $checkboxArray, $isReadonlyUser);
 	$table .= getCheckboxField($file_id, $category->name, '_sf_file_cat_origin_' . $file_id . '_' . $category->term_id, $catValue, $checkboxArray, $isReadonlyUser, true);
 

@@ -366,7 +366,7 @@ if ($data["headrow"] && $data["headrowKat"] && $data["keys"]) {
 	// Kopfzeile
 	$table .= '<div class="row1 header">';
 	foreach ($headRow as $element) {
-		$table .= '<div class="cell">' . $element . '</div>';
+		$table .= '<div class="cell_text">' . $element . '</div>';
 	}
 	$table .= "</div>";
 
@@ -452,7 +452,7 @@ error_log("element " . print_r($element, true));
 error_log("file_id " . print_r($file_id, true));							
 							$row = '<div class="row1">';
 							if(in_array("Id", $headRow)) {
-								$row .= '<div class="cell">' . $file_id . '</div>';
+								$row .= '<div class="cell_text">' . $file_id . '</div>';
 							}
 						} else if ($dataKey == "title") {
 							addTitleField($row, $file_id, $element, $inputArray, $isReadonlyUser);

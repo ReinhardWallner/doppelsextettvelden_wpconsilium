@@ -75,23 +75,32 @@ select[aria-disabled="true"] {
   background: #f7f7f7;
 }
 
-.cell {
+.cell_text {
   flex: 0 0 200px;         /* feste Spaltenbreite */
   padding: 6px;
   box-sizing: border-box;
   border-right: 1px solid #eee;
 }
 
-.cell:last-child {
+.row1.header .cell_text {
+  background-color: f7f7f7;
+}
+
+.cell_cat {
+  text-align: center;
+  background-color: #f7f7f7;
+}
+
+.cell_text:last-child {
   border-right: none;
 }
 
-.cell input[type="text"] {
+.cell_text input[type="text"] {
   width: 100%;
   box-sizing: border-box;
 }
 
-.cell input[type="checkbox"] {
+.cell_text input[type="checkbox"] {
   transform: scale(1.2);
 }
 
@@ -139,7 +148,7 @@ width: 100%;
 max-width: 800px;
 margin: 2rem auto;
 padding: 1rem;
-background: #f9f9f9;
+background-color: #bedbf4;
 border: 1px solid #ddd;
 border-radius: 8px;
 }
@@ -193,6 +202,10 @@ border-color: #005baa;
   white-space: nowrap; /* verhindert Zeilenumbruch im Buttontext */
 }
 
+
+#the-redirect-form {
+  background-color: #bedbf4
+}
 
 /** Button-Formular Border entfernen */
 #the-redirect-form,
@@ -350,6 +363,10 @@ margin-bottom: .25rem;
   
   .ast-container form {
     width: 100%; /* Forms nehmen volle Breite */
+  }
+
+  #dataForm {
+    background-color: #bedbf4
   }
 
   #categories-form,
