@@ -54,6 +54,7 @@ select[aria-disabled="true"] {
 .table-scroll-wrapper {
   overflow-x: auto;       /* Scrollbar bei Überbreite */
   border: 1px solid #ccc;
+  border-radius: 5px;
   max-height: 60vh; /* oder feste Pixelzahl z. B. 600px */
   overflow-y: auto;
   overflow-x: auto;
@@ -61,34 +62,51 @@ select[aria-disabled="true"] {
 }
 
 .row1 {
-  display: flex;          /* Zeilen als Flexbox */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 250px;  /* gleiche Breite für alle Spalten */
   min-width: max-content; /* Breite richtet sich nach Inhalt */
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e6e8ec;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: 15px;   /* optional: Innen-Abstand einfügen */
-  padding-right: 15px;
+  padding-left: 5px;   /* optional: Innen-Abstand einfügen */
+  padding-right: 5px;
 }
 
 .row1.header {
   font-weight: bold;
-  background: #f7f7f7;
+  background: #eef2f7;
+  border-bottom: 2px solid #d0d5dd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 .cell_text {
-  flex: 0 0 200px;         /* feste Spaltenbreite */
-  padding: 6px;
   box-sizing: border-box;
-  border-right: 1px solid #eee;
+  border-radius: 0;
+  /* nur rechter Border = gleiche Breiten wie vorher */
+}
+
+/* letzte Spalte ohne Rand */
+.cell_text:last-child {
+  border-right: none;
 }
 
 .row1.header .cell_text {
-  background-color: f7f7f7;
+  background-color: #f7f7f7;
+}
+
+.cell_text,
+.row1.header .cell_text {
+  flex: 0 0 200px;
+  padding: 3px 6px;
+  border-right: 1px solid #cfd6df;
 }
 
 .cell_cat {
   text-align: center;
-  background-color: #f7f7f7;
 }
 
 .cell_text:last-child {
@@ -148,9 +166,13 @@ width: 100%;
 max-width: 800px;
 margin: 2rem auto;
 padding: 1rem;
-background-color: #bedbf4;
+background-color: #eaf5fe;
 border: 1px solid #ddd;
 border-radius: 8px;
+}
+
+.shared-files-pagination-improved .shared-files-pagination-improved-more-files {
+    margin-top: 4px;
 }
 
 /** Klare Trennung mit Abstand */
@@ -204,7 +226,7 @@ border-color: #005baa;
 
 
 #the-redirect-form {
-  background-color: #bedbf4
+  background-color: #eaf5fe
 }
 
 /** Button-Formular Border entfernen */
@@ -366,7 +388,13 @@ margin-bottom: .25rem;
   }
 
   #dataForm {
-    background-color: #bedbf4
+    background-color: #eaf5fe;
+    margin-bottom: -70px;
+  }
+
+  /* Wenn KEINE Pagination vorhanden ist → Abstand erzeugen */
+  body:not(:has(.shared-files-pagination-improved)) #dataForm {
+      margin-bottom: 0px !important; /* dein gewünschter Wert */
   }
 
   #categories-form,
@@ -407,12 +435,19 @@ margin-bottom: .25rem;
       flex: 0 0 250px;
   }
 
-  .search-input {
-    padding-top: 4px !important;
-    padding-bottom: 3px !important;
-    min-width: 250px;
+  .search-input, 
+  select, 
+  input[type="text"] {
+    background: #ffffff;
+    border: 1px solid #cfd6df;
+    border-radius: 6px;
+    padding: 6px 10px;
   }
  
+  .search-input {
+    min-width: 300px;
+  }
+
   .option-checkbox,
   .option-select {
     display: flex;
