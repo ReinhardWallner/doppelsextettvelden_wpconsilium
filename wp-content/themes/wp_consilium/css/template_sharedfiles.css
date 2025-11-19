@@ -408,16 +408,16 @@ margin-bottom: .25rem;
     display: grid;
     grid-template-columns: 2fr 1fr 7fr auto; /* erste Spalte fix, zweite nimmt Rest */
     gap: 1rem;
-	align-items: center;
-	margin-bottom: 0.5rem;
+	  align-items: center;
+	  margin-bottom: 0.5rem;
   }
+
   .search-row-bottom {
     display: grid;
     grid-template-columns: 1fr 2fr 7fr auto; /* erste Spalte fix, zweite nimmt Rest */
     gap: 1rem;
-	align-items: center;
-	margin-bottom: 0.5rem;
-															
+	  align-items: center;
+	  margin-bottom: 0.5rem;													
   }
 
   /* Eingabeelemente in diesen Zeilen nicht auf volle Breite */
@@ -511,60 +511,63 @@ margin-bottom: .25rem;
 
   /* Mobile Styles */
   @media (max-width: 600px) {
-
-    /* Gesamte Suchzeilen flexen auf Spalten */
-    .search-row-top,
-    .search-row-bottom {
-      flex-direction: column !important;
-      align-items: stretch !important;
-      gap: 0.5rem;
-    }
-
-    /* "Modify single field" margin entfernen */
-    .option-select {
-      margin-left: 0 !important;
-      width: 100%;
-    }
-
-    /* Zeilen pro Seite + Buttons in Elemente-Gruppe auf volle Breite */
-    .elements-group {
-      flex-direction: column !important;
-      flex-wrap: nowrap;  /* verhindert Zeilenumbruch */
-      margin-left: 0 !important;
-      width: 100%;
-    }
-
-    .elements-group label,
-    .elements-group input,
-    .elements-group button {
-      width: 100% !important;
-      margin-left: 0 !important;
+    /* Styles for Modify template */
+    .search-row-top {
+      display: flex !important;       /* fügt !important hinzu */
+      flex-direction: column !important; /* übereinander statt nebeneinander */
+      gap: 1rem;
       margin-bottom: 0.5rem;
     }
 
-    .button-wrapper {
-      flex-direction: column !important;
-      width: 100%;
-    }
-
-    .button-wrapper button {
+    .search-row-top .search-field {
+      flex: none !important;   
       width: 100% !important;
-      margin-left: 0 !important;
     }
 
-    /* Suchfeld und Kategorie auf volle Breite */
-    .search-field,
-    .category-select {
-      flex: 1 1 100% !important;
-      max-width: 100% !important;
+    .search-input {
+      min-width: 100px;
+      width: 100% !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
+    
+    .search-row-top .category-select {
+      flex: none !important;   
+      width: 100% !important;
+      height: auto !important;
+      min-height: auto !important;
     }
 
-    .search-catupdate-field,
-    .category-catupdate-select,
-    .reset-button {
-        flex: 1 1 100% !important;
-        min-width: 0 !important; /* vorher war 200px */
-        margin-left: 0 !important; /* entfernt Desktop-Abstand */
+    .search-input, 
+    select, 
+    input[type="text"] {
+      padding: 0px 10px;
+    }
+
+    .search-row-bottom {
+      display: flex !important;       /* fügt !important hinzu */
+      flex-direction: column !important; /* übereinander statt nebeneinander */
+      gap: 1rem;
+      margin-bottom: 0.5rem;													
+    }
+
+    .option-select {
+      display: flex !important;       /* fügt !important hinzu */
+      flex-direction: column !important; /* übereinander statt nebeneinander */
+      margin-left: 0px;
+      gap: 0.5rem;
+    }
+
+    .elements-group {
+      display: flex !important;       /* fügt !important hinzu */
+      flex-direction: column !important; /* übereinander statt nebeneinander */
+      gap: 0.5rem;
+      margin-left: 0px !important; /* schiebt die gesamte Gruppe nach rechts */
+    }
+
+    .button-wrapper {
+      display: flex !important;       /* fügt !important hinzu */
+      flex-direction: column !important; /* übereinander statt nebeneinander */
     }
   }
 
@@ -573,15 +576,6 @@ margin-bottom: .25rem;
   }
   /* END of Styles for Modify template */
 
-  /* Styles for Modify category template */  
-  .search-row-top .search-field {
-    flex: 2 1 200px; /* deutlich mehr Platz für die Suche */
-    max-width: 400px;
-  }
-
-  .search-row-top .category-select {
-      flex: 0 0 250px;
-  }
   .search-catupdate-field,
   .category-catupdate-select
   {
