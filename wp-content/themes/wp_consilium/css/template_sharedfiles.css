@@ -602,6 +602,45 @@ margin-bottom: .25rem;
     }
   }
 
+/* Medium Devices: 600px bis 1200px */
+@media (min-width: 601px) and (max-width: 1200px) {
+  .search-row-top,
+  .search-row-bottom {
+    display: flex;
+    flex-wrap: wrap; /* ermöglicht Umbruch */
+    gap: 1rem;
+  }
+
+  .search-row-top .search-field,
+  .search-row-top .category-select,
+  .search-row-bottom .option-select,
+  .elements-group {
+    flex: 1 1 calc(50% - 10px); /* jeweils max. 50% minus Abstand */
+    min-width: 200px; /* verhindert zu kleine Felder */
+  }
+
+  .button-wrapper,
+  .elements-group {
+    flex-wrap: wrap;       /* Buttons umbrechen */
+    justify-content: flex-start;
+  }
+
+  .button-wrapper button,
+  .elements-group button {
+    flex: 1 1 auto;
+    min-width: 120px;      /* verhindert zu kleine Buttons */
+  }
+}
+
+/* Optional: Large Devices: >1200px */
+@media (min-width: 1201px) {
+  .search-row-top .search-field,
+  .search-row-top .category-select,
+  .search-row-bottom .option-select,
+  .elements-group {
+    flex: 0 0 auto; /* volle Breite je nach Inhalt */
+  }
+}
 
   #dataForm input[type="submit"] {
     margin-top: 20px; /* Abstand nach oben */
