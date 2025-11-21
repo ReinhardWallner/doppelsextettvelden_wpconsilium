@@ -65,7 +65,7 @@ select[aria-disabled="true"] {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 250px;  /* gleiche Breite für alle Spalten */
-  min-width: max-content; /* Breite richtet sich nach Inhalt */
+  width: 100%; /* Breite richtet sich nach Inhalt */
   border-bottom: 1px solid #e6e8ec;
   margin-left: 0 !important;
   margin-right: 0 !important;
@@ -128,34 +128,6 @@ select[aria-disabled="true"] {
 }
 .row1:not(.header):nth-child(odd) {
   background-color: #ffffff;
-}
-
-/* Mobile: Zeilen umbrechen */
-@media (max-width: 600px) {
-  .row1 {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cell {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  /* Beispiel: Label + Input zusammenhalten (falls du sowas einfügst) */
-  .rows-per-page {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .rows-per-page input {
-    flex: 1 1 auto;
-    min-width: 50px;
-  }
 }
 
 /** Formular stretch auf volle Breite */ 
@@ -389,7 +361,7 @@ margin-bottom: .25rem;
 
   #dataForm {
     background-color: #eaf5fe;
-    margin-bottom: -70px;
+    margin-bottom: -40px;
   }
 
   /* Wenn KEINE Pagination vorhanden ist → Abstand erzeugen */
@@ -511,6 +483,24 @@ margin-bottom: .25rem;
 
   /* Mobile Styles */
   @media (max-width: 600px) {
+    /* Nur die obere Zeile über Logo/Menu */
+    .header-top {
+      display: none !important;
+    }
+
+    /* Höhe des Headers anpassen, damit kein Leerraum bleibt */
+    .header.header-v1 {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+      min-height: 0 !important;
+    }
+
+    #cpt-update-wrapper {
+      width: 100%;
+      padding: 0;
+      margin-top: 0px;
+    }
+
     /* Styles for Modify template */
     .search-row-top {
       display: flex !important;       /* fügt !important hinzu */
@@ -544,6 +534,10 @@ margin-bottom: .25rem;
       padding: 0px 10px;
     }
 
+    .rows-per-page-div{
+      margin-bottom: 5px;
+    }
+
     .search-row-bottom {
       display: flex !important;       /* fügt !important hinzu */
       flex-direction: column !important; /* übereinander statt nebeneinander */
@@ -569,7 +563,45 @@ margin-bottom: .25rem;
       display: flex !important;       /* fügt !important hinzu */
       flex-direction: column !important; /* übereinander statt nebeneinander */
     }
+
+    #footer-top {
+      height: 0 !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }    
+
+    .row1 {
+      flex-direction: column;
+      align-items: stretch;
+      grid-auto-columns: calc(50% - 10px); /* halbe Seitenbreite minus 10px */
+    }
+  
+    .cell {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  
+    /* Beispiel: Label + Input zusammenhalten (falls du sowas einfügst) */
+    .rows-per-page {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  
+    .rows-per-page input {
+      flex: 1 1 auto;
+      min-width: 50px;
+    }
+
+    .shared-files-pagination-improved {
+      border: 0px;
+    }
   }
+
 
   #dataForm input[type="submit"] {
     margin-top: 20px; /* Abstand nach oben */

@@ -209,9 +209,16 @@ $checkboxArray = array();
 <?php
 $home = home_url( $wp->request );
 
+$searchFields = "";
+if($isReadonlyUser == true){
+	$searchFields .= "<div style='margin-left: 50px; margin-bottom: 10px; font-size: 16px;'>Suche, Download und Excel export</div>";
+} else {
+	$searchFields .= "<div style='margin-left: 50px; margin-bottom: 10px; font-size: 16px;'>Suche, Bearbeitung, Download und Excel export</div>";
+}
+
 // ------------------------------------------------------------------------------------------------------------------------
 // Form Suche start
-$searchFields = '<form
+$searchFields .= '<form
    id="the-redirect-form" 
    method="post" 
    action="' . $home . '" 
@@ -311,7 +318,7 @@ $searchFields .= '</select></div>';
 // Download ZIP
 $searchFields .= '<div class="elements-group">';
 $searchFields .= '<div class="reset-button"><button type="button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'WP_CONSILIUM-child') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'WP_CONSILIUM-child') . '</button></div>';
-$searchFields .= '<label style="margin-right: 10px; margin-left: 20px;">' . esc_html__('Rows per page', 'WP_CONSILIUM-child') . '</label><input type="text" name="elementsPerPage" id="elementsPerPage" style="width: 70px;" value="' . $posts_per_page . '" onblur="elementsPerPageChange(this.name, this.value)"/>';
+$searchFields .= '<div class="rows-per-page-div"><label style="margin-right: 10px; margin-left: 20px;">' . esc_html__('Rows per page', 'WP_CONSILIUM-child') . '</label><input type="text" name="elementsPerPage" id="elementsPerPage" style="width: 70px;" value="' . $posts_per_page . '" onblur="elementsPerPageChange(this.name, this.value)"/></div>';
 $searchFields .= '<div class="button-wrapper">';
 $searchFields .= '<button type="button" name="downloadZipBtn" style="float:right" onclick="onZipFileCreationClick()">' . esc_html__('Download ZIP', 'WP_CONSILIUM-child') . '</button>';
 $searchFields .= '<input type="hidden" name="excelImportFilename" id="excelImportFilename"/>';
