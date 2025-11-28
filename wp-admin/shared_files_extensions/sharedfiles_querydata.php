@@ -7,10 +7,10 @@ function queryData($parameters)
 	if(array_key_exists("onlyModifySingleField", $parameters))
 		$onlyModifySingleField = $parameters["onlyModifySingleField"];
 
-	$select = "SELECT distinct p.id, p.post_title
+	$select = "SELECT distinct p.id, p.post_title, m_desc.post_id
 FROM `wp_posts` p
-left join `wp_postmeta` m_cf on p.id=m_cf.post_id and m_cf.meta_key like '%_sf_file_upload_cf%' 
-left join `wp_postmeta` m_desc on p.id=m_desc.post_id and m_desc.meta_key like '%_sf_description%' 
+left join `wp_postmeta` m_cf on p.id=m_cf.post_id and m_cf.meta_key COLLATE utf8mb4_bin like '%_sf_file_upload_cf%' 
+left join `wp_postmeta` m_desc on p.id=m_desc.post_id and m_desc.meta_key COLLATE utf8mb4_bin like '%_sf_description%' 
 left join `wp_term_relationships` trel_tag on trel_tag.object_id=p.id
 left join `wp_terms` t_tag on trel_tag.term_taxonomy_id=t_tag.term_id
 left join `wp_term_taxonomy` tax_tag on tax_tag.term_id=t_tag.term_id and tax_tag.taxonomy='shared-file-tag'
@@ -23,38 +23,38 @@ where p.post_type='shared_file'";
 	if ($parameters["search"]) {
 		if ($nurKategorienAnzeigen == true) {
 			$filter = "and 
-			(p.post_title like '%{$parameters["search"]}%')";
+			(p.post_title COLLATE utf8mb4_bin like '%{$parameters["search"]}%')";
 		} else if($onlyModifySingleField != null && $onlyModifySingleField != "notselected") {
 			if(str_starts_with($onlyModifySingleField, "file_upload_custom_field_")){
 				$rest = str_replace("file_upload_custom_field_", "_sf_file_upload_cf_", $onlyModifySingleField);
 				$filter = "and 
-				(p.post_title like '%{$parameters["search"]}%' 
+				(p.post_title COLLATE utf8mb4_bin like '%{$parameters["search"]}%' 
 				or (m_cf.meta_key='{$rest}' and m_cf.meta_value like '%{$parameters["search"]}%')
 				)";			
 			} else if(str_starts_with($onlyModifySingleField, 'description')){
 				$filter = "and 
-				(p.post_title like '%{$parameters["search"]}%' 
-				or m_desc.meta_value like '%{$parameters["search"]}%'
+				(p.post_title COLLATE utf8mb4_bin like '%{$parameters["search"]}%' 
+				or m_desc.meta_value COLLATE utf8mb4_bin like '%{$parameters["search"]}%'
 				)";	
 			} else if(str_starts_with($onlyModifySingleField, 'tags')){
 				$filter = "and 
-				(p.post_title like '%{$parameters["search"]}%' 
-				or (t_tag.name like '%{$parameters["search"]}%' and tax_tag.taxonomy='shared-file-tag')
+				(p.post_title COLLATE utf8mb4_bin like '%{$parameters["search"]}%' 
+				or (t_tag.name COLLATE utf8mb4_bin like '%{$parameters["search"]}%' and tax_tag.taxonomy='shared-file-tag')
 				)";	
 			}				
 		} else {
 			$filter = "and 
-			(p.post_title like '%{$parameters["search"]}%' 
-			or (t_tag.name like '%{$parameters["search"]}%' and tax_tag.taxonomy='shared-file-tag')
-			or m_desc.meta_value like '%{$parameters["search"]}%'
-			or m_cf.meta_value like '%{$parameters["search"]}%'
+			(p.post_title COLLATE utf8mb4_bin like '%{$parameters["search"]}%' 
+			or (t_tag.name COLLATE utf8mb4_bin like '%{$parameters["search"]}%' and tax_tag.taxonomy='shared-file-tag')
+			or m_desc.meta_value COLLATE utf8mb4_bin like '%{$parameters["search"]}%'
+			or m_cf.meta_value COLLATE utf8mb4_bin like '%{$parameters["search"]}%'
 			)";			
 		}
 	}
 
 	if ($parameters["category"]) {
 		$cat = $parameters["category"];
-		$filter .= "and (t_cat.slug like '%{$cat}%' and tax_cat.taxonomy='shared-file-category')";
+		$filter .= "and (t_cat.slug COLLATE utf8mb4_bin like '%{$cat}%' and tax_cat.taxonomy='shared-file-category')";
 	}
 
 	$limit = $parameters["posts_per_page"];
@@ -62,6 +62,8 @@ where p.post_type='shared_file'";
 
 	$queryCount = "Select count(*) as total from (" . $select . "\n" . $filter . ") qu";
 	$query = $select . "\n" . $filter;
+	// error_log("QQQQQ queryCount: \n" . print_r($queryCount, true));
+	// error_log("QQQQQ query: \n" . print_r($query, true));
 
 	$paged = $parameters["paged"];
 	if ($paged > 0) {
@@ -80,6 +82,7 @@ limit {$limit} offset {$offset}";
 	$queryResult = $wpdb->get_results($query);
 	$ids = array_column($queryResult, 'id');
 	// error_log("ids " . print_r($ids, true));
+	// error_log("QQQQQ queryResult " . print_r($queryResult, true));
 	
 	$data = array();
 	$data["total"] = $total;

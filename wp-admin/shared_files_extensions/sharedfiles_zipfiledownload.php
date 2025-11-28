@@ -15,7 +15,8 @@ function createzipfile($data, $path, $fileName)
 			echo "* Sorry ZIP creation failed at this time";
 		}
 
-		foreach ($outerArrayKeys as $outerKey) {
+		foreach ($outerArrayKeys as $outerKey1) {
+			$outerKey = (string)$outerKey1;
 			if ($outerKey != "keys" && $outerKey != "headrow" && 
 				$outerKey != "headrowKat" && $outerKey != "headRowSingleFields" && 
 				$outerKey != "args" && $outerKey != "total") {

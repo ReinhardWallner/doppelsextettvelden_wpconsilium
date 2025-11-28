@@ -1661,12 +1661,15 @@ add_action('wp_enqueue_scripts', 'tempsharedfiles_enqueue_update_form_styles');
 
 add_action( 'init', function() {
     
-    $mo = get_stylesheet_directory() . '/languages/astra-child-de_DE.mo';
-    if ( file_exists( $mo ) ) {
-        $loaded = load_textdomain( 'astra-child', $mo );
-        error_log( 'IIIII Manuelles Laden astra-child: ' . ( $loaded ? 'OK' : 'FAILED' ) );
-    } else {
-        error_log( 'IIIII MO Datei nicht gefunden: ' . $mo );
-    }
+    // $mo = get_stylesheet_directory() . '/languages/de_DE.mo';
+    // if ( file_exists( $mo ) ) {
+    //     $loaded = load_textdomain( 'astra-child', $mo );
+    //     error_log( 'IIIII Manuelles Laden astra-child: ' . ( $loaded ? 'OK' : 'FAILED' ) );
+    // } else {
+    //     error_log( 'IIIII MO Datei nicht gefunden: ' . $mo );
+    // }
+	// $mo = WP_LANG_DIR . '/wp_consilium-de_DE.mo';
+
+	load_theme_textdomain( 'wp_consilium', get_stylesheet_directory() . '/languages' );
 });
 ?>

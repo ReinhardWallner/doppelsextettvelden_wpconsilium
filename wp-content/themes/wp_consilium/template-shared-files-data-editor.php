@@ -131,6 +131,7 @@ if ($excel_export == true) {
 	);
 
 	$data = queryData($parameters);
+	error_log("EEEEEEE Excel download pars: \n" . print_r($parameters, true) . ", \nData " . print_r($data, true));
 	downloadExcelData($data, $fileName, $nurKategorienAnzeigen, $onlyModifySingleField);
 	return;
 }
@@ -263,12 +264,13 @@ $searchFields .= '</div>';
 
 $searchFields .= '<div class="search-row-bottom">';
 $searchFields .= '<div class="option-checkbox">';
-
+$tst = esc_html__('Modify categories only', 'wp_consilium');
+error_log("PPPPPPPP prüfe Übersetzung " . print_r($tst, true));
 // Nur Kategorien bearbeiten
-$nurKategorienText = esc_html__('Modify categories only', 'WP_CONSILIUM-child');
+$nurKategorienText = esc_html__('Modify categories only', 'wp_consilium');
 
 if ($isReadonlyUser == true){
-	$nurKategorienText = esc_html__('Show only categories', 'WP_CONSILIUM-child');
+	$nurKategorienText = esc_html__('Show only categories', 'wp_consilium');
 }
 
 if ($nurKategorienAnzeigen == true) {
@@ -280,13 +282,13 @@ if ($nurKategorienAnzeigen == true) {
 $searchFields .= '</div>';
 
 $searchFields .= '<div class="option-select">';
-$onlyModifySingleFieldText = esc_html__('Modify single field:', 'WP_CONSILIUM-child');
+$onlyModifySingleFieldText = esc_html__('Modify single field:', 'wp_consilium');
 if ($isReadonlyUser){
-	$onlyModifySingleFieldText = esc_html__('Show single field:', 'WP_CONSILIUM-child');
+	$onlyModifySingleFieldText = esc_html__('Show single field:', 'wp_consilium');
 }
 $searchFields .= '<label>' . $onlyModifySingleFieldText . '</label>';
 $searchFields .= '<select name="onlyModifySingleField" id="onlyModifySingleField" class="shared-files-category-select select_v2" onchange="onSelectSingleFieldChange()">';
-$searchFields .= '<option class="level-0" id="notselected" value="notselected">' . esc_html__('Select single field to modify', 'WP_CONSILIUM-child') . '</option>';
+$searchFields .= '<option class="level-0" id="notselected" value="notselected">' . esc_html__('Select single field to modify', 'wp_consilium') . '</option>';
 if($onlyModifySingleField != null && $onlyModifySingleField == "description"){
 	$searchFields .= '<option class="level-0" id="description" value="description" selected>' . esc_html__('Description', 'shared-files') . '</option>';
 } else {
@@ -317,15 +319,19 @@ $searchFields .= '</select></div>';
 
 // Download ZIP
 $searchFields .= '<div class="elements-group">';
-$searchFields .= '<div class="reset-button"><button type="button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'WP_CONSILIUM-child') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'WP_CONSILIUM-child') . '</button></div>';
-$searchFields .= '<div class="rows-per-page-div"><label style="margin-right: 10px; margin-left: 20px;">' . esc_html__('Rows per page', 'WP_CONSILIUM-child') . '</label><input type="text" name="elementsPerPage" id="elementsPerPage" style="width: 70px;" value="' . $posts_per_page . '" onblur="elementsPerPageChange(this.name, this.value)"/></div>';
+
+if (!$isReadonlyUser){
+	$searchFields .= '<div class="reset-button"><button type="button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
+}
+
+$searchFields .= '<div class="rows-per-page-div"><label style="margin-right: 10px; margin-left: 20px;">' . esc_html__('Rows per page', 'wp_consilium') . '</label><input type="text" name="elementsPerPage" id="elementsPerPage" style="width: 70px;" value="' . $posts_per_page . '" onblur="elementsPerPageChange(this.name, this.value)"/></div>';
 $searchFields .= '<div class="button-wrapper">';
-$searchFields .= '<button type="button" name="downloadZipBtn" style="float:right" onclick="onZipFileCreationClick()">' . esc_html__('Download ZIP', 'WP_CONSILIUM-child') . '</button>';
+$searchFields .= '<button type="button" name="downloadZipBtn" style="float:right" onclick="onZipFileCreationClick()">' . esc_html__('Download ZIP', 'wp_consilium') . '</button>';
 $searchFields .= '<input type="hidden" name="excelImportFilename" id="excelImportFilename"/>';
 $searchFields .= '<input type="hidden" name="doExcelExport" id="doExcelExport"/>';
 
 // Download Excel Liste
-$searchFields .= '<button type="button" name="excepExportBtn" style="float:right" onclick="onExcelExportclick()">' . esc_html__('Excel Export', 'WP_CONSILIUM-child') . '</button>';
+$searchFields .= '<button type="button" name="excepExportBtn" style="float:right" onclick="onExcelExportclick()">' . esc_html__('Excel Export', 'wp_consilium') . '</button>';
 $searchFields .= '<input type="hidden" name="zipfilename" id="zipfilename"/>';
 $searchFields .= '<input type="hidden" name="createzipFile" id="createzipFile"/>';
 $searchFields .= '</div></div>';
@@ -505,7 +511,7 @@ error_log("tags " . print_r($element, true));
 	$table .= "</div>";
 	
 	if($isReadonlyUser == false) {
-		$table .= '<input type="submit" name="submit" disabled="true" value="' . esc_html__('Save', 'WP_CONSILIUM-child') . '"></input>';
+		$table .= '<input type="submit" name="submit" disabled="true" value="' . esc_html__('Save', 'wp_consilium') . '"></input>';
 	}
 
 	$table .= '</form>';

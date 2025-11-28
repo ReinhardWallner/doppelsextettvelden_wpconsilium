@@ -86,7 +86,9 @@ select[aria-disabled="true"] {
 .cell_text {
   box-sizing: border-box;
   border-radius: 0;
-  /* nur rechter Border = gleiche Breiten wie vorher */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* wenn du optisch abgeschnittenen Text willst */
 }
 
 /* letzte Spalte ohne Rand */

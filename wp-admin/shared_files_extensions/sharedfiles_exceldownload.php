@@ -21,14 +21,27 @@ function downloadExcelData($data, $fileName, $nurKategorienAnzeigen, $onlyModify
 		}
 
 		asort($outerArrayKeys);
-		foreach ($outerArrayKeys as $outerKey) {
+		$skipKeys = ['keys','headrow','headrowKat','headRowSingleFields','args','total'];
+		foreach ($outerArrayKeys as $outerKey1) {
+			error_log("EEEEEEE downloadExcelData: \nouterKey1: " . print_r($outerKey1, true));
+			$outerKey = (string)$outerKey1;
+			error_log("EEEEEEE downloadExcelData: \nouterKey: " . print_r($outerKey, true));
 			if ($outerKey != "keys" && $outerKey != "headrow" && 
 				$outerKey != "headrowKat"  && $outerKey != "headRowSingleFields" && 
 				$outerKey != "args" && $outerKey != "total") {
 				$dataRowArray = $data[$outerKey];
+			error_log("EEEEEEE downloadExcelData ADD ROW: \nouterKey: " . print_r($dataRowArray, true) . ", \ndataArrayKeys: " . print_r($dataArrayKeys, true));
 				addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $onlyModifySingleField);
 			}
+
+			// if (!in_array(strtolower((string)$outerKey), $skipKeys, true)) {
+        	// 	error_log("ADD ROW outerKey: " . print_r($outerKey, true));
+			// 	$dataRowArray = $data[$outerKey];
+        	// 	addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $onlyModifySingleField);
+    		// }
 		}
+
+	
 	}
 }
 
@@ -62,17 +75,36 @@ function addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $only
 				continue;
 			}
 		} else {
-			if ($nurKategorienAnzeigen == true && ($dataKey == "description" || $dataKey == "tags")) {
+			$dataKeyStr = (string)$dataKey;
+
+			if ($nurKategorienAnzeigen == true && ($dataKeyStr == "description" || $dataKeyStr == "tags")) {
 				continue;
 			}
 
-			if(($onlyModifySingleField == null || $onlyModifySingleField == "notselected") || 
-				$dataKey == "file_id" || $dataKey == "title" ||
-				($onlyModifySingleField != null && $dataKey == "description" &&
+			if($dataKeyStr != "file_id" && 
+				(($onlyModifySingleField == null || $onlyModifySingleField == "notselected") || 
+				$dataKeyStr == "title" ||
+				($onlyModifySingleField != null && $dataKeyStr == "description" &&
 				str_starts_with($onlyModifySingleField, "description") ||
-				($onlyModifySingleField != null && $dataKey == "tags" &&
+				($onlyModifySingleField != null && $dataKeyStr == "tags" &&
+				str_starts_with($onlyModifySingleField, "tags"))))) {	
+				$element = $dataRowArray[$dataKeyStr];
+
+				error_log("EEEEEEE downloadExcelData ELEMENT: \ndataKeyStr: " . print_r($dataKeyStr, true));
+				error_log("EEEEEEE downloadExcelData ELEMENT: \nelement: " . print_r($element, true));
+
+				if(($onlyModifySingleField == null || $onlyModifySingleField == "notselected")) {	
+					error_log("EEEEEEE downloadExcelData MAPS1");
+				}
+				if($dataKeyStr == "title") {	
+					error_log("EEEEEEE downloadExcelData MAPS 2");
+				}
+				if(($onlyModifySingleField != null && $dataKeyStr == "description" &&
+				str_starts_with($onlyModifySingleField, "description") ||
+				($onlyModifySingleField != null && $dataKeyStr == "tags" &&
 				str_starts_with($onlyModifySingleField, "tags")))) {	
-				$element = $dataRowArray[$dataKey];
+					error_log("EEEEEEE downloadExcelData MAPS 3");
+				}
 			} else {
 				continue;
 			}
