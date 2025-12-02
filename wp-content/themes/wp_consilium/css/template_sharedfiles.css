@@ -86,9 +86,7 @@ select[aria-disabled="true"] {
 .cell_text {
   box-sizing: border-box;
   border-radius: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; /* wenn du optisch abgeschnittenen Text willst */
+  /* nur rechter Border = gleiche Breiten wie vorher */
 }
 
 /* letzte Spalte ohne Rand */
@@ -109,6 +107,7 @@ select[aria-disabled="true"] {
 
 .cell_cat {
   text-align: center;
+  background-color: #ffffff;
 }
 
 .cell_text:last-child {
@@ -129,6 +128,14 @@ select[aria-disabled="true"] {
   background-color: #f9f9f9;
 }
 .row1:not(.header):nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.row1:not(.header):nth-child(even) .cell_text {
+  background-color: #f9f9f9;
+}
+
+.row1:not(.header):nth-child(odd) .cell_text {
   background-color: #ffffff;
 }
 
