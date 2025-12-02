@@ -107,7 +107,6 @@ select[aria-disabled="true"] {
 
 .cell_cat {
   text-align: center;
-  background-color: #ffffff;
 }
 
 .cell_text:last-child {
