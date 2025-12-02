@@ -48,6 +48,7 @@ where p.post_type='shared_file'";
 			or (t_tag.name COLLATE utf8mb4_0900_as_ci like '%{$parameters["search"]}%' and tax_tag.taxonomy='shared-file-tag')
 			or m_desc.meta_value COLLATE utf8mb4_0900_as_ci like '%{$parameters["search"]}%'
 			or m_cf.meta_value COLLATE utf8mb4_0900_as_ci like '%{$parameters["search"]}%'
+			or (t_cat.name COLLATE utf8mb4_0900_as_ci like '%{$parameters["search"]}%' and tax_cat.taxonomy='shared-file-category')
 			)";			
 		}
 	}
@@ -77,7 +78,7 @@ limit {$limit} offset {$offset}";
 	$wpdb = $parameters["wpdb"];
 	$queryCountResult = $wpdb->get_results($queryCount);
 	$total = array_column($queryCountResult, 'total')[0];
-	// error_log("query " . $query);
+	error_log("query " . $query);
 
 	$queryResult = $wpdb->get_results($query);
 	$ids = array_column($queryResult, 'id');
