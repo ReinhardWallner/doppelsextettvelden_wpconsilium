@@ -1522,7 +1522,7 @@ function redirect_users_to_specific_page() {
 		error_log("TTTTTTTTTTTTTTT This page is NOT home" . $pagename);
 	}
 	
-	if ( !is_user_logged_in() && ($pagename == 'notenarchiv' || is_page('suche') || is_page('liste')|| is_page('upload') || is_page('listkategorien') || is_page('tabellenansicht')) && $_SERVER['PHP_SELF'] != '/wp-admin/admin-ajax.php' ) {
+	if ( !is_user_logged_in() && ($pagename == 'notenarchiv' || is_page('suche') || is_page('liste')|| is_page('upload') || is_page('listkategorien') || is_page('tabellenansicht') || is_page('kategorienansicht')) && $_SERVER['PHP_SELF'] != '/wp-admin/admin-ajax.php' ) {
 		auth_redirect();
 	}	
 	else if ($pagename == 'notenarchiv') {
@@ -1575,7 +1575,7 @@ function nr_2010_wp_nav_menu_args($args = '')
 	global $post;
 	$pagename = get_query_var('pagename');
 	error_log("NNNNNNNNNNN nr_2010_wp_nav_menu_args is tabellenansicht? " . print_r($pagename, true) . " --> " . print_r(is_page('tabellenansicht'), true));
-	if ($pagename == 'notenarchiv' || is_page('suche') || is_page('liste') || is_page('upload') || is_page('listkategorien') || is_page('tabellenansicht'))
+	if ($pagename == 'notenarchiv' || is_page('suche') || is_page('liste') || is_page('upload') || is_page('listkategorien') || is_page('tabellenansicht') || is_page('kategorienansicht'))
 	{
 		$user = wp_get_current_user();
 		error_log("NNNNNNNNNNN nr_2010_wp_nav_menu_args user " . print_r($user, true));
@@ -1624,7 +1624,7 @@ console.log('DOMContentLoaded SUBMIT doExcel', doExcel);
                 }
             });
         ");
-    } else if(is_page('shared-files-category-editor')) { // Slug deiner Seite
+    } else if(is_page('kategorienansicht')) { // Slug deiner Seite
         // error_log("asta_child_sharedfiles_template_custom_scripts IS PAGE cpu-update");
         wp_register_script('custom-inline-js', '');
         wp_enqueue_script('custom-inline-js');

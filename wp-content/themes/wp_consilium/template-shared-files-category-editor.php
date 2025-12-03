@@ -1,0 +1,714 @@
+<?php
+/**
+ * Template Name: Shared Files Category Editor
+ *
+ * The template for the full-width page.
+ *
+ * @package Astra
+ * @since Astra 1.0
+ */
+
+ 
+if(!is_user_logged_in()){
+	$pagename = get_query_var('pagename');
+	error_log("Nicht berechtigt! " . print_r($pagename, true));
+	// TODO REDIRECT
+	return;
+}
+
+if ( ! function_exists( 'get_home_path' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+}
+
+$user = wp_get_current_user();
+$isReadonlyUser = false;
+if ( !in_array( 'administrator', (array) $user->roles ) && !in_array( 'editor', (array) $user->roles ) && !in_array( 'author', (array) $user->roles ) )
+{	
+	error_log("Nicht berechtigt! " . print_r($pagename, true));
+	// TODO REDIRECT
+	return;
+}
+
+$homepath = get_home_path();
+$homepath = str_replace("/", DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $homepath);
+$sharedfilefolder = $homepath . "wp-admin" . DIRECTORY_SEPARATOR  . "shared_files_extensions" . DIRECTORY_SEPARATOR ;
+
+include  $sharedfilefolder . "sharedfiles_querydata.php";
+include  $sharedfilefolder . "sharedfiles_helperfunctions.php";
+
+$s = get_option('shared_files_settings');
+$custom_fields_cnt = intval($s['custom_fields_cnt']) + 1;
+
+// error_log("TEMPLATE CAT START _POST " . print_r($_POST, return: true));
+// error_log("TEMPLATE CAT START _GET " . print_r($_GET, true));
+
+$taxonomy_slug = 'shared-file-category';
+$allcategories = get_terms($taxonomy_slug, array('hide_empty' => 0));
+
+$search = null;
+if (isset($_POST['searchField'])) {
+	$search = $_POST["searchField"];
+} else if (isset($_GET['searchField'])) {
+	$search = $_GET["searchField"];
+}
+$category = null;
+if (isset($_POST['sf_category'])) {
+	$category = $_POST["sf_category"];
+} else if (isset($_GET['sf_category'])) {
+	$category = $_GET["sf_category"];
+}
+
+// end attention: This code has before get_header section!!!
+
+get_header();
+
+
+$home = home_url( $wp->request );
+
+$searchFields = '<form id="categories-form" method="post" action="..." enctype="multipart/form-data">
+<div class="search-row search-row-top">
+  <div class="search-catupdate-field">';
+
+// Suchfeld
+if ($search) {
+	$searchFields .= '<input type="text" name="searchField" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" value="' . $search . '" oninput="onInputSearchText()"  />';
+} else {
+	$searchFields .= '<input type="text" name="searchField" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" oninput="onInputSearchText()" />';
+}
+$searchFields .= '</div>';
+
+// error_log("CATEGORY IN CAT UPD " . print_r($category, true));
+// Kategorienauswahl
+$categories_order = 'ASC';
+$argsCategoryCombo = array(
+	'taxonomy' => 'shared-file-category',
+	'name' => 'sf_category',
+	'show_option_all' => esc_attr__('Choose category', 'shared-files'),
+	'hierarchical' => true,
+	'class' => 'shared-files-category-select select_v2',
+	'echo' => false,
+	'value_field' => 'slug',
+	'selected' => $category,
+	'order' => $categories_order,
+  'hide_if_empty' => false, // nur wenn keine Begriffe existieren
+  'hide_empty' => false     // zeigt auch leere Begriffe an!
+);
+
+$categoryDropdowm = wp_dropdown_categories($argsCategoryCombo);
+$endIndex = strpos($categoryDropdowm, ">");
+$categoryDropdowm = str_replace("class='shared-files-category-select select_v2'>", 'class="shared-files-category-select select_v2" onchange="onCategoryChange()">', $categoryDropdowm);
+
+// Nur Kategorien bearbeiten
+$searchFields .= '<div class="category-catupdate-select">';
+$searchFields .= '<label for="sf_category">' . esc_html__('Choose category (inactive if search filter inserted or changes exist):', 'wp_consilium') . '</label>';
+$searchFields .= '<div class="select-with-button">';
+$searchFields .= $categoryDropdowm;
+$searchFields .= ' <button type="button" id="addNewCategory" title="' . esc_html__('Create category', 'wp_consilium') . '" class="small-button">' . esc_html__('Create', 'wp_consilium') . '</button>';
+$searchFields .= ' <button type="button" id="deleteSelectedCategory" title="' . esc_html__('Delete category', 'wp_consilium') . '" disabled="true" class="small-button">' . esc_html__('Delete', 'wp_consilium') . '</button>';
+$searchFields .= '</div></div>';
+$searchFields .= '<div class="reset-button"><button type="button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
+$searchFields .= '</div></form>';
+
+$adminUrl = get_admin_url();
+$postUrl = $adminUrl . 'shared_files_extensions/sharedfiles_category_post.php';
+
+$form = '<form method="post" name="dataForm-categories" id="dataForm-categories" enctype="application/x-www-form-urlencoded" action="' . $postUrl . '">';
+
+
+// Datenabfrage
+// $parametersAll = array(
+// 	"posts_per_page" => $posts_per_page,
+// 	"paged" => $paged,
+// 	"wpdb" => $wpdb,
+// 	"search" =>"",
+// 	"category" => "",
+// 	"custom_fields_cnt" => $custom_fields_cnt,
+// 	"allcategories" => $allcategories,
+// 	"tag_slug" => $tag_slug,
+// 	"settings" => $s,
+// 	"nurKategorienAnzeigen" => false
+// );
+
+// $dataAll = queryData($parametersAll);
+$parametersSearch = array(
+	"posts_per_page" => $posts_per_page,
+	"paged" => $paged,
+	"wpdb" => $wpdb,
+	"search" => "",
+	"category" => "",
+	"custom_fields_cnt" => $custom_fields_cnt,
+	"allcategories" => $allcategories,
+	"tag_slug" => $tag_slug,
+	"settings" => $s,
+	"nurKategorienAnzeigen" => false
+);
+
+// Datenabfrage
+$dataSearch = queryData($parametersSearch);
+
+// error_log("ALL DATA " . print_r($dataSearch, true));
+
+$rowIndex = 0;
+
+$outerArrayKeys = array_keys(($dataSearch));
+$dataArrayKeys = $dataSearch["keys"];
+
+$fileCategoryMapping = [];
+$categoryFileMapping = [];
+foreach ($allcategories as $category1) {
+  // error_log("category " . print_r($category1, true));
+  $categoryFileMapping[$category1->slug] = ['catName' => $category1->slug,
+                                            'files' => []];
+}
+// error_log("categoryFileMapping Start " . print_r($categoryFileMapping, true));
+
+// Get titles
+$sortedFileList = [];
+foreach ($outerArrayKeys as $outerKey) {
+    if ($outerKey != "keys" && $outerKey != "headrow" && 
+      $outerKey != "headrowKat" && $outerKey != "headRowSingleFields" && 
+      $outerKey != "args" && $outerKey != "total") {
+        $dataRowArray = $dataSearch[$outerKey];
+        $file_id = null;
+        foreach ($dataArrayKeys as $dataKey) {
+            $element = null;
+            $isa = is_array($dataKey);
+            if (is_array($dataKey)) {
+                $firstKey = array_key_first($dataKey);
+                $secondKey = $dataKey[$firstKey];
+                $element = $dataRowArray[$firstKey][$secondKey];
+
+                if ($firstKey == "category") {
+                    $categoryTerm = arrayFindObjectElement($allcategories, "term_id", $secondKey);
+                    if ($element == "Ja") {
+                        // error_log("cat term " . print_r($element, true) . ": " . print_r($categoryTerm, true));
+                        $catEl = [
+                          'term_id' => $categoryTerm->term_id,
+                          'slug' => $categoryTerm->slug];
+                        // error_log("cat mapping fileid " . print_r($fileCategoryMapping[$file_id], true));
+                        // error_log("cat mapping fileid " . print_r($fileCategoryMapping[$file_id]["categories"], true));
+                        array_push($fileCategoryMapping[$file_id]["categories"], $catEl);
+                        array_push($categoryFileMapping[$categoryTerm->slug]['files'], $file_id);
+                    }
+                }
+            } else {
+                $element = $dataRowArray[$dataKey];
+                if ($dataKey == "file_id") {
+                  $file_id = $element;
+                  $fileCategoryMapping[$file_id] = ["categories" => []];
+                  // error_log("fileCategoryMapping " . print_r($fileCategoryMapping, true));
+                }else if ($dataKey == "title") {
+                    // error_log("title " . print_r($element, true));
+                    $sortedFileList[$outerKey] = [ "fileName" => $element,
+                                                  "file_id" => $file_id];
+                    $fileCategoryMapping[$file_id]["fileName"] = $element;
+                }
+            }
+        }
+    }
+}
+// error_log("categoryFileMapping End " . print_r($categoryFileMapping, true));
+
+ echo $searchFields;
+
+// error_log($searchFields);
+
+// sort titles
+$allTitles = [];
+$categoryTitles = [];
+for ($i = 0; $i < count($sortedFileList); $i++) {
+    $element = $sortedFileList[$i]["fileName"];
+    $fileId = $sortedFileList[$i]["file_id"];
+    array_push($allTitles, $element);
+    // $form .= $fileId . " " . $element . "<br />";
+}
+
+$form .= "<div class=\"dual-listbox-wrapper\">
+<div class=\"dual-listbox\">
+  <!-- Linke Liste -->
+  <div class=\"dual-list\">
+    <label>" . esc_html__('Available titles', 'wp_consilium') . "</label>
+    <select id=\"listLeft\" multiple disabled='true' ondblclick='leftListhandleDoubleClick()'></select>
+  </div>
+
+  <!-- Buttons -->
+  <div class=\"dual-buttons\">
+  <button type='button' class='button button-primary' id=\"appendEntryButton\" disabled=\"true\" onclick='moveSelected(\"listLeft\",\"selectedFiles\")'>→</button>
+    <button type='button' class='button' id=\"releaseEntryButton\" disabled=\"true\" onclick='moveSelected(\"selectedFiles\",\"listLeft\")'>←</button>
+  </div>
+
+  <!-- Rechte Liste -->
+  <div class=\"dual-list\">
+    <label>" . esc_html__('Mapped titles', 'wp_consilium') . "</label>
+    <select id=\"selectedFiles\" name=\"selectedFiles[]\" multiple disabled='true' ondblclick='rightListhandleDoubleClick()'></select>
+  </div>
+</div>
+</div>";
+
+
+// error_log("ALL DATA allTitles " . print_r($allTitles, true));
+
+$form .= '<input type="submit" name="submit" disabled="true" value="' . esc_html__('Save', 'shared-files') . '"></input>';
+
+$form .= '</form>';
+
+echo $form;
+// error_log("allcats " . print_r($allcategories, true));
+
+echo '<div id="newCategoryModal" class="modal">
+<div class="modal-content">
+  <h3>Neue Kategorie anlegen</h3>
+  <input type="text" id="newCategoryInput" placeholder="Kategoriename eingeben">
+
+  <label>Übergeordnete Kategorie:</label>
+  <select name="parent_category_select" id="parent_category_select">
+  <option value="" selected disabled>-- ' . esc_html__("please select (optional)", 'wp_consilium') . ' --</option>';
+foreach ($allcategories as $category1) {
+  echo '<option class="level-0" value="' . $category1->slug . '">' . $category1->name . '</option>';
+}
+echo '</select>';
+
+echo '
+  <div class="modal-actions">
+    <button id="saveCategory">Speichern</button>
+    <button id="cancelCategory">Abbrechen</button>
+  </div>
+</div></div>
+<div id="deleteCategoryModal" class="modal">
+<div class="modal-content">
+  <label id="deletemodalLabel">Soll die gewählte Kategorie gelöscht werden?</label>
+  <div class="modal-actions">
+    <button id="deleteCategory">Löschen</button>
+    <button id="cancelDeleteCategory">Abbrechen</button>
+  </div>
+</div>
+</div>
+<div id="reloadPageModal" class="modal">
+<div class="modal-content">
+  <label>Änderungen verwerfen und Seite neu laden?</label>
+  <div class="modal-actions">
+    <button id="reloadPage">Verwerfen</button>
+    <button id="cancelReloadPage">Abbrechen</button>
+  </div>
+</div>
+</div>';
+
+// error_log("form " . print_r($form, true));
+
+
+// **************************************************
+// create javascript data
+$catagoriesArr = [];
+foreach ($allcategories as $obj) {
+  $catagoriesArr[$obj->term_id] = $obj->name;
+}
+// error_log("catagoriesArr " . print_r($catagoriesArr, true));
+
+?>
+
+<!-- pass variables to javascript -->
+<script>
+  	/**
+	 * Set Caret position in search field
+	 */
+	function onloadInternally() {
+    console.log("CAT onloadInternally", selectedCategory)
+    if(selectedCategory){
+      let select = document.getElementById('sf_category');
+      if(select)
+      {
+        // set values in list entries
+        onCategoryChange();
+      }
+    } else { 
+      applyFilter();
+    }
+	}
+
+  let modal = document.getElementById("newCategoryModal");
+  let input = document.getElementById("newCategoryInput");
+  let deleteModal = document.getElementById("deleteCategoryModal");
+  let deletemodalLabel = document.getElementById("deletemodalLabel");
+  let reloadPageModal = document.getElementById("reloadPageModal");
+
+  document.getElementById("addNewCategory").addEventListener("click", () => {
+    modal.style.display = "flex";
+    input.value = ""; // Eingabefeld leeren
+    input.focus();
+  });
+
+  document.getElementById("saveCategory").addEventListener("click", () => {
+    let newCategory = input.value.trim();
+    modal.style.display = "none";
+    let parentCategory = document.getElementById("parent_category_select");
+    if (newCategory) {
+      console.log("Neue Kategorie:, allCategories, parentCategory", newCategory, allCategories, parentCategory);
+      if(allCategories){
+        let existingCategory = allCategories.some(c => c.name.toLowerCase() == newCategory.toLowerCase())
+        if(existingCategory){
+          alert("Die Kategorie mit dem Namen '" + newCategory + "' existiert bereits!");
+          return;
+        }
+      }
+      // alert(`Kategorie "${newCategory}" wurde angelegt!`);
+      let selectedParent = null;
+      if(parentCategory){
+          selectedParent = parentCategory.selectedOptions.length === 1 ? parentCategory.value : undefined;
+      }
+
+      var form = document.getElementById("dataForm-categories");
+      console.log("Neue Kategorie Form", form);
+      appendHiddenInput("sf_category_createnew", form, false, newCategory);
+      if(selectedParent) {
+        appendHiddenInput("sf_category_createnew_parentslug", form, false, selectedParent);
+      }
+      // Natives submit erzwingen!
+      HTMLFormElement.prototype.submit.call(form);
+    }
+  });
+
+  document.getElementById("cancelCategory").addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  document.getElementById("deleteSelectedCategory").addEventListener("click", () => {
+    let select = document.getElementById('sf_category');
+    let catName = select.selectedOptions.length === 1 ? select.selectedOptions[0].text : undefined;
+    if (catName) {
+      deletemodalLabel.textContent  = "Soll die gewählte Kategorie '" + catName + "' gelöscht werden?";
+      deleteModal.style.display = "flex";
+    }
+  });
+
+  document.getElementById("deleteCategory").addEventListener("click", () => {
+    let select = document.getElementById('sf_category');
+    let catName = select.selectedOptions.length === 1 ? select.value : undefined;
+    if (catName) {
+      deleteModal.style.display = "none";
+      
+      var form = document.getElementById("dataForm-categories");
+      appendHiddenInput("sf_category_remove", form, false, catName);
+      // Natives submit erzwingen!
+      HTMLFormElement.prototype.submit.call(form);
+    }
+  });
+
+  document.getElementById("cancelDeleteCategory").addEventListener("click", () => {
+    deleteModal.style.display = "none";
+  });
+
+  document.getElementById("reloadCurrentPage").addEventListener("click", () => {
+    reloadPageModal.style.display = "flex";
+  });
+
+  document.getElementById("reloadPage").addEventListener("click", () => {
+    reloadPageModal.style.display = "none";
+     
+    var form = document.getElementById("dataForm-categories");
+    appendHiddenInput("sf_category", form);
+    appendHiddenInput("searchField", form);
+    appendHiddenInput("reloadPage", form, null, "true")
+    console.log("reloadPage before submit", form)
+    // Natives submit erzwingen!
+    HTMLFormElement.prototype.submit.call(form);
+  });
+
+  document.getElementById("cancelReloadPage").addEventListener("click", () => {
+    reloadPageModal.style.display = "none";
+  });
+
+  document.getElementById("dataForm-categories").addEventListener("submit", function (e) {
+    console.log("NORMAL SUBMIT before submit", e)
+    const selected = document.getElementById("selectedFiles").options;
+       //e.preventDefault();
+    for (let option of selected) {
+      option.selected = true; // Alle Optionen als ausgewählt markieren
+    }
+
+    const form = e.target;
+    // console.log("SUBMIT dataForm-categories form", form);
+		appendHiddenInput("sf_category", form);
+    appendHiddenInput("searchField", form);
+  });
+
+  function appendHiddenInput(name, form, ischeckbox, explicitValue){
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "referer_parm_" + name;
+      let value;
+      if(explicitValue)
+        value = explicitValue;
+      else
+        value = getInputValue(name);
+      // if(ischeckbox){
+      //   value = getInputValueCheckbox(name);
+      // }
+      hiddenInput.value = value;
+       console.log("HIDDEN INPUT ", hiddenInput)
+       console.log("HIDDEN INPUT value '" + value + "'", value.length)
+      if(value && value.length > 0)
+      {
+        form.appendChild(hiddenInput);
+      }
+  }
+
+  function getInputValue(fieldName) {
+		var fields = document.getElementsByName(fieldName);
+		if (fields && fields.length == 1) {
+      // console.log("getInputValue", fields[0], allCategories)
+			return fields[0].value;
+		}
+
+		return null;
+	}
+    
+	var allCategories = <?php echo json_encode($allcategories) ?>;
+	var insertSearchText = <?php echo json_encode($search) ?>;
+  var selectedCategory = <?php echo json_encode($category) ?>;
+
+  var catagoriesArr1 = <?php echo json_encode($catagoriesArr) ?>;
+  var fileCategoryMapping = <?php echo json_encode($fileCategoryMapping) ?>;
+  var categoryFileMapping = <?php echo json_encode($categoryFileMapping) ?>;
+  var sortedFileList = <?php echo json_encode($sortedFileList) ?>;
+  
+  // console.log("cat arr", catagoriesArr1);
+  // console.log("fileCategoryMapping", fileCategoryMapping);
+  // console.log("categoryFileMapping", categoryFileMapping);
+  // console.log("sortedFileList", sortedFileList);
+
+  // Funktion zum Verschieben von Optionen
+  function moveSelected(fromId, toId) {   
+    const from = document.getElementById(fromId);
+    const to = document.getElementById(toId);
+
+    Array.from(from.selectedOptions).forEach(option => {
+      console.log("moveSelected fromId, toId, option", from, to, option);
+      let index = getIndexForFileInsert(option.value, to);
+
+      if (index >= to.options.length) {
+        to.add(option); // am Ende hinzufügen
+      } else {
+        to.insertBefore(option, to.options[index]); // vor dem Element am Index einfügen
+      }
+    });
+
+    disableCategoryOptions();
+  }
+
+  function updateTooltip(btn) {
+    if (btn.disabled) {
+      btn.title = "Button ist inaktiv, weil ungespeicherte Änderungen existieren."
+      btn.style.cursor = "not-allowed";
+    } else {
+      btn.title = "Kategorie hinzufügen";
+      btn.style.cursor = "pointer";
+    }
+  }
+
+  function leftListhandleDoubleClick() {
+    const option = document.getElementById('listLeft');
+    if(option.selectedOptions && option.selectedOptions.length == 1) {
+      moveSelectedId(listLeft, selectedFiles, option.selectedOptions[0]);
+    }
+  }
+
+  function rightListhandleDoubleClick() {
+    const option = document.getElementById('selectedFiles');
+    if(option.selectedOptions && option.selectedOptions.length == 1) {
+      moveSelectedId(selectedFiles, listLeft, option.selectedOptions[0])
+    }
+  }
+
+  function moveSelectedId(fromList, toList, option) {
+    let opts = fromList.selectedOptions;
+    let index = getIndexForFileInsert(option.value, toList);
+    if (index >= toList.options.length) {
+      toList.add(option); // am Ende hinzufügen
+    } else {
+      toList.insertBefore(option, toList.options[index]); // vor dem Element am Index einfügen
+    }
+
+    disableCategoryOptions();
+  }
+
+  function disableCategoryOptions(){
+    let newCategory = document.getElementById('addNewCategory');
+    newCategory.disabled = true;
+    updateTooltip(newCategory);
+
+    let select = document.getElementById('sf_category');
+    select.disabled = true;
+
+    let reloadCurrentPage = document.getElementById('reloadCurrentPage');
+    console.log("disableCategoryOptions reloadCurrentPage", reloadCurrentPage)
+    reloadCurrentPage.disabled = false;
+  }
+
+  function getIndexForFileInsert(fileId, targetList) {
+    //  console.log("getIndexForFileInsert fileId, targetlist, sortedFilelist", fileId, targetList, sortedFileList);
+    if(targetList.options.length == 0){
+      //  console.log("getIndexForFileInsert return 0 because targetList is empty");
+      return 0;
+    }
+
+    let foundFileEntry = null;
+    let elementsBefore = [];
+    const keys = Object.keys(sortedFileList);
+    for (const key of keys) {
+      let fileEntry = sortedFileList[key];
+      if(fileEntry["file_id"] == fileId){
+        foundFileEntry = fileEntry;
+        break;
+      }
+
+      elementsBefore.push(fileEntry);
+    }
+    //  console.log("getIndexForFileInsert foundFileEntry elementsBefore", foundFileEntry, elementsBefore);
+    // find position in target list
+    if(elementsBefore.length == 0){
+      //  console.log("getIndexForFileInsert return 0 because elements before LIST is empty");
+       return 0;
+    } else {
+      for(let i = elementsBefore.length; i--; i => 0){
+        let element = elementsBefore[i];
+        //  console.log("    CHECK element " + i + ", " + element["fileName"]);
+        for(let j = 0; j < targetList.options.length; j++){
+          let option = targetList.options[j];
+          //  console.log("         CHECK target value " + option.value + ", " + element["fileName"]);
+          if(option.value == element["file_id"]){
+            //  console.log("getIndexForFileInsert return " + (j + 1) + " because elements before " + element["fileName"] + " found");
+            return j + 1;
+          }
+        }
+      }
+    }
+    
+    //  console.log("getIndexForFileInsert return 0 because elements before not found");
+    return 0;
+  }
+
+  function onCategoryChange() {
+    searchParametersChange();
+    applyFilter();
+	}
+
+  function onInputSearchText() {
+    applyFilter();
+  }
+
+  function searchParametersChange(){
+    let select = document.getElementById('sf_category');
+    const selectedFiles = document.getElementById("selectedFiles");
+    const listLeft = document.getElementById("listLeft");
+    let catName = select.selectedOptions.length === 1 ? select.value : undefined;
+
+    let applyParameters = catName != null && catName.length > 0;
+    let saveBtn = document.getElementsByName("submit");
+    const deleteCategoryBtn = document.getElementById("deleteSelectedCategory");
+    
+    if(!catName || catName == 0) {
+      if (saveBtn.length > 0) {
+        saveBtn[0].disabled = true;
+        listLeft.disabled = true;
+        selectedFiles.disabled = true;
+        appendEntryButton.disabled = true;
+        appendEntryButton.disabled = true;
+        releaseEntryButton.disabled = true;
+      }
+      if(deleteCategoryBtn){
+        deleteCategoryBtn.disabled = true;
+      }
+      return;
+    }
+
+
+    if(deleteCategoryBtn){
+      deleteCategoryBtn.disabled = false;
+    }
+    
+    if (saveBtn.length > 0) {
+      saveBtn[0].disabled = false;
+      listLeft.disabled = false;
+      selectedFiles.disabled = false;
+      appendEntryButton.disabled = false;
+      releaseEntryButton.disabled = false;
+    }
+
+   
+    while (listLeft.options.length > 0) {
+      listLeft.remove(0); // Entfernt immer das erste Element, bis leer
+    }
+    while (selectedFiles.options.length > 0) {
+      selectedFiles.remove(0); // Entfernt immer das erste Element, bis leer
+    }
+
+    const keys = Object.keys(sortedFileList);
+    for (const key of keys) {
+      let fileEntry = sortedFileList[key];
+      // console.log("File ID:", fileEntry );
+      // contains categories array
+      if(fileCategoryMapping){
+        let fileCatMapping = fileCategoryMapping[fileEntry["file_id"]];
+        // console.log("File fileCatMapping:", fileCatMapping );
+        const option = document.createElement("option");
+        option.text = fileEntry["fileName"];
+        option.value = fileEntry["file_id"];      
+
+        let mappedCategory = fileCatMapping["categories"].find(c => c.slug == catName);
+        if(mappedCategory) {
+          selectedFiles.add(option);
+        } else {
+            listLeft.add(option);
+        }
+      }
+    }
+  }
+
+  function applyFilter() {
+    let select = document.getElementById('sf_category');
+    let catName = select.selectedOptions.length === 1 ? select.value : undefined;
+
+    // if (!catName || catName == 0) {
+    //   console.log("applyFilter unwirksam, keine Kategorie gewählt");
+    //   return;
+    // }
+
+   
+    let searchFilter = getInputValue("searchField");
+    const keys = Object.keys(sortedFileList);
+    
+    // select.disabled = searchFilter && searchFilter.length > 0;  
+    
+    let selectedFiles = document.getElementById("selectedFiles");
+    let selectedValues = Array.from(selectedFiles.options).map(option => parseInt(option.value)); 
+    // console.log("SelectedFiles: ", selectedValues); // z.B. [33, 38, 37]
+
+    // Liste leeren
+    listLeft.options.length = 0;
+
+    for (const key of keys) {
+      let fileEntry = sortedFileList[key];
+      let fileId = parseInt(fileEntry["file_id"]);
+      let fileName = fileEntry["fileName"];
+
+      let isSelected = selectedValues.includes(fileId);
+      //  console.log("File ID: includes?", fileEntry, isSelected, fileName);
+
+      if (!isSelected) {
+        const option = document.createElement("option");
+        option.text = fileEntry["fileName"];
+        option.value = fileId;
+
+        // Optional: Filter nach Suchfeld oder Kategorie aktivieren
+        if (!searchFilter || (searchFilter && fileName.toLowerCase().includes(searchFilter.toLowerCase()))) {
+          listLeft.add(option);
+        }
+      }
+    }
+  }
+
+  //TODO: 
+  // Testformulare + BB-Tests
+  // Alle Files importieren
+  // Massentests
+</script>
