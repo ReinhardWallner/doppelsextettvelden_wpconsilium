@@ -165,7 +165,7 @@ border-top: 1px solid #ccc;
 
 /** Pagination-Styling */
 .shared-files-pagination-improved {
-text-align: center;
+  text-align: center;
 }
 
 .shared-files-pagination-improved a,
@@ -375,6 +375,10 @@ margin-bottom: .25rem;
   /* Wenn KEINE Pagination vorhanden ist → Abstand erzeugen */
   body:not(:has(.shared-files-pagination-improved)) #dataForm {
       margin-bottom: 0px !important; /* dein gewünschter Wert */
+  }
+  
+  body:not(:has(.reset-button)) .shared-files-pagination-improved {
+    margin-top: 39px !important; /* dein gewünschter Wert */
   }
 
   #categories-form,
