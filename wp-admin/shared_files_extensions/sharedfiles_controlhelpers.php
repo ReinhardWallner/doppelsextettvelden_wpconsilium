@@ -17,7 +17,7 @@ function getInputField($file_id, $cf_id, $name, $value, &$inputArray, $hidden = 
 		if ($value)
 			return '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" title="' . $value . '" onchange="inputOnChange(this.name, this.value)" />';
 		else
-			return '<input type="text" name="' . $name . '" id="' . $name . '" onchange="inputOnChange(this.name, this.value.value)" />';
+			return '<input type="text" name="' . $name . '" id="' . $name . '" onchange="inputOnChange(this.name, this.value)" />';
 	}
 }
 
@@ -38,7 +38,7 @@ function getCheckboxField($file_id, $cat_name, $name, $value, &$checkboxArray, $
 		if ($value)
 			return '<input type="hidden" name="' . $name . '" id="' . $name . '" checked value="' . $value . '" />';
 		else
-			return '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '" "/>';
+			return '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '" />';
 	} else {
 		if($isReadonlyUser){
 			if ($value)
