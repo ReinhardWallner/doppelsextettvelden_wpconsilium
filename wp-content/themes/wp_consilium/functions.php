@@ -1649,8 +1649,15 @@ function tempsharedfiles_enqueue_update_form_styles() {
     if (is_page_template('template-shared-files-data-editor.php') ||
     is_page_template('template-shared-files-category-editor.php')) {
         wp_enqueue_style(
-            'update-form-style',
+            'update-form-style-editor',
             get_stylesheet_directory_uri() . '/css/template_sharedfiles.css',
+            array(),
+            '1.0',
+            'all'
+        );
+		wp_enqueue_style(
+            'update-form-style-category',
+            get_stylesheet_directory_uri() . '/css/template_sharedfiles_category.css',
             array(),
             '1.0',
             'all'

@@ -65,15 +65,16 @@ get_header();
 
 $home = home_url( $wp->request );
 
-$searchFields = '<form id="categories-form" method="post" action="..." enctype="multipart/form-data">
+$searchFields = "<div style='margin-left: 50px; margin-bottom: 0px; font-size: 16px;'>Kategorien bearbeiten</div>";
+$searchFields .= '<form id="categories-form" method="post" action="..." enctype="multipart/form-data">
 <div class="search-row search-row-top-category">
   <div class="search-catupdate-field">';
 
 // Suchfeld
 if ($search) {
-	$searchFields .= '<input type="text" name="searchField" class="search-input" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" value="' . $search . '" oninput="onInputSearchText()"  />';
+	$searchFields .= '<input type="text" name="searchField" class="search-input-category" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" value="' . $search . '" oninput="onInputSearchText()"  />';
 } else {
-	$searchFields .= '<input type="text" name="searchField" class="search-input" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" oninput="onInputSearchText()" />';
+	$searchFields .= '<input type="text" name="searchField" class="search-input-category" autofocus placeholder="' . esc_html__('Search files...', 'shared-files') . '" oninput="onInputSearchText()" />';
 }
 $searchFields .= '</div>';
 
@@ -101,13 +102,13 @@ $categoryDropdowm = str_replace("class='shared-files-category-select select_v2'>
 // Nur Kategorien bearbeiten
 $searchFields .= '<div class="category-catupdate-select">';
 $searchFields .= '<label for="sf_category" class="sf_category_label">' . esc_html__('Choose category (inactive if search filter inserted or changes exist):', 'wp_consilium') . '</label>';
-$searchFields .= '<div class="select-with-button">';
 $searchFields .= $categoryDropdowm;
-$searchFields .= '<div class="buttons-row">';
+// $searchFields .= '<div class="select-with-button">';
+$searchFields .= '</div><div class="buttons-row-category">';
 $searchFields .= ' <button type="button" id="addNewCategory" title="' . esc_html__('Create category', 'wp_consilium') . '" class="small-button">' . esc_html__('Create', 'wp_consilium') . '</button>';
 $searchFields .= ' <button type="button" id="deleteSelectedCategory" title="' . esc_html__('Delete category', 'wp_consilium') . '" disabled="true" class="small-button">' . esc_html__('Delete', 'wp_consilium') . '</button>';
-$searchFields .= '</div></div></div>';
-$searchFields .= '<div class="reset-button"><button type="button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
+$searchFields .= '    <div class="mobile-spacer"></div>';
+$searchFields .= ' <button type="button" class="reset-button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
 $searchFields .= '</div></form>';
 
 $adminUrl = get_admin_url();

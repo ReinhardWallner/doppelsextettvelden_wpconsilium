@@ -1,0 +1,180 @@
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  #categories-form {
+    margin-top: 0.5rem !important;
+  }
+
+  #dataForm-categories {
+    margin-top: 0rem !important;
+  }
+
+  #categories-form,
+  #dataForm-categories {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0px;
+  }
+
+  .search-row-top-category {
+    display: flex;
+    align-items: center; /* vertikal zentrieren */
+    gap: 15px; /* optionaler Abstand */
+  }
+
+  .search-input-category {
+    background: #ffffff;
+    border: 1px solid #cfd6df;
+    border-radius: 6px;
+    padding: 6px 10px;
+  }
+ 
+  .search-input-category {
+    min-width: 300px;
+  }
+  
+  .mobile-spacer {
+    display: none;
+  }
+
+  .dual-listbox-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dual-list select {
+    min-height: 40vh; /* Minimum 70% der Viewport-Höhe */
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 700px) {
+  /* Gesamt-Wrapper */
+    .search-row-top-category {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    /* Zeile 1: Suche */
+    .search-catupdate-field {
+        width: 100%;
+    }
+    .search-catupdate-field input.search-input-category {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Zeile 2: Label */
+    .category-catupdate-select {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .sf_category_label {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.3rem;
+    }
+
+    /* Zeile 3: Select */
+    .category-catupdate-select select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Zeile 4: Zwei Buttons nebeneinander, zentriert */
+    .buttons-row-category {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* zentriert die Buttons */
+        gap: 0.5rem;
+    }
+    .buttons-row-category button:not(.reset-button) {
+        width: auto; /* nicht volle Breite */
+        padding: 0.4rem 1rem;
+        white-space: nowrap;
+    }
+
+    .mobile-spacer {
+        display: block;
+        flex-basis: 100%; /* nimmt ganze Zeile ein */
+        height: 0;        /* optional */
+    }
+
+    /* Zeile 5: Letzter Button zentriert */
+    .buttons-row-category .reset-button {
+        margin: 0 auto; /* zentriert */
+        width: auto; /* nicht volle Breite */
+        padding: 0.4rem 1rem;
+        white-space: nowrap;
+        display: block;
+    }
+  }
+
+/* Medium Devices: 600px bis 1200px */
+@media (min-width: 701px) and (max-width: 1500px) {
+  .search-row-top-category {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  /* Zeile 1: Suche */
+  .search-catupdate-field input {
+      width: 100%;
+  }
+
+  /* Zeile 2: Label + Select nebeneinander */
+  .category-catupdate-select {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+  }
+
+  .sf_category_label {
+      white-space: nowrap;
+  }
+
+  .category-catupdate-select select {
+      flex: 1;
+      width: auto;
+  }
+
+  /* Zeile 3: Buttons nebeneinander */
+  .buttons-row-category {
+      display: flex;
+      gap: 0.6rem;
+  }
+
+  /* Spacer unsichtbar auf Medium */
+  .mobile-spacer {
+      display: none;
+  }
+}
+
+/* Optional: Large Devices: >1200px */
+@media (min-width: 1501px) {
+  .search-row-top-category {
+      flex-direction: row;
+      align-items: center;
+  }
+
+  .category-catupdate-select,
+  .buttons-row-category {
+      flex-direction: row;
+      align-items: center;
+  }
+
+  .mobile-spacer {
+      display: none;
+  }
+}
+
