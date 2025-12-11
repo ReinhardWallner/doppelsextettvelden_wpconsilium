@@ -110,6 +110,8 @@ function addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $only
 			}
 		}
 
+		$element = str_replace(";", ",", $element);
+
 		// encoding ensures german "Umlaute"
 		echo mb_convert_encoding($element, "Windows-1252") . ";";
 	}

@@ -274,9 +274,9 @@ if ($isReadonlyUser == true){
 }
 
 if ($nurKategorienAnzeigen == true) {
-	$searchFields .= '<label for="nurKategorienAnzeigen"><input type="checkbox" name="nurKategorienAnzeigen" id="nurKategorienAnzeigen" checked value="on" onclick="onNurKategorienAnzeigenClick()"/><span style="word-break: break-word;">' . $nurKategorienText . '</span></label>';
+	$searchFields .= '<label for="nurKategorienAnzeigen" style="white-space: nowrap;"><input type="checkbox" name="nurKategorienAnzeigen" id="nurKategorienAnzeigen" checked value="on" onclick="onNurKategorienAnzeigenClick()"/><span style="white-space: nowrap;">' . $nurKategorienText . '</span></label>';
 } else {
-	$searchFields .= '<label for="nurKategorienAnzeigen"><input type="checkbox" name="nurKategorienAnzeigen" id="nurKategorienAnzeigen" onclick="onNurKategorienAnzeigenClick()"/><span style="word-break: break-word;">' . $nurKategorienText . '</span></label>';
+	$searchFields .= '<label for="nurKategorienAnzeigen" style="white-space: nowrap;"><input type="checkbox" name="nurKategorienAnzeigen" id="nurKategorienAnzeigen" onclick="onNurKategorienAnzeigenClick()"/><span style="white-space: nowrap;">' . $nurKategorienText . '</span></label>';
 }
 
 $searchFields .= '</div>';
