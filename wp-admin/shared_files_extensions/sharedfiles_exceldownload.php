@@ -62,6 +62,14 @@ function addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $only
 			$firstKey = array_key_first($dataKey);
 			$secondKey = $dataKey[$firstKey];
 			
+			// error_log("EEEEEEE downloadExcelData ARR: \nfirstKey: " . print_r($firstKey, true));
+			// error_log("EEEEEEE downloadExcelData ARR: \nsecondKey: " . print_r($secondKey, true));
+			// error_log("EEEEEEE downloadExcelData ARR: \nonlyModifySingleField: " . print_r($onlyModifySingleField, true));
+			// $st = str_starts_with($onlyModifySingleField, "file_upload_custom_field_");
+			// $en = str_ends_with($onlyModifySingleField, (string)$secondKey);
+			// error_log("EEEEEEE downloadExcelData ARR: \nstr_starts_with: " . print_r($st, true));
+			// error_log("EEEEEEE downloadExcelData ARR: \nstr_ends_with: " . print_r($en, true));
+
 			if ($firstKey == "custom_field" && $nurKategorienAnzeigen == true) {
 					continue;
 			}
@@ -69,7 +77,7 @@ function addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $only
 			if(($onlyModifySingleField == null || $onlyModifySingleField == "notselected") ||
 				($onlyModifySingleField != null && $firstKey != "category" &&
 				str_starts_with($onlyModifySingleField, "file_upload_custom_field_") &&
-				str_ends_with($onlyModifySingleField, $secondKey))) {
+				str_ends_with($onlyModifySingleField, (string)$secondKey))) {
 				$element = $dataRowArray[$firstKey][$secondKey];
 			} else {
 				continue;
@@ -90,28 +98,27 @@ function addDataRow($dataRowArray, $dataArrayKeys, $nurKategorienAnzeigen, $only
 				str_starts_with($onlyModifySingleField, "tags"))))) {	
 				$element = $dataRowArray[$dataKeyStr];
 
-				error_log("EEEEEEE downloadExcelData ELEMENT: \ndataKeyStr: " . print_r($dataKeyStr, true));
-				error_log("EEEEEEE downloadExcelData ELEMENT: \nelement: " . print_r($element, true));
+				// error_log("EEEEEEE downloadExcelData ELEMENT: \ndataKeyStr: " . print_r($dataKeyStr, true));
+				// error_log("EEEEEEE downloadExcelData ELEMENT: \nelement: " . print_r($element, true));
 
-				if(($onlyModifySingleField == null || $onlyModifySingleField == "notselected")) {	
-					error_log("EEEEEEE downloadExcelData MAPS1");
-				}
-				if($dataKeyStr == "title") {	
-					error_log("EEEEEEE downloadExcelData MAPS 2");
-				}
-				if(($onlyModifySingleField != null && $dataKeyStr == "description" &&
-				str_starts_with($onlyModifySingleField, "description") ||
-				($onlyModifySingleField != null && $dataKeyStr == "tags" &&
-				str_starts_with($onlyModifySingleField, "tags")))) {	
-					error_log("EEEEEEE downloadExcelData MAPS 3");
-				}
+				// if(($onlyModifySingleField == null || $onlyModifySingleField == "notselected")) {	
+				// 	error_log("EEEEEEE downloadExcelData MAPS1");
+				// }
+				// if($dataKeyStr == "title") {	
+				// 	error_log("EEEEEEE downloadExcelData MAPS 2");
+				// }
+				// if(($onlyModifySingleField != null && $dataKeyStr == "description" &&
+				// str_starts_with($onlyModifySingleField, "description") ||
+				// ($onlyModifySingleField != null && $dataKeyStr == "tags" &&
+				// str_starts_with($onlyModifySingleField, "tags")))) {	
+				// 	error_log("EEEEEEE downloadExcelData MAPS 3");
+				// }
 			} else {
 				continue;
 			}
 		}
 
-		$element = str_replace(";", ",", $element);
-
+		$element = trim(str_replace(";", ",", $element));
 		// encoding ensures german "Umlaute"
 		echo mb_convert_encoding($element, "Windows-1252") . ";";
 	}

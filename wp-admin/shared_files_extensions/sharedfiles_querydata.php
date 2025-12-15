@@ -230,8 +230,8 @@ limit {$limit} offset {$offset}";
 
 				$array_index = array_search($file_id, $ids);
 				$data[$array_index] = $row;
-			?>
-			<?php endwhile;
+			
+			endwhile;
 
 			// add rows to output
 

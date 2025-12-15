@@ -131,8 +131,8 @@ if ($excel_export == true) {
 	);
 
 	$data = queryData($parameters);
-	error_log("EEEEEEE Excel download pars: \n" . print_r($parameters, true) . ", \nData " . print_r($data, true));
-	downloadExcelData($data, $fileName, $nurKategorienAnzeigen, $onlyModifySingleField);
+	// 	error_log("data result " . print_r($data, true));	
+ 	downloadExcelData($data, $fileName, $nurKategorienAnzeigen, $onlyModifySingleField);
 	return;
 }
 
