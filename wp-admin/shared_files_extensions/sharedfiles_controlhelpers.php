@@ -1,5 +1,5 @@
 <?php
-function getInputField($file_id, $cf_id, $name, $value, &$inputArray, $hidden = false)
+function getInputField($file_id, $cf_id, $name, $value, &$inputArray, $hidden = false, $autocomplete = "")
 {
 	$obj = new stdClass();
 	$obj->file_id = $file_id;
@@ -15,9 +15,9 @@ function getInputField($file_id, $cf_id, $name, $value, &$inputArray, $hidden = 
 			return '<input type="hidden" name="' . $name . '" id="' . $name . '"/>';
 	} else {
 		if ($value)
-			return '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" title="' . $value . '" onchange="inputOnChange(this.name, this.value)" />';
+			return '<input type="text" name="' . $name . '" id="' . $name . '"' . $autocomplete . ' value="' . $value . '" title="' . $value . '" onchange="inputOnChange(this.name, this.value)" />';
 		else
-			return '<input type="text" name="' . $name . '" id="' . $name . '" onchange="inputOnChange(this.name, this.value)" />';
+			return '<input type="text" name="' . $name . '" id="' . $name . '"' . $autocomplete . ' onchange="inputOnChange(this.name, this.value)" />';
 	}
 }
 
@@ -91,7 +91,12 @@ function addCustomFieldField(&$table, $file_id, $n, $val, &$inputArray, $isReado
 		$table .= $val;
 	}
 	else {	
-		$table .= getInputField($file_id, $n, '_sf_file_cf_' . $file_id . '_' . $n, $val, $inputArray);
+		$autocomplete = "";
+		if($n == 7 ){ // this is a hack: CF Id 7 is Tonart
+			$autocomplete = ' autocomplete="off" ';
+		}
+
+		$table .= getInputField($file_id, $n, '_sf_file_cf_' . $file_id . '_' . $n, $val, $inputArray, false, $autocomplete);
 		$table .= getInputField($file_id, $n, '_sf_file_cf_origin_' . $file_id . '_' . $n, $val, $inputArray, true);
 	}
 

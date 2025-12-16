@@ -34,6 +34,7 @@ if ( !in_array( 'administrator', (array) $user->roles ) && !in_array( 'editor', 
 
 include  $sharedfilefolder . "sharedfiles_exceldownload.php";
 include  $sharedfilefolder . "sharedfiles_querydata.php";
+include  $sharedfilefolder . "sharedfiles_query_metavalues.php";
 include  $sharedfilefolder . "sharedfiles_helperfunctions.php";
 include  $sharedfilefolder . "sharedfiles_zipfiledownload.php";
 include  $sharedfilefolder . "sharedfiles_controlhelpers.php";
@@ -192,6 +193,26 @@ get_header();
 
 <?php
 
+$search_meta_values = ["Tonart/-angabe (SATB)"];
+
+$parametersMeta = array(
+	"posts_per_page" => $posts_per_page,
+	"paged" => $paged,
+	"wpdb" => $wpdb,
+	"search" => $search,
+	"category" => $category,
+	"custom_fields_cnt" => $custom_fields_cnt,
+	"allcategories" => $allcategories,
+	"tag_slug" => $tag_slug,
+	"settings" => $s,
+	"search_meta_values" => $search_meta_values
+);
+
+// error_log("searchString: " . $search);
+// Datenabfrage
+$metaData = queryMetaValues($parametersMeta);
+error_log("QQQQQQQQQQ metaData " . print_r($metaData, true));
+
 $inputArray = array();
 $checkboxArray = array();
 
@@ -204,7 +225,9 @@ $checkboxArray = array();
 	var custom_fields_cnt = <?php echo json_encode($custom_fields_cnt) ?>;
 	var allCategories = <?php echo json_encode($allcategories) ?>;
 	var insertSearchText = <?php echo json_encode($search) ?>;
+	var autoCompleteValues = <?php echo json_encode($metaData) ?>;
 </script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/shared_file_custom-autocomplete.js"></script>
 
 
 <?php
