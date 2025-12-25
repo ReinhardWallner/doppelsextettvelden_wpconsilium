@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>SATB Beispiel abcjs</title>
+<script src="https://cdn.jsdelivr.net/npm/abcjs/dist/abcjs-basic-min.js"></script>
+</head>
+<body>
+
+<h2>SATB Beispiel (4 Stimmen, 5 Töne)</h2>
+<div id="abc-output"></div>
+
+<script>
+const abcNotation2 = `
+T: New Exercise
+M: C
+L: 1/4
+K: C
+V: 1 
+c0c2G2|B2d2|B2(A2|C4)|
+V: 2 clef=bass name="Tenor\n[c.f.]\n[Alt.]"
+"^4. Consecutive leaps - - -"c4|e4|d4|c4|
+W: Set this line's fill to none to make space for annotations below the staff.
+`;
+
+
+window.ABCJS.renderAbc("abc-output", abcNotation2);
+</script>
+
+</body>
+</html>

@@ -20,37 +20,55 @@ document.addEventListener('DOMContentLoaded', function () {
         
             if (!suggestionKey) return [];
         
-            return suggestionsObj[suggestionKey]; // Array zurückgeben
+            let elements = [...suggestionsObj[suggestionKey]]; // Array zurückgeben
+            elements.sort();
+            return elements;
         }
         
         inputs.forEach(input => {
 
             let listDiv;
+            let selectedIndex = -1;
 
+            // 🔹 KEYDOWN NUR EINMAL
+            input.addEventListener('keydown', function (e) {
+                const items = listDiv?.querySelectorAll('.autocomplete-item');
+                if (!items || items.length === 0) return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = (selectedIndex + 1) % items.length;
+                    updateSelection(items, selectedIndex);
+
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+                    updateSelection(items, selectedIndex);
+
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedIndex >= 0) {
+                        items[selectedIndex].click();
+                    }
+
+                } else if (e.key === 'Escape') {
+                    listDiv?.remove();
+                }
+            });
+
+            // 🔹 INPUT HANDLER
             input.addEventListener('input', function () {
                 const val = this.value;
                 selectedIndex = -1;
-                // console.log('DOMContentLoaded INPUT ', this);
-                // console.log('DOMContentLoaded INPUT val, autoCompleteValues', val, autoCompleteValues);
 
-                // Liste löschen, falls vorhanden
                 if (listDiv) listDiv.remove();
-
                 if (!val) return;
 
-                // Liste erzeugen
                 listDiv = document.createElement('div');
                 listDiv.className = 'autocomplete-list';
 
-                // Position unter Input
-                const rect = this.getBoundingClientRect();
-                listDiv.style.top = (this.offsetTop + this.offsetHeight) + 'px';
-                listDiv.style.left = this.offsetLeft + 'px';
-                listDiv.style.width = this.offsetWidth + 'px';
-
-                // Vorschläge filtern
-                const extractedAutoCompleteValues = getSuggestionsForInput(this.name, autoCompleteValues);
-                // console.log('DOMContentLoaded INPUT autoCompleteValues', extractedAutoCompleteValues);
+                const extractedAutoCompleteValues =
+                    getSuggestionsForInput(this.name, autoCompleteValues);
 
                 extractedAutoCompleteValues
                     .filter(s => s.toLowerCase().includes(val.toLowerCase()))
@@ -68,42 +86,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         listDiv.appendChild(item);
                     });
 
-                // Anhängen
                 this.parentNode.appendChild(listDiv);
-
-                // Tastatursteuerung
-                input.addEventListener('keydown', function(e) {
-                    const items = listDiv?.querySelectorAll('.autocomplete-item');
-                    if (!items || items.length === 0) return;
-        
-                    if (e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        selectedIndex = (selectedIndex + 1) % items.length;
-                        updateSelection(items, selectedIndex);
-                    } else if (e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-                        updateSelection(items, selectedIndex);
-                    } else if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if (selectedIndex >= 0) {
-                            items[selectedIndex].click();
-                        }
-                    } else if (e.key === 'Escape') {
-                        listDiv.remove();
-                    }
-                });
-        
-                function updateSelection(items, index) {
-                    items.forEach((el, i) => {
-                        el.style.backgroundColor = i === index ? '#ddd' : 'white';
-                    });
-                }							
             });
 
-            // Liste schließen bei Klick außerhalb
-            document.addEventListener('click', function(e){
-                if(listDiv && !listDiv.contains(e.target) && e.target !== input){
+            function updateSelection(items, index) {
+                items.forEach((el, i) => {
+                    el.style.backgroundColor = i === index ? '#ddd' : 'white';
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (listDiv && !listDiv.contains(e.target) && e.target !== input) {
                     listDiv.remove();
                 }
             });

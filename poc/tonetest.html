@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Tonauswahl</title>
+ <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  select, button { font-size: 16px; margin: 5px 0; }
+  .notation { margin-left: 10px; font-weight: bold; }
+	  
+	.modal {
+	  display: none;
+	  position: fixed;
+	  inset: 0;
+	  background: rgba(0,0,0,0.5);
+	}
+
+	.modal.open {
+	  display: block;
+	}
+
+	.modal-content {
+	  background: #fff;
+	  padding: 20px;
+	  width: 500px;
+	  margin: 10% auto;
+	  border-radius: 8px;
+	}
+		
+	.music-btn {
+	  background: #0073aa;
+	  color: white;
+	  border: none;
+	  padding: 8px 12px;
+	  font-size: 1rem;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 6px;
+	  cursor: pointer;
+	  border-radius: 4px;
+	}
+
+	.music-btn img {
+	  display: inline-block;
+	}	
+
+	.radio-line {
+	  display: block;
+	  margin-bottom: 10px;
+	  cursor: pointer;
+	}
+</style>
+<script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
+<script>
+  
+function playTone() {
+    const frequency = document.getElementById('toneSelect').value;
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.value = frequency;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+
+    // sanftes Ausblenden
+    gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+
+    oscillator.stop(audioCtx.currentTime + 0.6);
+}
+
+</script>
+</head>
+<body>
+
+<div>
+<select id="toneSelect">
+  <option value="261.63">c'</option>
+  <option value="293.66">d'</option>
+  <option value="329.63">e'</option>
+  <option value="349.23">f'</option>
+  <option value="392.00">g'</option>
+  <option value="440.00">a'</option>
+  <option value="493.88">h'</option>
+  <option value="523.25">c''</option>
+</select>
+
+<button onclick="playTone()">Ton abspielen</button>
+<button onclick="playScale()">Tonleiter abspielen</button>
+</div
+
+<div>
+<select id="songSelect" style="width:300px;"></select>
+<button onclick="showNotes()" style="width:300px;">Töne anzeigen</button>
+<button onclick="playTriad()" style="width:300px;">Dreiklang abspielen</button>
+<button onclick="playTriadAndNotes()" style="width:300px;">Tonangabe abspielen</button>
+<button onclick="openTonesModal()" title="Tonangabe" style="width:300px;">
+<i class="fa fa-music"></i></button>
+<div id="notesOutput"></div>
+</div>
+
+<div id="tonesModal" class="modal">
+  <div class="modal-content">
+    <h3>Tonangabe</h3>
+
+    <div class="radio-group">
+	  <label class="radio-line" id="label-nurDreiKlang">
+		<input type="radio" id="nurDreiKlang" name="ton_abspielen" value="dreiklang">
+		<span class="label-text">Nur Dreiklang</span>
+	  </label>
+
+	  <label class="radio-line" id="label-nur_tonangabe">
+		<input type="radio" id="nur_tonangabe" name="ton_abspielen" value="ton">
+		<span class="label-text">Nur Tonangabe</span>
+	  </label>
+
+	  <label class="radio-line" id="label-dreiklang_und_tonangabe">
+		<input type="radio" id="dreiklang_und_tonangabe" name="ton_abspielen" value="beides" checked>
+		<span class="label-text">Dreiklang und Tonleiter</span>
+	  </label>
+    </div>
+
+    <div class="modal-actions" style="margin: 20px;">
+      <button id="playTones">Abspielen</button>
+      <button id="cancelPlayTones">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+	
+  const tonesModal = document.getElementById("tonesModal");
+  const cancelBtn = document.getElementById("cancelPlayTones");
+  
+  let lastToneSelection = "dreiklang_und_tonangabe";
+
+  // Modal öffnen (z.B. von einem Button außerhalb)
+  function openTonesModal() {
+	let triadNotes = getTriadNotes(scalesMapMusik);
+	console.log("triad Notes", triadNotes);
+	let helm = getNotesHelmholz(triadNotes);
+	console.log("triad Notes Helmholtz", helm);
+	
+	let notes = getNotesScientific();
+	let helmNotes = getNotesHelmholz(notes);
+	
+	document.querySelector("#label-nurDreiKlang .label-text").textContent = "Nur Dreiklang [" + helm.join(" ") + "]";
+	
+	document.querySelector("#label-nur_tonangabe .label-text").textContent = "Nur Tonangabe [" + helmNotes.join(" ") + "]";
+
+	document.querySelector("#label-dreiklang_und_tonangabe .label-text").textContent = "Dreiklang und Tonleiter [" + helm.join(" ") + " -- " + helmNotes.join(" ") + "]";
+	
+    tonesModal.classList.add("open");
+  }
+
+  // Modal schließen
+  function closeTonesModal() {
+    tonesModal.classList.remove("open");
+  }
+
+  // Abbrechen-Button schließt Modal
+  cancelBtn.addEventListener("click", closeTonesModal);
+
+  // Klick auf Overlay (außerhalb) schließt Modal
+  tonesModal.addEventListener("click", (e) => {
+	  if(e.target){
+		  if(e.target.id === "nurDreiKlang" || 
+		  e.target.id === "nur_tonangabe" || 
+		  e.target.id === "dreiklang_und_tonangabe"){
+			  lastToneSelection = e.target.id;
+		  } else if(e.target.id === "playTones") {
+			  // closeTonesModal();
+			  if(lastToneSelection === "nurDreiKlang"){
+				  playTriad();
+			  } else if(lastToneSelection === "nur_tonangabe"){
+				  playTones();
+			  } else if(lastToneSelection === "dreiklang_und_tonangabe"){
+				  playTriadAndNotes();
+			  }
+		  } else if(e.target.id === "cancelPlayTones") {
+			  closeTonesModal();
+		  }
+	  }
+  });
+
+  // Optional: ESC-Taste
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeTonesModal();
+    }
+  });
+  
+const songList = [
+	"Es-Dur / g' es' b es / 3-1-5-1  B-Dur / f (Solo)...	",
+	"A-Dur / cis' a e a / 3-1-5-1	",
+	"A-Dur / cis'' a' e' a / 3-1-5-1	",
+	"A-Dur / cis'' e' e' A / 3-5-5-1	",
+	"A-Dur / e' (Solo) / e' c' a A / 5-3-1-1	",
+	"A-Dur / e' e' e - / 5-5-5-	",
+	"A-Dur / e' e' e e / 5-5-5-5	",
+	"a-Moll / a' e' c' a / 1-5-3-1	",
+	"As-Dur / - - - As / 1	",
+	"As-Dur / b' g' es es / 5-3-1-1	",
+	"As-Dur / c' as' es' as / 3-1-5-1	",
+	"As-Dur / es' es' es' _ / 5-5-5-_	",
+	"As-Dur / es' es' es' es / 5-5-5-5	",
+	"B-Dur / b (Bass) / 1	",
+	"B-Dur / b' b' b B / 1-1-1-1	",
+	"B-Dur / b' f' d' b / 1-5-3-1	",
+	"B-Dur / d' d' f b / 3-3-5-1	",
+	"B-Dur / d'' b' g b B / 3-1-6-1-1 	",
+	"B-Dur / d'' f' d' b / 3-5-3-1	",
+	"B-Dur / f' d' b B /5-3-1-1	",
+	"C-Dur / c' c' c' c / 5-5-5-5	",
+	"C-Dur / c'' e' g / 1-3-5	",
+	"C-Dur / c'' g' e' c / 1-5-3-1	",
+	"C-Dur / e' c' g c / 3-1-5-1	",
+	"C-Dur / e'' c'' g' c / 3-1-5-1	",
+	"C-Dur / g' e' c' c / 5-3-1-1	",
+	"c-Moll / g'(Solo) g' es' c' c / 5-3-1-1	",
+	"D-Dur /  - fis' a d / -3-5-1	",
+	"D-Dur / a (Solo) d' d' d' d | 1-1-1-1	",
+	"D-Dur / a-a-a-_ / 5-5-5_	",
+	"D-Dur / a' (Solo) a a a a / 5-5-5-5	",
+	"D-Dur / a' (Solo) a' fis' d' d D / 5-e-1-1-1	",
+	"D-Dur / a' a' a a / 5-5-5-5	",
+	"D-Dur / a' fis' a d / 5-3-5-1	",
+	"D-Dur / a' fis' d' _ / 5-3-1_	",
+	"D-Dur / a' fis' d' d / 5-3-1-1	",
+	"D-Dur / d' (S) / 1	",
+	"D-Dur / d' d' d' d' / 1-1-1-1	",
+	"D-Dur / d' d'_  / 1-1_	",
+	"D-Dur / fis' d' a d / 3-1-5-1	",
+	"d-Moll / a' f' d' d / 5-3-1-1	",
+	"d-Moll / f' d' a d / 3-1-5-1	",
+	"d-Moll->e-Moll->fis-Moll / d' d' d' A / 1-1-1-5	",
+	"Des-Dur / f' des' as des / 3-1-5-1	",
+	"E-Dur / b' / 5	",
+	"E-Dur / h h h h /5-5-5-5	",
+	"e-Moll / g' e' h e /3-1-5-1	",
+	"Es-Dur / - g' b g es / 3-5-3-1	",
+	"Es-Dur / b b b b / 5-5-5-5	",
+	"Es-Dur / c'' as' es' es / 6-4-1-1	",
+	"Es-Dur / es' b g es / 1-5-3-1	",
+	"Es-Dur / es' es' es es / 1-1-1-1	",
+	"Es-Dur / es'' g' es / 1-3-1	",
+	"Es-Dur / g' es' b es / 3-1-5-1	",
+	"Es-Dur Beg: B-Dur / b' f' d' b / 1-5-3	",
+	"F-Dur / - c' f f / 5-1-1	",
+	"F-Dur / a' f' c' a / 3-1-5-3	",
+	"F-Dur / a' f' c' f / 3-1-5-1	",
+	"F-Dur / c' c' a f / 5-5-3-1	",
+	"F-Dur / c' c' c c / 5-5-5-5	",
+	"F-Dur / c' c' c' _ / 5-5-5 _	",
+	"F-Dur / c' c' c' c / 5-5-5-5	",
+	"F-Dur / c' c' c' c' / 	",
+	"F-Dur / c' c' c' c' / 5-1-	",
+	"F-Dur / c' f' a a / 5-1-3-1	",
+	"F-Dur / c'' a' f' f / 5-3-1-1	",
+	"F-Dur / c''-a'-f'-f / 5-3-1-1	",
+	"F-Dur / f' / 1	",
+	"F-Dur / f' c' a / 1-5-3	",
+	"F-Dur / f' c' a f / 1-5-3-1	",
+	"F-Dur / f' c' a f F / 1-5-3-1-1	",
+	"F-Dur / f' c' f / 1 5 1	",
+	"F-Dur / f' d' f g	",
+	"F-Dur / f' f' - - / 1-1	",
+	"F-Dur->G-Dur / c' (Solo) / f' c' a f /1-5-3-1	",
+	"G-Dur / - - h d G / --3-5-1	",
+	"G-Dur / a' fis' d' d D / 5-3-1-1-1	",
+	"G-Dur / d' a g h G / 5-2-1-3-1	",
+	"G-Dur / d' d' _ /5-5_	",
+	"G-Dur / d' d' - - / 1-1	",
+	"G-Dur / d' d' d d / 5-5-5-5	",
+	"G-Dur / d' d' d' _ / 5-5-5-	",
+	"G-Dur / d' d' d' d / 5-5-5-5	",
+	"G-Dur / d' d' h g / 5-5-3-1	",
+	"G-Dur / d' h g g / 5-3-1-1	",
+	"G-Dur / d'' (Solo) h' g' d' d' g / 3-1-5-5-1	",
+	"G-Dur / fis' d' a d / 3-1-5-1	",
+	"G-Dur / g' d' h g / 1-5-3-1	",
+	"G-Dur / g' g' g' _ / 1-1-1_	",
+	"G-Dur / h' d' g' g / 3-5-1-1	",
+	"G-Dur / h' g' d' g / 3-1-5-1 	",
+	"g-Moll / g' g' g g / 1-1-1-1	",
+	"H-Dur / fis' / 5	"
+	];
+	
+const noteMap = {
+  // Oktave 2 (großes C)
+  "C": "C2",  "C#": "C#2", "Db": "Db2", "D": "D2",  "D#": "D#2", "Eb": "Eb2",
+  "E": "E2",  "F": "F2",   "F#": "F#2", "Gb": "Gb2", "G": "G2",  "G#": "G#2",
+  "Ab": "Ab2", "A": "A2",  "A#": "A#2", "Bb": "Bb2", "B": "B2",
+
+  // Oktave 3
+  "c": "C3",  "cis": "C#3",  "des": "Db3", "d": "D3",  "dis": "D#3",  "es": "Eb3",
+  "e": "E3",  "f": "F3",     "fis": "F#3", "ges": "Gb3", "g": "G3",   "gis": "G#3",
+  "as": "Ab3","a": "A3",     "ais": "A#3", "b": "Bb3", "h": "B3",
+
+  // Oktave 4
+  "c'": "C4",  "cis'": "C#4",  "des'": "Db4", "d'": "D4",  "dis'": "D#4", "es'": "Eb4",
+  "e'": "E4",  "f'": "F4",    "fis'": "F#4", "ges'": "Gb4", "g'": "G4",   "gis'": "G#4",
+  "as'": "Ab4","a'": "A4",    "ais'": "A#4", "b'": "Bb4", "h'": "B4",
+
+  // Oktave 5
+  "c''": "C5", "cis''": "C#5", "des''": "Db5","d''": "D5", "dis''": "D#5","es''": "Eb5",
+  "e''": "E5", "f''": "F5",   "fis''": "F#5","ges''": "Gb5","g''": "G5",  "gis''": "G#5",
+  "as''": "Ab5","a''": "A5",  "ais''": "A#5","b''": "Bb5","h''": "B5",
+
+  // Oktave 6
+  "c'''": "C6", "cis'''": "C#6","des'''": "Db6","d'''": "D6","dis'''": "D#6","es'''": "Eb6",
+  "e'''": "E6", "f'''": "F6",  "fis'''": "F#6","ges'''": "Gb6","g'''": "G6","gis'''": "G#6",
+  "as'''": "Ab6","a'''": "A6","ais'''": "A#6","b'''": "Bb6","h'''": "B6"
+};
+
+const scalesMapScientific = {
+  // Dur-Tonarten
+  "C-Dur": ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"],
+  "C#-Dur": ["C#4", "D#4", "F4", "F#4", "G#4", "A#4", "C5", "C#5"],
+  "D-Dur": ["D4", "E4", "F#4", "G4", "A4", "B4", "C#5", "D5"],
+  "Eb-Dur": ["D#4", "F4", "G4", "G#4", "A#4", "C5", "D5", "D#5"],
+  "E-Dur": ["E4", "F#4", "G#4", "A4", "B4", "C#5", "D#5", "E5"],
+  "F-Dur": ["F4", "G4", "A4", "A#4", "C5", "D5", "E5", "F5"],
+  "F#-Dur": ["F#4", "G#4", "A#4", "B4", "C#5", "D#5", "F5", "F#5"],
+  "G-Dur": ["G4", "A4", "B4", "C5", "D5", "E5", "F#5", "G5"],
+  "Ab-Dur": ["G#4", "A#4", "C5", "C#5", "D#5", "F5", "G5", "G#5"],
+  "A-Dur": ["A4", "B4", "C#5", "D5", "E5", "F#5", "G#5", "A5"],
+  "Bb-Dur": ["A#4", "C5", "D5", "D#5", "F5", "G5", "A5", "A#5"],
+  "B-Dur": ["B4", "C#5", "D#5", "E5", "F#5", "G#5", "A#5", "B5"],
+
+  // Moll-Tonarten (natürlich)
+  "a-Moll": ["A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5"],
+  "a#-Moll": ["A#4", "C5", "C#5", "D#5", "F5", "F#5", "G#5", "A#5"],
+  "b-Moll": ["B4", "C#5", "D5", "E5", "F#5", "G5", "A5", "B5"],
+  "c-Moll": ["C4", "D4", "D#4", "F4", "G4", "G#4", "A#4", "C5"],
+  "c#-Moll": ["C#4", "D#4", "E4", "F#4", "G#4", "A4", "B4", "C#5"],
+  "d-Moll": ["D4", "E4", "F4", "G4", "A4", "A#4", "C5", "D5"],
+  "d#-Moll": ["D#4", "F4", "F#4", "G#4", "A#4", "B4", "C#5", "D#5"],
+  "e-Moll": ["E4", "F#4", "G4", "A4", "B4", "C5", "D5", "E5"],
+  "f-Moll": ["F4", "G4", "G#4", "A#4", "C5", "C#5", "D#5", "F5"],
+  "f#-Moll": ["F#4", "G#4", "A4", "B4", "C#5", "D5", "E5", "F#5"],
+  "g-Moll": ["G4", "A4", "A#4", "C5", "D5", "D#5", "F5", "G5"],
+  "g#-Moll": ["G#4", "A#4", "B4", "C#5", "D#5", "E5", "F#5", "G#5"],
+  "h-Moll": ["B4", "C#5", "D5", "E5", "F#5", "G5", "A5", "B5"]
+};
+
+const scalesMapMusik = {
+  // ======================
+  // DUR-TONARTEN
+  // ======================
+  "C-Dur":  ["C4","D4","E4","F4","G4","A4","B4","C5"],
+
+  "G-Dur":  ["G4","A4","B4","C5","D5","E5","F#5","G5"],
+  "D-Dur":  ["D4","E4","F#4","G4","A4","B4","C#5","D5"],
+  "A-Dur":  ["A4","B4","C#5","D5","E5","F#5","G#5","A5"],
+  "E-Dur":  ["E4","F#4","G#4","A4","B4","C#5","D#5","E5"],
+  "B-Dur":  ["B4","C#5","D#5","E5","F#5","G#5","A#5","B5"],
+  "F#-Dur": ["F#4","G#4","A#4","B4","C#5","D#5","E#5","F#5"],
+  "C#-Dur": ["C#4","D#4","E#4","F#4","G#4","A#4","B#4","C#5"],
+
+  "F-Dur":  ["F4","G4","A4","Bb4","C5","D5","E5","F5"],
+  "Bb-Dur": ["Bb4","C5","D5","Eb5","F5","G5","A5","Bb5"],
+  "Eb-Dur": ["Eb4","F4","G4","Ab4","Bb4","C5","D5","Eb5"],
+  "Ab-Dur": ["Ab4","Bb4","C5","Db5","Eb5","F5","G5","Ab5"],
+  "Db-Dur": ["Db4","Eb4","F4","Gb4","Ab4","Bb4","C5","Db5"],
+  "Gb-Dur": ["Gb4","Ab4","Bb4","Cb5","Db5","Eb5","F5","Gb5"],
+  "Cb-Dur": ["Cb4","Db4","Eb4","Fb4","Gb4","Ab4","Bb4","Cb5"],
+
+  // ======================
+  // MOLL (natürlich)
+  // ======================
+  "a-Moll":  ["A4","B4","C5","D5","E5","F5","G5","A5"],
+  "e-Moll":  ["E4","F#4","G4","A4","B4","C5","D5","E5"],
+  "h-Moll":  ["B4","C#5","D5","E5","F#5","G5","A5","B5"],
+  "f#-Moll": ["F#4","G#4","A4","B4","C#5","D5","E5","F#5"],
+  "c#-Moll": ["C#4","D#4","E4","F#4","G#4","A4","B4","C#5"],
+  "g#-Moll": ["G#4","A#4","B4","C#5","D#5","E5","F#5","G#5"],
+  "d#-Moll": ["D#4","E#4","F#4","G#4","A#4","B4","C#5","D#5"],
+  "a#-Moll": ["A#4","B#4","C#5","D#5","E#5","F#5","G#5","A#5"],
+
+  "d-Moll":  ["D4","E4","F4","G4","A4","Bb4","C5","D5"],
+  "g-Moll":  ["G4","A4","Bb4","C5","D5","Eb5","F5","G5"],
+  "c-Moll":  ["C4","D4","Eb4","F4","G4","Ab4","Bb4","C5"],
+  "f-Moll":  ["F4","G4","Ab4","Bb4","C5","Db5","Eb5","F5"],
+  "bb-Moll": ["Bb4","C5","Db5","Eb5","F5","Gb5","Ab5","Bb5"],
+  "eb-Moll": ["Eb4","F4","Gb4","Ab4","Bb4","Cb5","Db5","Eb5"],
+  "ab-Moll": ["Ab4","Bb4","Cb5","Db5","Eb5","Fb5","Gb5","Ab5"]
+};
+
+const songSelect = document.getElementById("songSelect");
+songList.forEach((song, idx) => {
+  const option = document.createElement("option");
+  option.value = idx;
+  option.textContent = song.split("/")[0].trim() + " / " + song.split("/")[1].trim(); // nur Name
+  songSelect.appendChild(option);
+});
+ 
+function playScale() {
+    const synth = new Tone.Synth().toDestination();
+
+    const notes = ["C4", "E4", "G4", "E4", "C4"];
+    let time = 0;
+
+    notes.forEach(note => {
+        synth.triggerAttackRelease(note, "4n", Tone.now() + time);
+        time += Tone.Time("4n").toSeconds(); // Viertelnote Abstand
+    });
+}
+
+function showNotes() {
+console.log("showNotes 1 " + songSelect);
+console.log("showNotes 2 " + document.getElementById("songSelect"));
+  const idx = songSelect.value;
+  const song = songList[idx];
+
+  // Töne zwischen den ersten zwei '/' extrahieren
+  const parts = song.split("/");
+  if(parts.length < 2) return;
+
+  const rawNotes = parts[1].trim().split(/\s+/); // Töne als Array
+  const outputDiv = document.getElementById("notesOutput");
+  outputDiv.innerHTML = "";
+
+  rawNotes.forEach(n => {
+    const note = n.replace(/[()]/g,''); // Klammern entfernen
+    const scientific = noteMap[note] || note; // mapping oder unverändert
+    const div = document.createElement("div");
+    div.innerHTML = `${note} <span class="notation">= ${scientific}</span>`;
+    outputDiv.appendChild(div);
+  });
+}
+
+function getNotesScientific() {
+  const idx = songSelect.value;
+  const song = songList[idx];
+
+  // Töne zwischen den ersten zwei '/' extrahieren
+  const parts = song.split("/");
+  if(parts.length < 2) return;
+
+  const rawNotes = parts[1].trim().split(/\s+/); // Töne als Array
+  const outputDiv = document.getElementById("notesOutput");
+  outputDiv.innerHTML = "";
+
+  return rawNotes.map((n, idx) => {
+    const note = n.replace(/[()]/g,''); // Klammern entfernen
+    let scientific = noteMap[note];// || note; // mapping oder unverändert
+	if(scientific && idx > 1){
+		let intValue = parseInt(scientific[scientific.length-1]) + 1;
+		scientific = scientific.substr(0, scientific.length - 1) + intValue;
+		console.log("InVal", intValue);
+	}
+    return scientific;
+  });
+}
+
+
+function getTriadNotes(scalesMap){
+	const songSelect = document.getElementById("songSelect");
+	const idx = songSelect.value;
+	const song = songList[idx];
+	let tonart = song.split("/")[0].trim();
+	
+	// Deutsche Notation zu englischer umwandeln, z.B. Es -> Eb
+	if(tonart[1] === "s") tonart = tonart[0] + "b" + tonart.substr(2);
+	
+	let tones = scalesMap[tonart];
+     
+	if(!tones || tones.length < 5) {
+		return [];
+	}
+	
+    let indices = [0,2,4,2,0]; // Dreiklang + kleine Bewegung
+	let result = [];
+	indices.forEach((i, idx) => {
+		result.push(tones[i]);
+	});
+	
+	return result;
+}
+
+function getHelmholtz(noteMap, scientific) {
+  return Object.keys(noteMap).find(
+    key => noteMap[key] === scientific
+  );
+}
+
+function getNotesHelmholz(triadNotesScientific){
+	let notes = [];
+	triadNotesScientific.forEach(note => {
+		notes.push(getHelmholtz(noteMap, note));
+	});
+	
+	return notes;
+}
+
+async function playTriadAndNotes(){
+	await playTriad();
+	console.log("after playTriad ");
+
+	setTimeout(async () => {
+		await playTones();
+		console.log("after playTones ");
+	}, 1000);
+
+	
+
+}
+
+function playTriad(){
+    return new Promise((resolve) => {
+		let triadNotes = getTriadNotes(scalesMapScientific);
+		let time = 0;
+		const synth = new Tone.Synth().toDestination();
+		triadNotes.forEach(tone => {
+			synth.triggerAttackRelease(tone, "4n", Tone.now() + time);
+            time += Tone.Time("4n").toSeconds();
+		});
+		setTimeout(resolve, time * 1000);
+    });
+}
+
+function playTones(){
+    return new Promise((resolve) => {
+        const synth = new Tone.Synth().toDestination();
+        const songSelect = document.getElementById("songSelect");
+        const idx = songSelect.value;
+        const song = songList[idx];
+
+        let notes = getNotesScientific(); // Array von Noten wie ['G4','Eb4','Bb3','Eb3']
+        console.log("playTones notes", notes);
+
+        if(!notes || notes.length === 0) {
+            resolve();
+            return;
+        }
+
+        let time = 0;
+        notes.forEach((note, idx) => {
+            synth.triggerAttackRelease(note, "4n", Tone.now() + time);
+            time += Tone.Time("4n").toSeconds();
+
+            // letzte Note: Promise auflösen
+            if(idx === notes.length - 1){
+                setTimeout(resolve, time * 1000);
+            }
+        });
+    });
+}
+
+
+</script>
+</body>
+</html>

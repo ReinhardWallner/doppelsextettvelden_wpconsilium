@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Dynamische Notenzeile</title>
+<style>
+  svg {
+    border: 1px solid #ccc;
+  }
+</style>
+</head>
+<body>
+
+<h2>Noten anzeigen:</h2>
+<div id="score"></div>
+
+<script>
+  // === Hilfsfunktion: Helmholtz -> Y-Position auf Notenlinie ===
+function helmholtzToY(note) {
+  const baseY = 80; // unterste Linie = E4
+  const step = 5;   // Abstand pro Linie/Zwischenraum
+  const positions = {
+    "c": baseY + step*4,   // C4 (c') zwei Hilfslinien unter E4
+    "cis": baseY + step*4,
+    "d": baseY + step*3,   // D4
+    "des": baseY + step*3,
+    "e": baseY,             // E4 unterste Linie
+    "f": baseY - step*1,    // F4
+    "fis": baseY - step*1,
+    "g": baseY - step*2,    // G4
+    "a": baseY - step*3,    // A4
+    "b": baseY - step*4,    // B4
+    "c'": baseY - step*5,   // C5 (eine Oktave höher)
+    "cis'": baseY - step*5,
+    "d'": baseY - step*6,   // D5
+    "dis'": baseY - step*6,
+    "e'": baseY - step*7,   // E5
+    "f'": baseY - step*8,   // F5
+    "fis'": baseY - step*8,
+    "g'": baseY - step*9,   // G5
+    "a'": baseY - step*10,  // A5
+    "b'": baseY - step*11,  // B5
+    "c''": baseY - step*12   // C6
+  };
+  return positions[note] || baseY;
+}
+
+  // === Hauptfunktion: Noten-Array -> SVG ===
+  function drawNotes(notes, containerId) {
+    const width = 300;
+    const height = 150;
+    const svgNS = "http://www.w3.org/2000/svg";
+
+    const container = document.getElementById(containerId);
+    container.innerHTML = ""; // vorherige SVG entfernen
+
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("width", width);
+    svg.setAttribute("height", height);
+
+    // Notenlinien
+    for (let i=0; i<5; i++) {
+      const line = document.createElementNS(svgNS, "line");
+      line.setAttribute("x1", 10);
+      line.setAttribute("y1", 40 + i*10);
+      line.setAttribute("x2", width - 10);
+      line.setAttribute("y2", 40 + i*10);
+      line.setAttribute("stroke", "black");
+      svg.appendChild(line);
+    }
+
+    // Violinschlüssel (einfacher Text)
+    const clef = document.createElementNS(svgNS, "text");
+    clef.setAttribute("x", 2);
+    clef.setAttribute("y", 75);
+    clef.setAttribute("font-size", "40");
+    clef.textContent = "𝄞";
+    svg.appendChild(clef);
+
+    // Noten einfügen
+    notes.forEach((note, index) => {
+      const x = 50 + index*40;
+      const y = helmholtzToY(note);
+
+      // Ellipse für Note
+      const ellipse = document.createElementNS(svgNS, "ellipse");
+      ellipse.setAttribute("cx", x);
+      ellipse.setAttribute("cy", y);
+      ellipse.setAttribute("rx", 6);
+      ellipse.setAttribute("ry", 4);
+      ellipse.setAttribute("fill", "black");
+      svg.appendChild(ellipse);
+
+      // Notenstiel (für höhere Noten)
+      if (y < 45) {
+        const line = document.createElementNS(svgNS, "line");
+        line.setAttribute("x1", x+6);
+        line.setAttribute("y1", y);
+        line.setAttribute("x2", x+6);
+        line.setAttribute("y2", y-20);
+        line.setAttribute("stroke", "black");
+        svg.appendChild(line);
+      }
+
+      // Hilfslinie für tiefe Noten (c, cis, des)
+      if (y > 80) {
+        const extraLine = document.createElementNS(svgNS, "line");
+        extraLine.setAttribute("x1", x-8);
+        extraLine.setAttribute("y1", 80);
+        extraLine.setAttribute("x2", x+8);
+        extraLine.setAttribute("y2", 80);
+        extraLine.setAttribute("stroke", "black");
+        svg.appendChild(extraLine);
+      }
+    });
+
+    container.appendChild(svg);
+  }
+
+  // === Test: C-Dur Dreiklang c'-e'-g' ===
+  //drawNotes(["c'", "e'", "g'"], "score");
+  drawNotes(["c", "d", "e", "c'", "d'", "e'"], "score");
+</script>
+
+</body>
+</html>

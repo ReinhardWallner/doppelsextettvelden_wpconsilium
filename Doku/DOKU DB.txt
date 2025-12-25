@@ -1,0 +1,109 @@
+use dsvpagedb;
+
+SELECT * FROM `wp_posts` p
+join `wp_postmeta` m on p.id=m.post_id
+WHERE id in (18,19)
+
+// categories
+use dsvpagedb;
+
+select * from `wp_terms` t
+join `wp_term_taxonomy` tax on tax.term_id=t.term_id
+where tax.taxonomy="shared-file-category"
+
+
+// all Tags
+use dsvpagedb;
+
+select * from `wp_terms` t
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id and tax.taxonomy="shared-file-tag"
+left join `wp_term_relationships` trel on trel.term_taxonomy_id=t.term_id
+where t.
+
+
+// all data
+use dsvpagedb;
+
+SELECT * FROM `wp_posts` p
+join `wp_postmeta` m on p.id=m.post_id
+left join `wp_term_relationships` trel on trel.object_id=p.id
+left join `wp_terms` t on trel.term_taxonomy_id=t.term_id
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id
+WHERE id in (18,19)
+
+
+// relevante spalten
+use dsvpagedb;
+
+SELECT p.id, p.post_title, m.meta_id, m.meta_key, meta_value, t.term_id, t.name, tax.taxonomy
+FROM `wp_posts` p
+left join `wp_postmeta` m on p.id=m.post_id and (m.meta_key like '%_sf_file_upload_cf%' or m.meta_key like '%_sf_description%')
+left join `wp_term_relationships` trel on trel.object_id=p.id
+left join `wp_terms` t on trel.term_taxonomy_id=t.term_id
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id and (tax.taxonomy='shared-file-tag' or tax.taxonomy='shared-file-category')
+where post_type='shared_file'
+order by p.post_title
+
+// gefiltert
+SELECT p.id, p.post_title, m.meta_id, m.meta_key, meta_value, t.term_id, t.name, tax.taxonomy
+FROM `wp_posts` p
+left join `wp_postmeta` m on p.id=m.post_id and (m.meta_key like '%_sf_file_upload_cf%' or m.meta_key like '%_sf_description%')
+left join `wp_term_relationships` trel on trel.object_id=p.id
+left join `wp_terms` t on trel.term_taxonomy_id=t.term_id
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id and (tax.taxonomy='shared-file-tag' or tax.taxonomy='shared-file-category')
+where post_type='shared_file'
+and 
+	(p.post_title like '%abc%' 
+	or t.name like '%abc%'
+	or (m.meta_key='_sf_description' and m.meta_value like '%abc%')
+	or (m.meta_key like '_sf_file_upload_cf%' and m.meta_value like '%abc%')
+	)
+order by p.post_title
+
+// paging
+SELECT distinct p.id, p.post_title
+FROM `wp_posts` p
+left join `wp_postmeta` m on p.id=m.post_id and (m.meta_key like '%_sf_file_upload_cf%' or m.meta_key like '%_sf_description%')
+left join `wp_term_relationships` trel on trel.object_id=p.id
+left join `wp_terms` t on trel.term_taxonomy_id=t.term_id
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id and (tax.taxonomy='shared-file-tag' or tax.taxonomy='shared-file-category')
+where post_type='shared_file'
+order by p.post_title
+limit 4 offset 8
+-- allgemein: limit pagesize, offset=(PageNr-1)*pagesize
+
+// paging + filterung
+SELECT distinct p.id, p.post_title
+FROM `wp_posts` p
+left join `wp_postmeta` m on p.id=m.post_id and (m.meta_key like '%_sf_file_upload_cf%' or m.meta_key like '%_sf_description%')
+left join `wp_term_relationships` trel on trel.object_id=p.id
+left join `wp_terms` t on trel.term_taxonomy_id=t.term_id
+left join `wp_term_taxonomy` tax on tax.term_id=t.term_id and (tax.taxonomy='shared-file-tag' or tax.taxonomy='shared-file-category')
+where post_type='shared_file'
+and 
+	(p.post_title like '%abc%' 
+	or t.name like '%abc%'
+	or (m.meta_key='_sf_description' and m.meta_value like '%abc%')
+	or (m.meta_key like '_sf_file_upload_cf%' and m.meta_value like '%abc%')
+	)
+order by p.post_title
+limit 4 offset 8
+
+
+Feld wo gespeichert:
+Title: post_title: 
+
+_sf_description
+
+Custom Fields, CF_ID 1:
+_sf_file_upload_cf_1 Glawischnig - Mittergradnegger
+
+
+
+select * from wp_postmeta where meta_key like '_sf_file_upload_cf_7%';
+
+
+
+select * from wp_postmeta m
+left join `wp_term_relationships` trel on trel.object_id=p.id
+where meta_key like '%_sf_file_upload_cf_7%';
