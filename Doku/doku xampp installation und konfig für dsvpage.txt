@@ -1,0 +1,18 @@
+utf8mb4_unicode_520_ci
+
+
+wp_config.php einstellen
+
+define('DB_USER', 'root');
+
+/**
+ * Ersetze passwort_hier_einfuegen mit deinem MySQL-Passwort.
+ */
+define('DB_PASSWORD', '');
+
+
+download 
+https://php.watch/versions/7.4/releases/7.4.33
+entpacke in E:\xampp_8030\apache\php7x
+
+starte apache
