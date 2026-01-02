@@ -64,7 +64,7 @@ select[aria-disabled="true"] {
 .row1 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 60px;   /* erste Spalte */
+  grid-template-columns: 80px;   /* erste Spalte */
   grid-auto-columns: 250px;      /* alle weiteren Spalten */
   width: 100%; /* Breite richtet sich nach Inhalt */
   border-bottom: 1px solid #e6e8ec;
@@ -88,6 +88,14 @@ select[aria-disabled="true"] {
   box-sizing: border-box;
   border-radius: 0;
   /* nur rechter Border = gleiche Breiten wie vorher */
+}
+
+.cell_text.cell-info-icon {
+  display: inline-flex;       /* bleibt inline im Grid */
+  align-items: center;        /* vertikal mittig */
+  justify-content: flex-start;/* nebeneinander statt zentriert */
+  gap: 8px;                   /* Abstand Icon ↔ Button */
+  height: 100%;
 }
 
 /* letzte Spalte ohne Rand */
@@ -568,7 +576,7 @@ margin-bottom: .25rem;
     .row1 {
       flex-direction: column;
       align-items: stretch;
-      grid-auto-columns: calc(50% - 10px); /* halbe Seitenbreite minus 10px */
+      grid-auto-columns: calc(50% - 40px); /* halbe Seitenbreite minus 10px */
     }
   
     .cell {
@@ -723,3 +731,21 @@ margin-bottom: .25rem;
   .info-icon:hover {
     background-color: #0056b3;
   }  
+
+  .btn-title {
+    display: inline-flex;          /* Icon sauber zentrieren */
+    align-items: center;
+    justify-content: center;
+    padding: 6px;                  /* kompakter Button */
+  }
+
+  .btn-title svg {
+      width: 18px;
+      height: 18px;
+      display: block;                /* verhindert Inline-Gaps */
+  }
+
+  .btn-title:hover {
+      background-color: #0056b3;
+  }
+  

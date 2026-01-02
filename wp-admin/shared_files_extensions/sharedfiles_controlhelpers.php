@@ -56,7 +56,8 @@ function getCheckboxField($file_id, $cat_name, $name, $value, &$checkboxArray, $
 
 }
 
-function addInfoIcon(&$table, $headRow, $dataArray){
+function addInfoColumn(&$table, $headRow, $dataArray){
+	// Info button
 	$info = "Titel: " . $dataArray["title"] . "\n";
 	$headrowIndexOffset = 2;
 	for ($n = 1; $n < $dataArray["custom_fields_cntint"]; $n++) {
@@ -80,6 +81,20 @@ function addInfoIcon(&$table, $headRow, $dataArray){
       <circle cx="12" cy="8" r="0.5"></circle>
     </svg>
   </span>';
+
+	// Link button
+  	$linkUrl = get_site_url() . "/shared-files/" . $dataArray["file_id"] . "/"; 
+	$table .= '<a data-file-type="" href="' . $linkUrl . '" data-file-url="' . $linkUrl . '" target="_blank" rel="ugc nofollow" data-external-url="" data-image-url="" class="btn-title" title="Datei öffnen">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14 3h7v7" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 14L21 3" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</a>';
 
 	$table .= '</div>'; 
 }
