@@ -7,23 +7,27 @@
 </head>
 <body>
 
-<h2>SATB Beispiel (4 Stimmen, 5 Töne)</h2>
+<h2>SATB Beispiel Dreiklang</h2>
 <div id="abc-output"></div>
 
 <script>
 const abcNotation2 = `
-T: New Exercise
-M: C
+T: Tonangabe
+M: D
 L: 1/4
-K: C
+K: D
 V: 1 
-c0c2G2|B2d2|B2(A2|C4)|
+[DFA] | DFAFD | FD
+V: 2 clef=bass
+z | zzzzz | zz A,D,
 `;
 
 
 window.ABCJS.renderAbc("abc-output", abcNotation2);
 </script>
-<!-- F-Dur / f' d' f g -->
+<!-- F-Dur / f' d' f g 
+D-Dur / fis' d' a d
+-->
 
 </body>
 </html>

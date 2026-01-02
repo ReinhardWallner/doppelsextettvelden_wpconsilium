@@ -94,8 +94,11 @@ limit {$limit} offset {$offset}";
 	// array_push($headRow, "Id");
 	// array_push($headRowKat, "Id");
 	// array_push($headRowSingleFields, "Id");
+	array_push($headRow, 'Info');
 	array_push($headRow, esc_html__('Title', 'shared-files'));
+	array_push($headRowKat, 'Info');
 	array_push($headRowKat, esc_html__('Title', 'shared-files'));
+	array_push($headRowSingleFields, 'Info');
 	array_push($headRowSingleFields, esc_html__('Title', 'shared-files'));
 	array_push($headRow, esc_html__('Description', 'shared-files'));
 		
@@ -176,6 +179,7 @@ limit {$limit} offset {$offset}";
 				$row["filename"] = $c["_sf_filename"][0];
 
 				$custom_fields_cntint = intval($parameters['custom_fields_cnt']);
+				$row["custom_fields_cntint"] = $custom_fields_cntint;
 				for ($n = 1; $n < $custom_fields_cntint; $n++) {
 					$val = "";
 					if (isset($s['file_upload_custom_field_' . $n]) && $cf_title = sanitize_text_field($s['file_upload_custom_field_' . $n])) {

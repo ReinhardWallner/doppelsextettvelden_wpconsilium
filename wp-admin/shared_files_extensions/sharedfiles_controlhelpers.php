@@ -56,6 +56,34 @@ function getCheckboxField($file_id, $cat_name, $name, $value, &$checkboxArray, $
 
 }
 
+function addInfoIcon(&$table, $headRow, $dataArray){
+	$info = "Titel: " . $dataArray["title"] . "\n";
+	$headrowIndexOffset = 2;
+	for ($n = 1; $n < $dataArray["custom_fields_cntint"]; $n++) {
+		$index = $n + $headrowIndexOffset;
+		if($dataArray["custom_field"][$n] != null){
+			$info .= $headRow[$index] . ": " . $dataArray["custom_field"][$n] . "\n";
+		}
+	}
+
+	if($dataArray["description"] != null){
+		$info .= $headRow["2"] . ": " . $dataArray["description"];
+	}
+
+	$table .= '<div class="cell_text cell-info-icon">';
+	$table .= '<span
+    class="info-icon"
+    title="' . $info . '">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="12" x2="12" y2="17"></line>
+      <circle cx="12" cy="8" r="0.5"></circle>
+    </svg>
+  </span>';
+
+	$table .= '</div>'; 
+}
+
 function addTitleField(&$table, $file_id, $title, &$inputArray, $isReadonlyUser)
 {
 	$table .= '<div class="cell_text">';

@@ -48,7 +48,9 @@ function downloadExcelData($data, $fileName, $nurKategorienAnzeigen, $onlyModify
 function addHeadRow($headRow)
 {
 	foreach ($headRow as $element) {
-		echo mb_convert_encoding($element, "Windows-1252") . ";";
+		if(trim($element) != "Info") {
+			echo mb_convert_encoding($element, "Windows-1252") . ";";
+		}
 	}
 
 	echo "\n";

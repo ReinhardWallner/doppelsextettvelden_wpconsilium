@@ -64,7 +64,8 @@ select[aria-disabled="true"] {
 .row1 {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 250px;  /* gleiche Breite für alle Spalten */
+  grid-template-columns: 60px;   /* erste Spalte */
+  grid-auto-columns: 250px;      /* alle weiteren Spalten */
   width: 100%; /* Breite richtet sich nach Inhalt */
   border-bottom: 1px solid #e6e8ec;
   margin-left: 0 !important;
@@ -701,3 +702,24 @@ margin-bottom: .25rem;
   .modal-actions button {
     margin-left: 8px;
   }
+
+  .info-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+  }
+
+  .info-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #29333A99;
+    stroke: white;
+    stroke-width: 2;
+  }
+
+  .info-icon:hover {
+    background-color: #0056b3;
+  }  

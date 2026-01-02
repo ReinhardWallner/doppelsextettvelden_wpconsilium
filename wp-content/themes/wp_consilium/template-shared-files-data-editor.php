@@ -486,7 +486,11 @@ error_log("element " . print_r($element, true));
 						if ($dataKey == "file_id") {
 							$file_id = $element;
 error_log("file_id " . print_r($file_id, true));							
+
 							$row = '<div class="row1">';
+
+							addInfoIcon($row, $data["headrow"], $dataRowArray);
+
 							if(in_array("Id", $headRow)) {
 								$row .= '<div class="cell_text">' . $file_id . '</div>';
 							}
