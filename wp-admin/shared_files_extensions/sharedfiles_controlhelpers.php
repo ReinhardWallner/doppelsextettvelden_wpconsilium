@@ -72,15 +72,19 @@ function addInfoColumn(&$table, $headRow, $dataArray){
 	}
 
 	$table .= '<div class="cell_text cell-info-icon">';
-	$table .= '<span
+	$table .= '<button
+    type="button"
     class="info-icon"
-    title="' . $info . '">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="10"></circle>
-      <line x1="12" y1="12" x2="12" y2="17"></line>
-      <circle cx="12" cy="8" r="0.5"></circle>
-    </svg>
-  </span>';
+    aria-label="Informationen anzeigen"
+  >
+	<svg viewBox="0 0 18 18" aria-hidden="true">
+        <circle cx="9" cy="9" r="8" stroke-width="1"></circle>
+		<line x1="9" y1="8" x2="9" y2="14"></line>
+		<circle cx="9" cy="5" r="0.5"></circle>
+	</svg>
+  </button>
+
+  <div class="info-tooltip">' . $info . '</div>';
 
 	// Link button
   	$linkUrl = get_site_url() . "/shared-files/" . $dataArray["file_id"] . "/"; 
