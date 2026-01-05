@@ -1,0 +1,45 @@
+  body { font-family: sans-serif; padding: 20px; }
+  select, button { font-size: 16px; margin: 5px 0; }
+  .notation { margin-left: 10px; font-weight: bold; }
+	  
+	.modal {
+	  display: none;
+	  position: fixed;
+	  inset: 0;
+	  background: rgba(0,0,0,0.5);
+	}
+
+	.modal.open {
+	  display: block;
+	}
+
+	.modal-content {
+	  background: #fff;
+	  padding: 20px;
+	  width: 500px;
+	  margin: 10% auto;
+	  border-radius: 8px;
+	}
+		
+	.music-btn {
+	  background: #0073aa;
+	  color: white;
+	  border: none;
+	  padding: 8px 12px;
+	  font-size: 1rem;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 6px;
+	  cursor: pointer;
+	  border-radius: 4px;
+	}
+
+	.music-btn img {
+	  display: inline-block;
+	}	
+
+	.radio-line {
+	  display: block;
+	  margin-bottom: 10px;
+	  cursor: pointer;
+	}
