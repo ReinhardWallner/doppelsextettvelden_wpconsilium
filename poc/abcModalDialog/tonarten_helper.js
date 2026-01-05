@@ -84,6 +84,33 @@ const scalesMapTonartenMusikalisch = {
   "ab-Moll": ["Ab4","Bb4","Cb5","Db5","Eb5","Fb5","Gb5","Ab5"]
 };
 
+const abcNoteToPitchMap = {
+  // Oktave 2 (großes C)
+  "C": "C2",  "C#": "C#2", "Db": "Db2", "D": "D2",  "D#": "D#2", "Eb": "Eb2",
+  "E": "E2",  "F": "F2",   "F#": "F#2", "Gb": "Gb2", "G": "G2",  "G#": "G#2",
+  "Ab": "Ab2", "A": "A2",  "A#": "A#2", "Bb": "Bb2", "B": "B2",
+
+  // Oktave 3
+  "c": "C3",  "cis": "C#3",  "des": "Db3", "d": "D3",  "dis": "D#3",  "es": "Eb3",
+  "e": "E3",  "f": "F3",     "fis": "F#3", "ges": "Gb3", "g": "G3",   "gis": "G#3",
+  "as": "Ab3","a": "A3",     "ais": "A#3", "b": "Bb3", "h": "B3",
+
+  // Oktave 4
+  "c'": "C4",  "cis'": "C#4",  "des'": "Db4", "d'": "D4",  "dis'": "D#4", "es'": "Eb4",
+  "e'": "E4",  "f'": "F4",    "fis'": "F#4", "ges'": "Gb4", "g'": "G4",   "gis'": "G#4",
+  "as'": "Ab4","a'": "A4",    "ais'": "A#4", "b'": "Bb4", "h'": "B4",
+
+  // Oktave 5
+  "c''": "C5", "cis''": "C#5", "des''": "Db5","d''": "D5", "dis''": "D#5","es''": "Eb5",
+  "e''": "E5", "f''": "F5",   "fis''": "F#5","ges''": "Gb5","g''": "G5",  "gis''": "G#5",
+  "as''": "Ab5","a''": "A5",  "ais''": "A#5","b''": "Bb5","h''": "B5",
+
+  // Oktave 6
+  "c'''": "C6", "cis'''": "C#6","des'''": "Db6","d'''": "D6","dis'''": "D#6","es'''": "Eb6",
+  "e'''": "E6", "f'''": "F6",  "fis'''": "F#6","ges'''": "Gb6","g'''": "G6","gis'''": "G#6",
+  "as'''": "Ab6","a'''": "A6","ais'''": "A#6","b'''": "Bb6","h'''": "B6"
+};
+
 function getTriadNotes(scalesMap, tonart){
 	// Deutsche Notation zu englischer umwandeln, z.B. Es -> Eb
 	if(tonart[1] === "s") tonart = tonart[0] + "b" + tonart.substr(2);
@@ -106,7 +133,7 @@ function getTriadNotes(scalesMap, tonart){
 function getNotesHelmholz(triadNotesScientific){
 	let notes = [];
 	triadNotesScientific.forEach(note => {
-		notes.push(getHelmholtz(noteMap, note));
+		notes.push(getHelmholtz(abcNoteToPitchMap, note));
 	});
 	
 	return notes;
@@ -125,7 +152,7 @@ function getNotesScientific(tones) {
 
   return rawNotes.map((n, idx) => {
     const note = n.replace(/[()]/g,''); // Klammern entfernen
-    let scientific = noteMap[note];// || note; // mapping oder unverändert
+    let scientific = abcNoteToPitchMap[note];// || note; // mapping oder unverändert
 	if(scientific && idx > 1){
 		let intValue = parseInt(scientific[scientific.length-1]) + 1;
 		scientific = scientific.substr(0, scientific.length - 1) + intValue;
