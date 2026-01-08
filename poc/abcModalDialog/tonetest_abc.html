@@ -16,53 +16,13 @@
 	<script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
 <script>
   
-function playTone() {
-    const frequency = document.getElementById('toneSelect').value;
-
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    oscillator.type = 'sine';
-    oscillator.frequency.value = frequency;
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    oscillator.start();
-
-    // sanftes Ausblenden
-    gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-
-    oscillator.stop(audioCtx.currentTime + 0.6);
-}
-
 </script>
 </head>
 <body>
 
-<div>
-<select id="toneSelect">
-  <option value="261.63">c'</option>
-  <option value="293.66">d'</option>
-  <option value="329.63">e'</option>
-  <option value="349.23">f'</option>
-  <option value="392.00">g'</option>
-  <option value="440.00">a'</option>
-  <option value="493.88">h'</option>
-  <option value="523.25">c''</option>
-</select>
-
-<button onclick="playTone()">Ton abspielen</button>
-<button onclick="playScale()">Tonleiter abspielen</button>
-</div>
 
 <div>
 <select id="songSelect" style="width:300px;"></select>
-<button onclick="showNotes()" style="width:300px;">Töne anzeigen</button>
-<button onclick="playTriad()" style="width:300px;">Dreiklang abspielen</button>
-<button onclick="playTriadAndNotes()" style="width:300px;">Tonangabe abspielen</button>
 <button onclick="openTonesModal()" title="Tonangabe" style="width:300px;">
 <i class="fa fa-music"></i></button>
 <div id="notesOutput"></div>
@@ -70,118 +30,147 @@ function playTone() {
 
 <div id="tonesModal" class="modal">
   <div class="modal-content">
-    <h3>Tonangabe</h3>
-	
-	<p>
-	<b>Tonart:</b> <label id="tonart-label"> </label>
-	</p>
-	<p>
-	<b>Tonangabe:</b> <label id="tonart-toene"> </label>
-	</p>
-
-	<div id="abc-triad-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-triad-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-triad-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-triad-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-triad-output"> </div>
-	</div>
-
-	<div id="abc-triadwithaccord-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-triadwithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-triadwithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-triadwithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-triadwithaccord-output"></div>
-	</div>
-
-	<div id="abc-notes-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-notes-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-notes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-notes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-notes-output"> </div>
-	</div>
-
-	<div id="abc-noteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-noteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-noteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-noteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-noteswithaccord-output"> </div>
-	</div>
-
-	<div id="abc-triadandnotes-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-triadandnotes-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-triadandnotes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-triadandnotes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-triadandnotes-output"> </div>
-	</div>
-
-	<div id="abc-triadandnoteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
-		<div id="abc-triadandnoteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
-			<button id="abc-triadandnoteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
-			▶️
-			</button>
-			<button id="abc-triadandnoteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
-			⏹️
-			</button>
-		</div>
-		<div id="abc-triadandnoteswithaccord-output"> </div>
+	<div class="modal-header">
+		<span class="modal-title">Tonangabe</span>
+		<button class="modal-close" onclick="closeTonesModal()">✖️</button>
 	</div>	
 
-    <div class="radio-group">
-	  <label class="radio-line" id="label-nurDreiKlang">
-		<input type="radio" id="nurDreiKlang" name="ton_abspielen" value="dreiklang">
-		<span class="label-text">Nur Dreiklang</span>
-	  </label>
+	<div class="modal-body">	
+		<div>
+			<h3>Tonangabe</h3>
+			
+			<p>
+			<b>Tonart:</b> <label id="tonart-label"> </label>
+			</p>
+			<p>
+			<b>Tonangabe:</b> <label id="tonart-toene"> </label>
+			</p>
+		</div>
+		<div class="radio-group">
+			<label class="radio-options" id="label-nurDreiKlang">
+				<input type="radio" id="nurDreiKlang" name="ton_abspielen" value="dreiklang">
+				<span class="label-text">Nur Dreiklang</span>
+			</label>
 
-	  <label class="radio-line" id="label-nur_tonangabe">
-		<input type="radio" id="nur_tonangabe" name="ton_abspielen" value="ton">
-		<span class="label-text">Nur Tonangabe</span>
-	  </label>
+				<label class="radio-options" id="label-akkordUndDreiKlang">
+				<input type="radio" id="akkordUndDreiKlang" name="ton_abspielen" value="akkorddreiklang">
+				<span class="label-text">Akkord und Dreiklang</span>
+			</label>
 
-	  <label class="radio-line" id="label-dreiklang_und_tonangabe">
-		<input type="radio" id="dreiklang_und_tonangabe" name="ton_abspielen" value="beides" checked>
-		<span class="label-text">Dreiklang und Tonleiter</span>
-	  </label>
-    </div>
+			<label class="radio-line" id="label-nurTonangabe">
+				<input type="radio" id="nurTonangabe" name="ton_abspielen" value="ton">
+				<span class="label-text">Nur Tonangabe</span>
+			</label>
 
-    <div class="modal-actions" style="margin: 20px;">
-      <button id="playTones">Abspielen</button>
-      <button id="cancelPlayTones">Schließen</button>
-    </div>
+			<label class="radio-line" id="label-akkordUndTonangabe">
+				<input type="radio" id="akkordUndTonangabe" name="ton_abspielen" value="akkordton">
+				<span class="label-text">Akkord und Tonangabe</span>
+			</label>		
+
+			<label class="radio-line" id="label-dreiklangUndTonangabe">
+				<input type="radio" id="dreiklangUndTonangabe" name="ton_abspielen" value="dreiklangton">
+				<span class="label-text">Dreiklang und Tonangabe</span>
+			</label>
+
+			<label class="radio-line" id="label-akkordDreiklangUndTonangabe">
+				<input type="radio" id="akkordDreiklangUndTonangabe" name="ton_abspielen" value="akkorddreiklangton" checked>
+				<span class="label-text">Akkord, Dreiklang und Tonangabe</span>
+			</label>		
+		</div>
+
+		<div id="abc-triad-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-triad-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-triad-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-triad-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-triad-output"> </div>
+		</div>
+
+		<div id="abc-triadwithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-triadwithaccord-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-triadwithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-triadwithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-triadwithaccord-output"></div>
+		</div>
+
+		<div id="abc-notes-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-notes-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-notes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-notes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-notes-output"> </div>
+		</div>
+
+		<div id="abc-noteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-noteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-noteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-noteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-noteswithaccord-output"> </div>
+		</div>
+
+		<div id="abc-triadandnotes-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-triadandnotes-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-triadandnotes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-triadandnotes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-triadandnotes-output"> </div>
+		</div>
+
+		<div id="abc-triadandnoteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+			<div id="abc-triadandnoteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px;">
+				<button id="abc-triadandnoteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+				▶️
+				</button>
+				<button id="abc-triadandnoteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+				⏹️
+				</button>
+			</div>
+			<div id="abc-triadandnoteswithaccord-output"> </div>
+		</div>	
+
+		<div class="modal-actions" style="display: flex; justify-content: flex-end; margin: 20px;">
+			<button id="cancelPlayTones">Schließen</button>
+		</div>
+	</div>
   </div>
 </div>
 
 <script>
 	
+	const radioToContainerMap = {
+	dreiklang: "abc-triad-container",
+	akkorddreiklang: "abc-triadwithaccord-container",
+	ton: "abc-notes-container",
+	akkordton: "abc-noteswithaccord-container",
+	dreiklangton: "abc-triadandnotes-container",
+	akkorddreiklangton: "abc-triadandnoteswithaccord-container"
+	};
+
 	const tonesModal = document.getElementById("tonesModal");
 	const cancelBtn = document.getElementById("cancelPlayTones");
 	
-	let lastToneSelection = "dreiklang_und_tonangabe";
-
 	let midiBuffer = null;
 	let audioContext = null;
 	let abcNotationTriadObj = null;
@@ -194,6 +183,13 @@ function playTone() {
 	// Listener für Modal schließen
 	cancelBtn.addEventListener("click", () => tonesModal.classList.remove("open"));
 	document.addEventListener("keydown", (e) => { if(e.key === "Escape") tonesModal.classList.remove("open"); });
+
+	document.querySelectorAll('input[name="ton_abspielen"]').forEach(radio => {
+		radio.addEventListener("change", e => {
+		updateVisibleAbcContainer(e.target.value);
+		});
+	});
+
 
 	// Listener für Play/Stop Buttons **nur einmal registrieren**
 	// Triad
@@ -284,49 +280,55 @@ function playTone() {
    	let abcTones = getAbcNotesFromHelmholtz(helmTones, true);
    	console.log("Tones abcTones", abcTones);
 
-	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang", 0, false, true, false);
+	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, false);
    	console.log("Tones abcNotationTriad", abcNotationTriad);
-	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Dreiklang", 0, true, true, false);
+	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, false);
    	console.log("Tones abcNotationTriadWithAccord", abcNotationTriadWithAccord);
 
-	let abcNotationNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Nur Töne", 0, false, false, true);
+	let abcNotationNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, false, true);
    	console.log("Tones abcNotationNotes", abcNotationNotes);
-	let abcNotationNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Töne", 0, true, false, true);
+	let abcNotationNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, false, true);
    	console.log("Tones abcNotationNotesWithAccord", abcNotationNotesWithAccord);
 	
-	let abcNotationTriadAndNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang und Töne", 0, false, true, true);
+	let abcNotationTriadAndNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, true);
    	console.log("Tones abcNotationTriadAndNotes", abcNotationTriadAndNotes);
-	let abcNotationTriadAndNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord, Dreiklang und Töne", 0, true, true, true);
+	let abcNotationTriadAndNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, true);
    	console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
 
 
-	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: 0.5 })[0];
-	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: 0.5 })[0];
-	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: 0.5 })[0];
-	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.5 })[0];
-	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.5 })[0];
-	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.5 })[0];
+	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: 0.6, add_classes: true })[0];
+	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: 0.6 })[0];
+	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: 0.6 })[0];
+	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.6 })[0];
+	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.6 })[0];
+	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.6 })[0];
 
 	midiBuffer = new ABCJS.synth.CreateSynth();
 	audioContext = new AudioContext();
-
-	// // Play & Stop
-	// document.getElementById("abc-triad-play-btn").addEventListener("click", () => {
-	// 	onAudioContextResumed(abcNotationTriadObj);
-	// });
-	// document.getElementById("abc-triad-stop-btn").addEventListener("click", onClickStop);
-
-	// function onClickStop() {
-	// 	midiBuffer.stop();
-	// }
-    
-    document.querySelector("#label-nurDreiKlang .label-text").textContent = "Nur Dreiklang [" + helm.join(" ") + "]";
-    
-    document.querySelector("#label-nur_tonangabe .label-text").textContent = "Nur Tonangabe [" + helmTones.join(" ") + "]";
-
-    document.querySelector("#label-dreiklang_und_tonangabe .label-text").textContent = "Dreiklang und Tonleiter [" + helm.join(" ") + " -- " + helmTones.join(" ") + "]";
-    
+       
     tonesModal.classList.add("open");
+  }
+
+  function hideAllAbcContainers() {
+	Object.values(radioToContainerMap).forEach(id => {
+		const el = document.getElementById(id);
+		if (el) el.style.display = "none";
+	});
+  }
+
+  function updateVisibleAbcContainer(value) {
+	hideAllAbcContainers();
+
+	const containerId = radioToContainerMap[value];
+	const container = document.getElementById(containerId);
+
+	if (container) {
+	container.style.display = "flex"; // wichtig: du nutzt flex!
+	}
+  }
+
+  function closeTonesModal() {
+  	document.getElementById('tonesModal').style.display = 'none';
   }
 
   function onAudioContextResumed(visualObj) {
@@ -352,34 +354,18 @@ function playTone() {
   // Abbrechen-Button schließt Modal
   cancelBtn.addEventListener("click", closeTonesModal);
 
-  // Klick auf Overlay (außerhalb) schließt Modal
-  tonesModal.addEventListener("click", (e) => {
-	  if(e.target){
-		  if(e.target.id === "nurDreiKlang" || 
-		  e.target.id === "nur_tonangabe" || 
-		  e.target.id === "dreiklang_und_tonangabe"){
-			  lastToneSelection = e.target.id;
-		  } else if(e.target.id === "playTones") {
-			  // closeTonesModal();
-			  if(lastToneSelection === "nurDreiKlang"){
-				  playTriad();
-			  } else if(lastToneSelection === "nur_tonangabe"){
-				  playTones();
-			  } else if(lastToneSelection === "dreiklang_und_tonangabe"){
-				  playTriadAndNotes();
-			  }
-		  } else if(e.target.id === "cancelPlayTones") {
-			  closeTonesModal();
-		  }
-	  }
-  });
-
   // Optional: ESC-Taste
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeTonesModal();
     }
   });
+
+  const initiallyChecked = document.querySelector('input[name="ton_abspielen"]:checked');
+
+  if (initiallyChecked) {
+	updateVisibleAbcContainer(initiallyChecked.value);
+  }  
   
 const songList = [
 	"Es-Dur / g' es' b es / 3-1-5-1  B-Dur / f (Solo)...	",
@@ -485,101 +471,10 @@ songList.forEach((song, idx) => {
   songSelect.appendChild(option);
 });
  
-function playScale() {
-    const synth = new Tone.Synth().toDestination();
-
-    const notes = ["C4", "E4", "G4", "E4", "C4"];
-    let time = 0;
-
-    notes.forEach(note => {
-        synth.triggerAttackRelease(note, "4n", Tone.now() + time);
-        time += Tone.Time("4n").toSeconds(); // Viertelnote Abstand
-    });
-}
-
 function getSelectedSong(){
 	const idx = document.getElementById("songSelect").value;
 	return songList[idx];
 }
-
-function showNotes() {
-  const idx = songSelect.value;
-  const song = songList[idx];
-
-  // Töne zwischen den ersten zwei '/' extrahieren
-  const parts = song.split("/");
-  if(parts.length < 2) return;
-
-  const rawNotes = parts[1].trim().split(/\s+/); // Töne als Array
-  const outputDiv = document.getElementById("notesOutput");
-  outputDiv.innerHTML = "";
-
-  rawNotes.forEach(n => {
-    const note = n.replace(/[()]/g,''); // Klammern entfernen
-    const scientific = helmholtzToScientificPitchMap[note] || note; // mapping oder unverändert
-    const div = document.createElement("div");
-    div.innerHTML = `${note} <span class="notation">= ${scientific}</span>`;
-    outputDiv.appendChild(div);
-  });
-}
-
-
-async function playTriadAndNotes(){
-	await playTriad();
-	console.log("after playTriad ");
-
-	setTimeout(async () => {
-		await playTones();
-		console.log("after playTones ");
-	}, 1000);
-
-	
-
-}
-
-function playTriad(){
-    return new Promise((resolve) => {
-	 	const song = getSelectedSong();
-    	var keySignature = getKeySignature(song);
- 	  	let correctedKeySignature = getCorrectedKeySignature(keySignature);
-		let triadNotes = getTriadNotes(scalesMapTonartenScientific, correctedKeySignature);
-		let time = 0;
-		const synth = new Tone.Synth().toDestination();
-		triadNotes.forEach(tone => {
-			synth.triggerAttackRelease(tone, "4n", Tone.now() + time);
-            time += Tone.Time("4n").toSeconds();
-		});
-		setTimeout(resolve, time * 1000);
-    });
-}
-
-function playTones(){
-    return new Promise((resolve) => {
-        const synth = new Tone.Synth().toDestination();
-
-       	const song = getSelectedSong();
-        let tones = getTones(song);
-        let notes = getNotesScientific(tones); // Array von Noten wie ['G4','Eb4','Bb3','Eb3']
-        console.log("playTones notes", notes);
-
-        if(!notes || notes.length === 0) {
-            resolve();
-            return;
-        }
-
-        let time = 0;
-        notes.forEach((note, idx) => {
-            synth.triggerAttackRelease(note, "4n", Tone.now() + time);
-            time += Tone.Time("4n").toSeconds();
-
-            // letzte Note: Promise auflösen
-            if(idx === notes.length - 1){
-                setTimeout(resolve, time * 1000);
-            }
-        });
-    });
-}
-
 
 </script>
 </body>
