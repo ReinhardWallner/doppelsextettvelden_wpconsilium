@@ -1,0 +1,18 @@
+TODOs für die Tonangabe
+
+
+* Stelle Tonart und Töne in Helmholtz-Notation dar
+
+* Ermittle Dreiklang
+* Ermittle DreiklangTöne
+* Ermittle Töne für die Tonangabe (inkl. Variation alles in Violinschlüssel oder nicht)
+
+Hilfsklassen:
+* Tontransformationen
+
+* Generiere abc-Notation für jede Auswahl
+* Zeichne Noten
+* Implementiere Buttons für die Wiedergabe 
+* Spiele Buttons mit richtigen Parametern ab
+
+* Schließen-Button

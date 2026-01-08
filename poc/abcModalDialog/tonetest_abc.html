@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="tonetest_abc.css">
 	<script src="tone_input_parser.js"></script>
 	<script src="tonarten_helper.js"></script>
+	<script src="abc_natation_generator.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/abcjs/dist/abcjs-basic-min.js"></script>
 	
 	<script src="https://unpkg.com/tone@latest/build/Tone.js"></script>
 <script>
@@ -53,7 +56,7 @@ function playTone() {
 
 <button onclick="playTone()">Ton abspielen</button>
 <button onclick="playScale()">Tonleiter abspielen</button>
-</div
+</div>
 
 <div>
 <select id="songSelect" style="width:300px;"></select>
@@ -75,6 +78,78 @@ function playTone() {
 	<p>
 	<b>Tonangabe:</b> <label id="tonart-toene"> </label>
 	</p>
+
+	<div id="abc-triad-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-triad-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-triad-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-triad-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-triad-output"> </div>
+	</div>
+
+	<div id="abc-triadwithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-triadwithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-triadwithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-triadwithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-triadwithaccord-output"></div>
+	</div>
+
+	<div id="abc-notes-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-notes-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-notes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-notes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-notes-output"> </div>
+	</div>
+
+	<div id="abc-noteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-noteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-noteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-noteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-noteswithaccord-output"> </div>
+	</div>
+
+	<div id="abc-triadandnotes-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-triadandnotes-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-triadandnotes-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-triadandnotes-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-triadandnotes-output"> </div>
+	</div>
+
+	<div id="abc-triadandnoteswithaccord-container" style="display: flex; align-items: center; gap: 10px;">
+		<div id="abc-triadandnoteswithaccord-controls" style="display: flex; flex-direction: row; gap: 5px; margin-top: 35px;">
+			<button id="abc-triadandnoteswithaccord-play-btn" title="Play" style="background: none; border: none; cursor: pointer;">
+			▶️
+			</button>
+			<button id="abc-triadandnoteswithaccord-stop-btn" title="Stop" style="background: none; border: none; cursor: pointer;">
+			⏹️
+			</button>
+		</div>
+		<div id="abc-triadandnoteswithaccord-output"> </div>
+	</div>	
 
     <div class="radio-group">
 	  <label class="radio-line" id="label-nurDreiKlang">
@@ -102,10 +177,79 @@ function playTone() {
 
 <script>
 	
-  const tonesModal = document.getElementById("tonesModal");
-  const cancelBtn = document.getElementById("cancelPlayTones");
-  
-  let lastToneSelection = "dreiklang_und_tonangabe";
+	const tonesModal = document.getElementById("tonesModal");
+	const cancelBtn = document.getElementById("cancelPlayTones");
+	
+	let lastToneSelection = "dreiklang_und_tonangabe";
+
+	let midiBuffer = null;
+	let audioContext = null;
+	let abcNotationTriadObj = null;
+	let abcNotationTriadWithAccordObj = null;
+	let abcNotationNotesObj = null;
+	let abcNotationNotesWithAccordObj = null;
+	let abcNotationTriadNotesObj = null;
+	let abcNotationTriadNotesWithAccordObj = null;
+
+	// Listener für Modal schließen
+	cancelBtn.addEventListener("click", () => tonesModal.classList.remove("open"));
+	document.addEventListener("keydown", (e) => { if(e.key === "Escape") tonesModal.classList.remove("open"); });
+
+	// Listener für Play/Stop Buttons **nur einmal registrieren**
+	// Triad
+	document.getElementById("abc-triad-play-btn").addEventListener("click", async () => {
+		if(abcNotationTriadObj) {
+			await onAudioContextResumed(abcNotationTriadObj);
+		}
+	});
+	document.getElementById("abc-triad-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+	document.getElementById("abc-triadwithaccord-play-btn").addEventListener("click", async () => {
+		if(abcNotationTriadWithAccordObj) {
+			await onAudioContextResumed(abcNotationTriadWithAccordObj);
+		}
+	});
+	document.getElementById("abc-triadwithaccord-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+
+	// Notes
+	document.getElementById("abc-notes-play-btn").addEventListener("click", async () => {
+		if(abcNotationNotesObj) {
+			await onAudioContextResumed(abcNotationNotesObj);
+		}
+	});
+	document.getElementById("abc-notes-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+	document.getElementById("abc-noteswithaccord-play-btn").addEventListener("click", async () => {
+		if(abcNotationNotesWithAccordObj) {
+			await onAudioContextResumed(abcNotationNotesWithAccordObj);
+		}
+	});
+	document.getElementById("abc-noteswithaccord-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+
+	// Triad and Notes
+	document.getElementById("abc-triadandnotes-play-btn").addEventListener("click", async () => {
+		if(abcNotationTriadNotesObj) {
+			await onAudioContextResumed(abcNotationTriadNotesObj);
+		}
+	});
+	document.getElementById("abc-triadandnotes-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+	document.getElementById("abc-triadandnoteswithaccord-play-btn").addEventListener("click", async () => {
+		if(abcNotationTriadNotesWithAccordObj) {
+			await onAudioContextResumed(abcNotationTriadNotesWithAccordObj);
+		}
+	});
+	document.getElementById("abc-triadandnoteswithaccord-stop-btn").addEventListener("click", () => {
+		if(midiBuffer) midiBuffer.stop();
+	});
+
 
   // Modal öffnen (z.B. von einem Button außerhalb)
   function openTonesModal() {
@@ -118,25 +262,87 @@ function playTone() {
     const tonartToeneLabel = document.getElementById("tonart-toene");
     tonartToeneLabel.textContent = toene;
 
+	let correctedKeySignature = getCorrectedKeySignature(keySignature);
 
-    let triadNotes = getTriadNotes(scalesMapTonartenMusikalisch, getKeySignature);
-    console.log("triad Notes", triadNotes);
+   	let keySignatureAbc = musikalischeTonartToAbc(correctedKeySignature);
+	console.log("triad Notes keySignature, correctedKeySignature, keySignatureAbc", keySignature, correctedKeySignature, keySignatureAbc);
+
+    let triadNotes = getTriadNotes(scalesMapTonartenMusikalisch, correctedKeySignature);
+    // console.log("triad Notes triadNotes", triadNotes);
     let helm = getNotesHelmholz(triadNotes);
     console.log("triad Notes Helmholtz", helm);
-    
+    let triadAbcNotes = getAbcNotesFromHelmholtz(helm, true);
+   	console.log("triad Tones triadAbcNotes", triadAbcNotes);
+
     let tones = getTones(song);
-    let notes = getNotesScientific(tones);
-    let helmNotes = getNotesHelmholz(notes);
+   	 console.log("Tones", tones);
+     let notes = getNotesScientific(tones);
+     console.log("Tones scientific", notes);
+    let helmTones = getNotesHelmholz(notes);
+   	console.log("Tones helmNotes", helmTones);
     
+   	let abcTones = getAbcNotesFromHelmholtz(helmTones, true);
+   	console.log("Tones abcTones", abcTones);
+
+	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, "Dreiklang", 0, false);
+   	console.log("Tones abcNotationTriad", abcNotationTriad);
+	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, "Akkord und Dreiklang", 0, true);
+   	console.log("Tones abcNotationTriadWithAccord", abcNotationTriadWithAccord);
+
+	let abcNotationNotes = getTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Nur Töne", 0, false);
+   	console.log("Tones abcNotationNotes", abcNotationNotes);
+	let abcNotationNotesWithAccord = getTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Töne", 0, true);
+   	console.log("Tones abcNotationNotesWithAccord", abcNotationNotesWithAccord);
+	
+	let abcNotationTriadAndNotes = getTriadAndTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang und Noten", 0, false);
+   	console.log("Tones abcNotationTriadAndNotes", abcNotationTriadAndNotes);
+	let abcNotationTriadAndNotesWithAccord = getTriadAndTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord, Dreiklang und Noten", 0, true);
+   	console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
+
+
+	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: 0.5 })[0];
+	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: 0.5 })[0];
+	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: 0.5 })[0];
+	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.5 })[0];
+	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.5 })[0];
+	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.5 })[0];
+
+	midiBuffer = new ABCJS.synth.CreateSynth();
+	audioContext = new AudioContext();
+
+	// // Play & Stop
+	// document.getElementById("abc-triad-play-btn").addEventListener("click", () => {
+	// 	onAudioContextResumed(abcNotationTriadObj);
+	// });
+	// document.getElementById("abc-triad-stop-btn").addEventListener("click", onClickStop);
+
+	// function onClickStop() {
+	// 	midiBuffer.stop();
+	// }
     
     document.querySelector("#label-nurDreiKlang .label-text").textContent = "Nur Dreiklang [" + helm.join(" ") + "]";
     
-    document.querySelector("#label-nur_tonangabe .label-text").textContent = "Nur Tonangabe [" + helmNotes.join(" ") + "]";
+    document.querySelector("#label-nur_tonangabe .label-text").textContent = "Nur Tonangabe [" + helmTones.join(" ") + "]";
 
-    document.querySelector("#label-dreiklang_und_tonangabe .label-text").textContent = "Dreiklang und Tonleiter [" + helm.join(" ") + " -- " + helmNotes.join(" ") + "]";
+    document.querySelector("#label-dreiklang_und_tonangabe .label-text").textContent = "Dreiklang und Tonleiter [" + helm.join(" ") + " -- " + helmTones.join(" ") + "]";
     
     tonesModal.classList.add("open");
   }
+
+  function onAudioContextResumed(visualObj) {
+	// preloads and caches all notes needed. may be significant network traffic
+	return midiBuffer.init({
+		visualObj: visualObj,
+		audioContext: audioContext,
+		<!-- millisecondsPerMeasure: bpmToMs(speedSlider.value) -->
+	})
+	.then(() => midiBuffer.prime()) // actually builds the output buffer.
+		.then(() => {
+		midiBuffer.start(); // At this point, everything slow has happened.
+		return Promise.resolve();
+	})
+	.catch(console.warn.bind(console));
+	}
 
   // Modal schließen
   function closeTonesModal() {
@@ -310,7 +516,7 @@ function showNotes() {
 
   rawNotes.forEach(n => {
     const note = n.replace(/[()]/g,''); // Klammern entfernen
-    const scientific = abcNoteToPitchMap[note] || note; // mapping oder unverändert
+    const scientific = helmholtzToScientificPitchMap[note] || note; // mapping oder unverändert
     const div = document.createElement("div");
     div.innerHTML = `${note} <span class="notation">= ${scientific}</span>`;
     outputDiv.appendChild(div);
@@ -334,8 +540,9 @@ async function playTriadAndNotes(){
 function playTriad(){
     return new Promise((resolve) => {
 	 	const song = getSelectedSong();
-    var keySignature = getKeySignature(song);
- 	  let triadNotes = getTriadNotes(scalesMapTonartenScientific, keySignature);
+    	var keySignature = getKeySignature(song);
+ 	  	let correctedKeySignature = getCorrectedKeySignature(keySignature);
+		let triadNotes = getTriadNotes(scalesMapTonartenScientific, correctedKeySignature);
 		let time = 0;
 		const synth = new Tone.Synth().toDestination();
 		triadNotes.forEach(tone => {

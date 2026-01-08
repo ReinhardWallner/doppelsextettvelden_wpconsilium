@@ -84,7 +84,7 @@ const scalesMapTonartenMusikalisch = {
   "ab-Moll": ["Ab4","Bb4","Cb5","Db5","Eb5","Fb5","Gb5","Ab5"]
 };
 
-const abcNoteToPitchMap = {
+const helmholtzToScientificPitchMap = {
   // Oktave 2 (großes C)
   "C": "C2",  "C#": "C#2", "Db": "Db2", "D": "D2",  "D#": "D#2", "Eb": "Eb2",
   "E": "E2",  "F": "F2",   "F#": "F#2", "Gb": "Gb2", "G": "G2",  "G#": "G#2",
@@ -111,9 +111,84 @@ const abcNoteToPitchMap = {
   "as'''": "Ab6","a'''": "A6","ais'''": "A#6","b'''": "Bb6","h'''": "B6"
 };
 
+const helmholtzToAbcPitchMap = {
+  // Oktave 2 (großes C)
+  "C": "C,,",   "C#": "^C,,", "Db": "_D,,", "D": "D,,",   "D#": "^D,,", "Eb": "_E,,",
+  "E": "E,,",   "F": "F,,",   "F#": "^F,,", "Gb": "_G,,", "G": "G,,",   "G#": "^G,,",
+  "Ab": "_A,,", "A": "A,,",   "A#": "^A,,", "Bb": "_B,,", "B": "B,,",
+
+  // Oktave 3
+  "c": "C,",    "cis": "^C,",   "des": "_D,", "d": "D,",    "dis": "^D,", "es": "_E,",
+  "e": "E,",    "f": "F,",      "fis": "^F,", "ges": "_G,", "g": "G,",    "gis": "^G,",
+  "as": "_A,",  "a": "A,",      "ais": "^A,", "b": "_B,",  "h": "B,",
+
+  // Oktave 4 (mittleres C)
+  "c'": "C",    "cis'": "^C",   "des'": "_D", "d'": "D",    "dis'": "^D", "es'": "_E",
+  "e'": "E",    "f'": "F",      "fis'": "^F", "ges'": "_G", "g'": "G",    "gis'": "^G",
+  "as'": "_A",  "a'": "A",      "ais'": "^A", "b'": "_B",  "h'": "B",
+
+  // Oktave 5
+  "c''": "c",   "cis''": "^c",  "des''": "_d", "d''": "d",   "dis''": "^d", "es''": "_e",
+  "e''": "e",   "f''": "f",     "fis''": "^f", "ges''": "_g", "g''": "g",   "gis''": "^g",
+  "as''": "_a", "a''": "a",     "ais''": "^a", "b''": "_b", "h''": "b",
+
+  // Oktave 6
+  "c'''": "c'",  "cis'''": "^c'", "des'''": "_d'", "d'''": "d'", "dis'''": "^d'", "es'''": "_e'",
+  "e'''": "e'",  "f'''": "f'",    "fis'''": "^f'", "ges'''": "_g'", "g'''": "g'",  "gis'''": "^g'",
+  "as'''": "_a'", "a'''": "a'",   "ais'''": "^a'", "b'''": "_b'", "h'''": "b'"
+};
+
+const tonartMusikalischToAbcMap = {
+  // ======================
+  // DUR
+  // ======================
+  "C-Dur": "C",
+  "G-Dur": "G",
+  "D-Dur": "D",
+  "A-Dur": "A",
+  "E-Dur": "E",
+  "B-Dur": "B",
+  "F#-Dur": "F#",
+  "C#-Dur": "C#",
+
+  "F-Dur": "F",
+  "Bb-Dur": "Bb",
+  "Eb-Dur": "Eb",
+  "Ab-Dur": "Ab",
+  "Db-Dur": "Db",
+  "Gb-Dur": "Gb",
+  "Cb-Dur": "Cb",
+
+  // ======================
+  // MOLL (natürlich)
+  // ======================
+  "a-Moll": "Am",
+  "e-Moll": "Em",
+  "h-Moll": "Bm",
+  "f#-Moll": "F#m",
+  "c#-Moll": "C#m",
+  "g#-Moll": "G#m",
+  "d#-Moll": "D#m",
+  "a#-Moll": "A#m",
+
+  "d-Moll": "Dm",
+  "g-Moll": "Gm",
+  "c-Moll": "Cm",
+  "f-Moll": "Fm",
+  "bb-Moll": "Bbm",
+  "eb-Moll": "Ebm",
+  "ab-Moll": "Abm"
+};
+
+function getCorrectedKeySignature(tonart){
+  if(tonart[1] === "s") tonart = tonart[0] + "b" + tonart.substr(2);
+  
+  return tonart;
+}
+
 function getTriadNotes(scalesMap, tonart){
 	// Deutsche Notation zu englischer umwandeln, z.B. Es -> Eb
-	if(tonart[1] === "s") tonart = tonart[0] + "b" + tonart.substr(2);
+	// if(tonart[1] === "s") tonart = tonart[0] + "b" + tonart.substr(2);
 	
 	let tones = scalesMap[tonart];
      
@@ -133,7 +208,7 @@ function getTriadNotes(scalesMap, tonart){
 function getNotesHelmholz(triadNotesScientific){
 	let notes = [];
 	triadNotesScientific.forEach(note => {
-		notes.push(getHelmholtz(abcNoteToPitchMap, note));
+		notes.push(getHelmholtz(helmholtzToScientificPitchMap, note));
 	});
 	
 	return notes;
@@ -145,19 +220,56 @@ function getHelmholtz(noteMap, scientific) {
   );
 }
 
-function getNotesScientific(tones) {
-  const rawNotes = tones.split(/\s+/); // Töne als Array
-  const outputDiv = document.getElementById("notesOutput");
-  outputDiv.innerHTML = "";
+/**
+ * Delivers Abc notation tones. if removeAccidental is true, all prefixes ^ or _ for flat and sharp will be removed.
+ * @param {*} triadNotesHelmholtz 
+ * @param {*} removeAccidental 
+ * @returns 
+ */
+function getAbcNotesFromHelmholtz(triadNotesHelmholtz, removeAccidental){
+	let notes = [];
+	triadNotesHelmholtz.forEach(note => {
+		notes.push(getAbcFromHelmholtz(helmholtzToAbcPitchMap, note, removeAccidental));
+	});
+	
+	return notes;
+}
 
+function getAbcFromHelmholtz(noteMap, helmholtzNote, removeAccidental) {
+  let abcNote = noteMap[helmholtzNote];
+  console.log("AAAAA ", helmholtzNote, abcNote)
+  if(removeAccidental){
+    abcNote = abcNote.replace('^', '');
+    abcNote = abcNote.replace('_', '');
+  }
+
+  return abcNote;
+}
+
+function getNotesScientific(tones, raiseBassTonesOneOctaveHigher = false) {
+  const rawNotes = tones.split(/\s+/); // Töne als Array
+  // const outputDiv = document.getElementById("notesOutput");
+  // outputDiv.innerHTML = "";
+console.log("SSSSS ", tones, rawNotes)
   return rawNotes.map((n, idx) => {
     const note = n.replace(/[()]/g,''); // Klammern entfernen
-    let scientific = abcNoteToPitchMap[note];// || note; // mapping oder unverändert
-	if(scientific && idx > 1){
+    let scientific = helmholtzToScientificPitchMap[note];// || note; // mapping oder unverändert
+console.log("SSSSS note n, note, scientific", n, note, scientific)
+	if(raiseBassTonesOneOctaveHigher && scientific && idx > 1){
 		let intValue = parseInt(scientific[scientific.length-1]) + 1;
 		scientific = scientific.substr(0, scientific.length - 1) + intValue;
-		console.log("InVal", intValue);
+		// console.log("InVal", intValue);
 	}
     return scientific;
   });
+}
+
+function musikalischeTonartToAbc(tonart) {
+  const abcKey = tonartMusikalischToAbcMap[tonart];
+
+  if (!abcKey) {
+    throw new Error(`Unbekannte Tonart: ${tonart}`);
+  }
+
+  return abcKey;
 }

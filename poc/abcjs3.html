@@ -22,7 +22,8 @@
 
 <script>
 const abcNotationDrei = `
-T: SATB Beispiel Dreiklang
+T: SATB Beispiel Dreiklang Klavier
+%%MIDI program 0
 M: D
 L: 1/4
 K: D
@@ -38,7 +39,8 @@ const dreiKlangVisualObj = window.ABCJS.renderAbc("abc_dr-output", abcNotationDr
 })[0];
 
 const abcNotationToene = `
-T: SATB Beispiel Dreiklang + Töne
+T: SATB Beispiel Dreiklang + Töne Voice Aahs
+%%MIDI program 52
 M: D
 L: 1/4
 K: D
@@ -53,9 +55,13 @@ const toeneVisualObj = window.ABCJS.renderAbc("abd_toene-output", abcNotationToe
   //tablature: [{instrument: 'violin'}]
 })[0];
 
+// 0 Piano
+// 42 Cello
+// 53 Voice Oohs
 
 const abcNotationDreiToene = `
-T: SATB Beispiel Dreiklang + Töne
+T: SATB Beispiel Dreiklang + Töne Voice Oohs
+%%MIDI program 53
 M: D
 L: 1/4
 K: D
