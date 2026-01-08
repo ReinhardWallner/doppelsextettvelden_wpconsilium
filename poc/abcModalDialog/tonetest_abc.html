@@ -37,14 +37,23 @@
 
 	<div class="modal-body">	
 		<div>
-			<h3>Tonangabe</h3>
-			
-			<p>
-			<b>Tonart:</b> <label id="tonart-label"> </label>
-			</p>
-			<p>
-			<b>Tonangabe:</b> <label id="tonart-toene"> </label>
-			</p>
+			<div class="modal-header-container">
+				<div class="modal-header-left">
+				<b>Tonart:</b> <label id="tonart-label"> </label>
+				</div>
+				<div class="modal-header-right" style="display: flex; justify-content: flex-end;">
+					<label id="label-playKammerton-btn">
+						<button id="playKammerton-btn" title="Kammerton a (440Hz)" style="background: none; border: none; cursor: pointer;">
+						▶️
+						</button>
+						<span class="label-text">Kammerton a' (440 Hz)</span>
+						<div id="abc-kammerton-output" style="display: none;"> </div>
+					</label>					
+				</div>
+			</div>
+			<div class="modal-header-container">
+				<b>Tonangabe:</b> <label id="tonart-toene"> </label>
+			</div>
 		</div>
 		<div class="radio-group">
 			<label class="radio-options" id="label-nurDreiKlang">
@@ -52,7 +61,7 @@
 				<span class="label-text">Nur Dreiklang</span>
 			</label>
 
-				<label class="radio-options" id="label-akkordUndDreiKlang">
+			<label class="radio-options" id="label-akkordUndDreiKlang">
 				<input type="radio" id="akkordUndDreiKlang" name="ton_abspielen" value="akkorddreiklang">
 				<span class="label-text">Akkord und Dreiklang</span>
 			</label>
@@ -150,7 +159,7 @@
 			<div id="abc-triadandnoteswithaccord-output"> </div>
 		</div>	
 
-		<div class="modal-actions" style="display: flex; justify-content: flex-end; margin: 20px;">
+		<div class="modal-actions" style="display: flex; justify-content: flex-end; margin: 10px;">
 			<button id="cancelPlayTones">Schließen</button>
 		</div>
 	</div>
@@ -173,6 +182,8 @@
 	
 	let midiBuffer = null;
 	let audioContext = null;
+
+	let abcKammertonObj = null;
 	let abcNotationTriadObj = null;
 	let abcNotationTriadWithAccordObj = null;
 	let abcNotationNotesObj = null;
@@ -192,6 +203,13 @@
 
 
 	// Listener für Play/Stop Buttons **nur einmal registrieren**
+	// Kammerton a
+	document.getElementById("playKammerton-btn").addEventListener("click", async () => {
+		if(abcKammertonObj) {
+			await onAudioContextResumed(abcKammertonObj);
+		}
+	});
+
 	// Triad
 	document.getElementById("abc-triad-play-btn").addEventListener("click", async () => {
 		if(abcNotationTriadObj) {
@@ -302,6 +320,10 @@
 	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.6 })[0];
 	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.6 })[0];
 	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.6 })[0];
+
+	let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
+  	console.log("Tones abcKammerton", abcKammerton);
+	abcKammertonObj = window.ABCJS.renderAbc("abc-kammerton-output", abcKammerton, { scale: 0.6 })[0];
 
 	midiBuffer = new ABCJS.synth.CreateSynth();
 	audioContext = new AudioContext();

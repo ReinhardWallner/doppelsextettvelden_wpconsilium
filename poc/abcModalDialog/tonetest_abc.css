@@ -8,7 +8,7 @@
 		align-items: center;
 		background-color: #007acc;
 		color: white;
-		padding: 8px 12px;
+		padding: 5px 12px;
 		font-weight: bold;
 	}
 
@@ -40,19 +40,41 @@
 	}
 
 	.modal-content {
-	background-color: white;
-    border: 1px solid #ccc;      /* sauberer Border */
-    border-radius: 8px;           /* leicht abgerundete Ecken */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* leichter Schatten */
-    max-width: 500px;             /* optional, max. Breite */
-    margin: 40px auto;            /* zentriert auf der Seite */
-    padding: 0;                   /* Padding wird vom Header/Body/Footer übernommen */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;             /* damit die abgerundeten Ecken sauber bleiben */
-
+		background-color: white;
+		border: 1px solid #ccc;      /* sauberer Border */
+		border-radius: 8px;           /* leicht abgerundete Ecken */
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* leichter Schatten */
+		max-width: 550px;             /* optional, max. Breite */
+		margin: 40px auto;            /* zentriert auf der Seite */
+		padding: 0;                   /* Padding wird vom Header/Body/Footer übernommen */
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;             /* damit die abgerundeten Ecken sauber bleiben */
 	}
 		
+	.modal-header-container {
+		display: flex;              /* Nebeneinander anordnen */
+		align-items: center;        /* vertikal zentrieren */
+		gap: 20px;                  /* Abstand zwischen den Divs */
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.modal-header-left {
+		flex: 1;                    /* nimmt den verfügbaren Platz ein */
+	}
+
+	.modal-header-right {
+		display: flex;              
+		justify-content: flex-end;  /* rechts ausrichten */
+		align-items: center;        /* Button + Text vertikal zentrieren */
+	}
+
+	.label-text {
+		margin-left: 5px;           /* Abstand zwischen Button und Text */
+		font-size: 0.9em;           /* kleinere Schriftgröße, optional */
+	}
+
 	.music-btn {
 	  background: #0073aa;
 	  color: white;
@@ -75,11 +97,12 @@
 		flex-direction: column; /* Untereinander */
 		gap: 10px; /* Abstand zwischen den Labels */
 		margin-left: 10px;
+		margin-top: 20px;
 		margin-bottom: 10px;
 	}
 
 	.radio-group label {
-		font-size: 0.9rem; /* Kleinere Schriftgröße */
+		font-size: 1rem; /* Kleinere Schriftgröße */
 		cursor: pointer;
 		display: flex;
 		align-items: center; /* Buttons und Text vertikal zentrieren */

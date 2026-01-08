@@ -237,7 +237,6 @@ function getAbcNotesFromHelmholtz(triadNotesHelmholtz, removeAccidental){
 
 function getAbcFromHelmholtz(noteMap, helmholtzNote, removeAccidental) {
   let abcNote = noteMap[helmholtzNote];
-  console.log("AAAAA ", helmholtzNote, abcNote)
   if(removeAccidental){
     abcNote = abcNote.replace('^', '');
     abcNote = abcNote.replace('_', '');
@@ -248,18 +247,13 @@ function getAbcFromHelmholtz(noteMap, helmholtzNote, removeAccidental) {
 
 function getNotesScientific(tones, raiseBassTonesOneOctaveHigher = false) {
   const rawNotes = tones.split(/\s+/); // Töne als Array
-  // const outputDiv = document.getElementById("notesOutput");
-  // outputDiv.innerHTML = "";
-console.log("SSSSS ", tones, rawNotes)
   return rawNotes.map((n, idx) => {
     const note = n.replace(/[()]/g,''); // Klammern entfernen
     let scientific = helmholtzToScientificPitchMap[note];// || note; // mapping oder unverändert
-console.log("SSSSS note n, note, scientific", n, note, scientific)
-	if(raiseBassTonesOneOctaveHigher && scientific && idx > 1){
-		let intValue = parseInt(scientific[scientific.length-1]) + 1;
-		scientific = scientific.substr(0, scientific.length - 1) + intValue;
-		// console.log("InVal", intValue);
-	}
+	  if(raiseBassTonesOneOctaveHigher && scientific && idx > 1){
+		  let intValue = parseInt(scientific[scientific.length-1]) + 1;
+		  scientific = scientific.substr(0, scientific.length - 1) + intValue;
+	  }
     return scientific;
   });
 }

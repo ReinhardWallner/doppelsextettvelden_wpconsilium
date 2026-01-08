@@ -10,6 +10,18 @@
  * z Pause viertel Note
  * clef=bass Bassschlüssel
 */
+function getSingleToneNotation(key, abcNotes, title, midiProgramNr){
+    let triadLine1 = abcNotes.join('');
+
+    return `T: ${title}
+    %%MIDI program ${midiProgramNr}
+    L: 1
+    K: ${key}
+    V: 1
+    ${triadLine1}
+    `;
+}
+
 function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playAccordPrior, playTriad, playNotes){
     let triadLine1 = "";
     let triadLine2 = "";
