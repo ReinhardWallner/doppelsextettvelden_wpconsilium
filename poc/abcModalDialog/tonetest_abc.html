@@ -284,19 +284,19 @@ function playTone() {
    	let abcTones = getAbcNotesFromHelmholtz(helmTones, true);
    	console.log("Tones abcTones", abcTones);
 
-	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, "Dreiklang", 0, false);
+	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang", 0, false, true, false);
    	console.log("Tones abcNotationTriad", abcNotationTriad);
-	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, "Akkord und Dreiklang", 0, true);
+	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Dreiklang", 0, true, true, false);
    	console.log("Tones abcNotationTriadWithAccord", abcNotationTriadWithAccord);
 
-	let abcNotationNotes = getTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Nur Töne", 0, false);
+	let abcNotationNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Nur Töne", 0, false, false, true);
    	console.log("Tones abcNotationNotes", abcNotationNotes);
-	let abcNotationNotesWithAccord = getTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Töne", 0, true);
+	let abcNotationNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord und Töne", 0, true, false, true);
    	console.log("Tones abcNotationNotesWithAccord", abcNotationNotesWithAccord);
 	
-	let abcNotationTriadAndNotes = getTriadAndTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang und Noten", 0, false);
+	let abcNotationTriadAndNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Dreiklang und Töne", 0, false, true, true);
    	console.log("Tones abcNotationTriadAndNotes", abcNotationTriadAndNotes);
-	let abcNotationTriadAndNotesWithAccord = getTriadAndTonesNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord, Dreiklang und Noten", 0, true);
+	let abcNotationTriadAndNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "Akkord, Dreiklang und Töne", 0, true, true, true);
    	console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
 
 

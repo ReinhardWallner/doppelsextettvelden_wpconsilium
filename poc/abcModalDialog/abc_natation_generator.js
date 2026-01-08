@@ -10,70 +10,31 @@
  * z Pause viertel Note
  * clef=bass Bassschlüssel
 */
-function getTriadNotation(key, triadNotes, title, midiProgramNr, playAccordPrior){
-    let triadText = "";
+function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playAccordPrior, playTriad, playNotes){
+    let triadLine1 = "";
+    let triadLine2 = "";
+    // triad
     if(playAccordPrior && triadNotes && triadNotes.length >=3){
-        triadText = "[" + triadNotes.slice(0, 3).join('2') + "] z | ";
+        triadLine1 = "[" + triadNotes.slice(0, 3).join('2') + "] z | ";
+        triadLine2 = "z2z | ";
+    }
+    if(playTriad){
+        triadLine1 += triadNotes.join('') + " z | ";
+        triadLine2 += "zzzzzz |";
     }
 
-    let triadAbc = triadNotes.join('') + " | ";
+    if(playNotes){
+        // notes
+        triadLine1 += abcNotes.slice(0, abcNotes.length - 2).join('');
+        if(triadLine1.length > 2){
+            triadLine1 += "z";
+        }
 
-    return `T: ${title}
-    %%MIDI program ${midiProgramNr}
-    L: 1/4
-    K: ${key}
-    V: 1
-    ${triadText}${triadAbc}
-    `;
-}
-
-function getTonesNotation(key, triadNotes, abcNotes, title, midiProgramNr, playAccordPrior){
-    let triadText = "";
-    let triadAbcLine1 = abcNotes.slice(0, abcNotes.length - 2).join('');
-    if(triadAbcLine1.length > 2){
-         triadAbcLine1 += "z";
+        for(i=0; i < abcNotes.length - 2; i++){
+            triadLine2 += "z";
+        }
+        triadLine2 += abcNotes.slice(abcNotes.length - 2, abcNotes.length).join('') + " | ";
     }
-
-    let triadAbcLine2 = "";
-    for(i=0; i < abcNotes.length - 2; i++){
-        triadAbcLine2 += "z";
-    }
-    triadAbcLine2 += abcNotes.slice(abcNotes.length - 2, abcNotes.length).join('') + " | ";
-    console.log("GGGGG getTonesNotation", abcNotes, abcNotes.slice(0, abcNotes.length - 2), abcNotes.slice(abcNotes.length - 2, abcNotes.length))
-    if(playAccordPrior && triadNotes && triadNotes.length >=3){
-        triadText = "[" + triadNotes.slice(0, 3).join('2') + "] z | ";
-        triadAbcLine2 = "z2z | " + triadAbcLine2;
-    }
-
-
-    return `T: ${title}
-    %%MIDI program ${midiProgramNr}
-    L: 1/4
-    K: ${key}
-    V: 1
-    ${triadText}${triadAbcLine1}
-    V: 2 clef=bass
-    ${triadAbcLine2}
-    `;
-}
-
-function getTriadAndTonesNotation(key, triadNotes, abcNotes, title, midiProgramNr, playAccordPrior){
-    let triadLine1 = triadNotes.join('') + " z | ";
-    let triadLine2 = "zzzzzz |";
-    if(playAccordPrior && triadNotes && triadNotes.length >=3){
-        triadLine1 = "[" + triadNotes.slice(0, 3).join('2') + "] z | " + triadLine1;
-        triadLine2 = "z2z | " + triadLine2;
-    }
-
-    triadLine1 += abcNotes.slice(0, abcNotes.length - 2).join('');
-    if(triadLine1.length > 2){
-         triadLine1 += "z";
-    }
-
-    for(i=0; i < abcNotes.length - 2; i++){
-        triadLine2 += "z";
-    }
-    triadLine2 += abcNotes.slice(abcNotes.length - 2, abcNotes.length).join('') + " | ";
 
     return `T: ${title}
     %%MIDI program ${midiProgramNr}
