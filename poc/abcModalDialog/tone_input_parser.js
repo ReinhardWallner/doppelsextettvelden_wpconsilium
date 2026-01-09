@@ -8,12 +8,17 @@ function getKeySignature(input) {
     return null;
 }
 
-function getTones(input) {
+function getTones(input, clearEmptyTones) {
     if (typeof input !== "string") return null;
 
     const parts = input.split("/");
-    if(parts.length > 1)
-        return parts[1].trim();
+    if(parts.length > 1) {
+        if(clearEmptyTones) {
+            return parts[1].replaceAll("-", "").trim();
+        } else{
+            return parts[1].trim();
+        }
+    }
 
     return null;
 }

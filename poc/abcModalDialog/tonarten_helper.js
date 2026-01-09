@@ -237,9 +237,11 @@ function getAbcNotesFromHelmholtz(triadNotesHelmholtz, removeAccidental){
 
 function getAbcFromHelmholtz(noteMap, helmholtzNote, removeAccidental) {
   let abcNote = noteMap[helmholtzNote];
+  // console.log("getAbcFromHelmholtz", helmholtzNote, removeAccidental, abcNote)
   if(removeAccidental){
     abcNote = abcNote.replace('^', '');
     abcNote = abcNote.replace('_', '');
+  // console.log("getAbcFromHelmholtz 2", helmholtzNote, removeAccidental, abcNote)
   }
 
   return abcNote;

@@ -55,36 +55,46 @@
 				<b>Tonangabe:</b> <label id="tonart-toene"> </label>
 			</div>
 		</div>
-		<div class="radio-group">
-			<label class="radio-options" id="label-nurDreiKlang">
-				<input type="radio" id="nurDreiKlang" name="ton_abspielen" value="dreiklang">
-				<span class="label-text">Nur Dreiklang</span>
-			</label>
 
-			<label class="radio-options" id="label-akkordUndDreiKlang">
-				<input type="radio" id="akkordUndDreiKlang" name="ton_abspielen" value="akkorddreiklang">
-				<span class="label-text">Akkord und Dreiklang</span>
-			</label>
+		<div class="modal-header-container">
+			<div class="radio-group modal-header-left2">
+				<label class="radio-options" id="label-nurDreiKlang">
+					<input type="radio" id="nurDreiKlang" name="ton_abspielen" value="dreiklang">
+					<span class="label-text">Nur Dreiklang</span>
+				</label>
 
-			<label class="radio-line" id="label-nurTonangabe">
-				<input type="radio" id="nurTonangabe" name="ton_abspielen" value="ton">
-				<span class="label-text">Nur Tonangabe</span>
-			</label>
+				<label class="radio-options" id="label-akkordUndDreiKlang">
+					<input type="radio" id="akkordUndDreiKlang" name="ton_abspielen" value="akkorddreiklang">
+					<span class="label-text">Akkord und Dreiklang</span>
+				</label>
 
-			<label class="radio-line" id="label-akkordUndTonangabe">
-				<input type="radio" id="akkordUndTonangabe" name="ton_abspielen" value="akkordton">
-				<span class="label-text">Akkord und Tonangabe</span>
-			</label>		
+				<label class="radio-line" id="label-nurTonangabe">
+					<input type="radio" id="nurTonangabe" name="ton_abspielen" value="ton">
+					<span class="label-text">Nur Tonangabe</span>
+				</label>
 
-			<label class="radio-line" id="label-dreiklangUndTonangabe">
-				<input type="radio" id="dreiklangUndTonangabe" name="ton_abspielen" value="dreiklangton">
-				<span class="label-text">Dreiklang und Tonangabe</span>
-			</label>
+				<label class="radio-line" id="label-akkordUndTonangabe">
+					<input type="radio" id="akkordUndTonangabe" name="ton_abspielen" value="akkordton">
+					<span class="label-text">Akkord und Tonangabe</span>
+				</label>		
 
-			<label class="radio-line" id="label-akkordDreiklangUndTonangabe">
-				<input type="radio" id="akkordDreiklangUndTonangabe" name="ton_abspielen" value="akkorddreiklangton" checked>
-				<span class="label-text">Akkord, Dreiklang und Tonangabe</span>
-			</label>		
+				<label class="radio-line" id="label-dreiklangUndTonangabe">
+					<input type="radio" id="dreiklangUndTonangabe" name="ton_abspielen" value="dreiklangton">
+					<span class="label-text">Dreiklang und Tonangabe</span>
+				</label>
+
+				<label class="radio-line" id="label-akkordDreiklangUndTonangabe">
+					<input type="radio" id="akkordDreiklangUndTonangabe" name="ton_abspielen" value="akkorddreiklangton" checked>
+					<span class="label-text">Akkord, Dreiklang und Tonangabe</span>
+				</label>		
+			</div>
+			
+			<div class="modal-header-right2">
+				<div class="modal-header-bottom">
+					<label for="tempoSlider"><b>Tempo:</b> <span id="tempoValue">40</span> BPM</label><br>
+					<input type="range" id="tempoSlider" min="20" max="70" value="40" step="1" >
+				</div>
+			</div>
 		</div>
 
 		<div id="abc-triad-container" style="display: flex; align-items: center; gap: 10px;">
@@ -264,17 +274,26 @@
 		if(midiBuffer) midiBuffer.stop();
 	});
 
+	const slider = document.getElementById('tempoSlider');
+	const display = document.getElementById('tempoValue');
+
+	slider.addEventListener('input', () => {
+		display.textContent = slider.value; // live den Wert anzeigen
+	});
+
 
   // Modal öffnen (z.B. von einem Button außerhalb)
   function openTonesModal() {
-   	const song = getSelectedSong();
+   	const songString = getSelectedSong();
+	const song = songString.replace(/\([^)]*\)/g, "");
     var keySignature = getKeySignature(song);
     
     const tonartLabel = document.getElementById("tonart-label");
     tonartLabel.textContent = keySignature;
-    var toene = getTones(song);
+    var tonesUnCleared = getTones(songString);
+    var tones = getTones(song, true);
     const tonartToeneLabel = document.getElementById("tonart-toene");
-    tonartToeneLabel.textContent = toene;
+    tonartToeneLabel.textContent = tonesUnCleared;
 
 	let correctedKeySignature = getCorrectedKeySignature(keySignature);
 
@@ -288,10 +307,9 @@
     let triadAbcNotes = getAbcNotesFromHelmholtz(helm, true);
    	console.log("triad Tones triadAbcNotes", triadAbcNotes);
 
-    let tones = getTones(song);
-   	 console.log("Tones", tones);
-     let notes = getNotesScientific(tones);
-     console.log("Tones scientific", notes);
+  	console.log("Tones", tones);
+    let notes = getNotesScientific(tones);
+    console.log("Tones scientific", notes);
     let helmTones = getNotesHelmholz(notes);
    	console.log("Tones helmNotes", helmTones);
     
@@ -358,7 +376,7 @@
 	return midiBuffer.init({
 		visualObj: visualObj,
 		audioContext: audioContext,
-		<!-- millisecondsPerMeasure: bpmToMs(speedSlider.value) -->
+		millisecondsPerMeasure: bpmToMs(slider.value)
 	})
 	.then(() => midiBuffer.prime()) // actually builds the output buffer.
 		.then(() => {
@@ -366,6 +384,16 @@
 		return Promise.resolve();
 	})
 	.catch(console.warn.bind(console));
+  }
+
+	/**
+	 * Wandelt BPM (Beats per Minute) in Millisekunden pro Schlag um.
+	 * @param {number} bpm - Geschwindigkeit in BPM
+	 * @returns {number} Millisekunden pro Schlag
+	 */
+	function bpmToMs(bpm) {
+		if (bpm <= 0) return 0; // Sicherheitsabfrage
+		return 60000 / bpm;
 	}
 
   // Modal schließen
@@ -390,99 +418,177 @@
   }  
   
 const songList = [
-	"Es-Dur / g' es' b es / 3-1-5-1  B-Dur / f (Solo)...	",
-	"A-Dur / cis' a e a / 3-1-5-1	",
-	"A-Dur / cis'' a' e' a / 3-1-5-1	",
-	"A-Dur / cis'' e' e' A / 3-5-5-1	",
-	"A-Dur / e' (Solo) / e' c' a A / 5-3-1-1	",
-	"A-Dur / e' e' e - / 5-5-5-	",
-	"A-Dur / e' e' e e / 5-5-5-5	",
-	"a-Moll / a' e' c' a / 1-5-3-1	",
-	"As-Dur / - - - As / 1	",
-	"As-Dur / b' g' es es / 5-3-1-1	",
-	"As-Dur / c' as' es' as / 3-1-5-1	",
-	"As-Dur / es' es' es' _ / 5-5-5-_	",
-	"As-Dur / es' es' es' es / 5-5-5-5	",
-	"B-Dur / b (Bass) / 1	",
-	"B-Dur / b' b' b B / 1-1-1-1	",
-	"B-Dur / b' f' d' b / 1-5-3-1	",
-	"B-Dur / d' d' f b / 3-3-5-1	",
-	"B-Dur / d'' b' g b B / 3-1-6-1-1 	",
-	"B-Dur / d'' f' d' b / 3-5-3-1	",
-	"B-Dur / f' d' b B /5-3-1-1	",
-	"C-Dur / c' c' c' c / 5-5-5-5	",
-	"C-Dur / c'' e' g / 1-3-5	",
-	"C-Dur / c'' g' e' c / 1-5-3-1	",
-	"C-Dur / e' c' g c / 3-1-5-1	",
-	"C-Dur / e'' c'' g' c / 3-1-5-1	",
-	"C-Dur / g' e' c' c / 5-3-1-1	",
-	"c-Moll / g'(Solo) g' es' c' c / 5-3-1-1	",
-	"D-Dur /  - fis' a d / -3-5-1	",
-	"D-Dur / a (Solo) d' d' d' d | 1-1-1-1	",
-	"D-Dur / a-a-a-_ / 5-5-5_	",
-	"D-Dur / a' (Solo) a a a a / 5-5-5-5	",
-	"D-Dur / a' (Solo) a' fis' d' d D / 5-e-1-1-1	",
-	"D-Dur / a' a' a a / 5-5-5-5	",
-	"D-Dur / a' fis' a d / 5-3-5-1	",
-	"D-Dur / a' fis' d' _ / 5-3-1_	",
-	"D-Dur / a' fis' d' d / 5-3-1-1	",
-	"D-Dur / d' (S) / 1	",
-	"D-Dur / d' d' d' d' / 1-1-1-1	",
-	"D-Dur / d' d'_  / 1-1_	",
-	"D-Dur / fis' d' a d / 3-1-5-1	",
-	"d-Moll / a' f' d' d / 5-3-1-1	",
-	"d-Moll / f' d' a d / 3-1-5-1	",
-	"d-Moll->e-Moll->fis-Moll / d' d' d' A / 1-1-1-5	",
-	"Des-Dur / f' des' as des / 3-1-5-1	",
-	"E-Dur / b' / 5	",
-	"E-Dur / h h h h /5-5-5-5	",
-	"e-Moll / g' e' h e /3-1-5-1	",
-	"Es-Dur / - g' b g es / 3-5-3-1	",
-	"Es-Dur / b b b b / 5-5-5-5	",
-	"Es-Dur / c'' as' es' es / 6-4-1-1	",
-	"Es-Dur / es' b g es / 1-5-3-1	",
-	"Es-Dur / es' es' es es / 1-1-1-1	",
-	"Es-Dur / es'' g' es / 1-3-1	",
-	"Es-Dur / g' es' b es / 3-1-5-1	",
-	"Es-Dur Beg: B-Dur / b' f' d' b / 1-5-3	",
-	"F-Dur / - c' f f / 5-1-1	",
-	"F-Dur / a' f' c' a / 3-1-5-3	",
-	"F-Dur / a' f' c' f / 3-1-5-1	",
-	"F-Dur / c' c' a f / 5-5-3-1	",
-	"F-Dur / c' c' c c / 5-5-5-5	",
-	"F-Dur / c' c' c' _ / 5-5-5 _	",
-	"F-Dur / c' c' c' c / 5-5-5-5	",
-	"F-Dur / c' c' c' c' / 	",
-	"F-Dur / c' c' c' c' / 5-1-	",
-	"F-Dur / c' f' a a / 5-1-3-1	",
-	"F-Dur / c'' a' f' f / 5-3-1-1	",
-	"F-Dur / c''-a'-f'-f / 5-3-1-1	",
-	"F-Dur / f' / 1	",
-	"F-Dur / f' c' a / 1-5-3	",
-	"F-Dur / f' c' a f / 1-5-3-1	",
-	"F-Dur / f' c' a f F / 1-5-3-1-1	",
-	"F-Dur / f' c' f / 1 5 1	",
-	"F-Dur / f' d' f g	",
-	"F-Dur / f' f' - - / 1-1	",
-	"F-Dur->G-Dur / c' (Solo) / f' c' a f /1-5-3-1	",
-	"G-Dur / - - h d G / --3-5-1	",
-	"G-Dur / a' fis' d' d D / 5-3-1-1-1	",
-	"G-Dur / d' a g h G / 5-2-1-3-1	",
-	"G-Dur / d' d' _ /5-5_	",
-	"G-Dur / d' d' - - / 1-1	",
-	"G-Dur / d' d' d d / 5-5-5-5	",
-	"G-Dur / d' d' d' _ / 5-5-5-	",
-	"G-Dur / d' d' d' d / 5-5-5-5	",
-	"G-Dur / d' d' h g / 5-5-3-1	",
-	"G-Dur / d' h g g / 5-3-1-1	",
-	"G-Dur / d'' (Solo) h' g' d' d' g / 3-1-5-5-1	",
-	"G-Dur / fis' d' a d / 3-1-5-1	",
-	"G-Dur / g' d' h g / 1-5-3-1	",
-	"G-Dur / g' g' g' _ / 1-1-1_	",
-	"G-Dur / h' d' g' g / 3-5-1-1	",
-	"G-Dur / h' g' d' g / 3-1-5-1 	",
-	"g-Moll / g' g' g g / 1-1-1-1	",
-	"H-Dur / fis' / 5	"
+"A-Dur / a' e' (A1) cis' (A2) a - / 1-5-3-4",
+"A-Dur / a' e' cis' a / 1-5-3-1",
+"A-Dur / cis' a e a / 3-1-5-1",
+"A-Dur / cis'' a' e' a / 3-1-5-1",
+"A-Dur / cis' cis' cis' cis' / 3-3-3-3",
+"A-Dur / cis'' e' e' A / 3-5-5-1",
+"A-Dur / e' (Solo) / e' c' a A / 5-3-1-1",
+"A-Dur / e' (Solo) e' e' e e / 5",
+"A-Dur / e' cis' a - / 5-3-1",
+"A-Dur / e' cis' a A / 5-3-1-1",
+"A-Dur / e' e' cis' a / 5-5-3-1",
+"A-Dur / e' e' e - / 5-5-5",
+"A-Dur / e' e' e e / 5-5-5-5",
+"A-Dur / e' h h / 5-2-2",
+"a-Moll / a' e' c' a / 1-5-3-1",
+"As-Dur / - - - As / 1",
+"As-Dur / - c' - - / 3",
+"As-Dur / b' g' es es / 5-3-1-1",
+"As-Dur / c' as' es' as / 3-1-5-1",
+"As-Dur / c' c' f' A / 3-3-6-1",
+"As-Dur / c'' es' - - as / 3-5-1",
+"As-Dur / es' es' b es' / 5-5-2-5",
+"As-Dur / es' es' es' - / 5-5-5",
+"As-Dur / es' es' es' es / 5-5-5-5",
+"B-Dur / - - - b / 1",
+"B-Dur / b' b' b B / 1-1-1-1",
+"B-Dur / b' f' d' b / 1-5-3-1",
+"B-Dur / b' f' d' b B / 1-5-3-1-1",
+"B-Dur / d' b b B / 3-1-1-1",
+"B-Dur / d' b f B / 3-1-5-1",
+"B-Dur / d'' b' g b B / 3-1-6-1-1",
+"B-Dur / d' d' f b / 3-3-5-1",
+"B-Dur / d'' f' d' b / 3-5-3-1",
+"B-Dur / f (Solo) f' d' b B / 5-5-3-1-1",
+"B-Dur / f' d' b B / 5-3-1-1",
+"B-Dur / f' d' b B /5-3-1-1",
+"B-Dur / f' f' f f / 5-5-5-5",
+"B-Dur / f' f' f' f / 5-5-5-5",
+"C-Dur (eigentlich Kirchentonart mixolydisch g-h-d) / d'' h' g' d' g / 2-7-5-2-5",
+"C-Dur / - - - c / 1",
+"C-Dur / - - - d / 2",
+"C-Dur / - - e c / 3-1",
+"C-Dur / c' c' c c / 1-1-1-1",
+"C-Dur / c' c' c' c / 5-5-5-5",
+"C-Dur / c' c' c' c' c' c' / 1-1-1-1-1-1",
+"C-Dur / c'' e' g - / 1-3-5",
+"C-Dur / c'' g' c' c / 1-5-1-1",
+"C-Dur / c'' g' e' c / 1-5-3-1",
+"C-Dur / e' (Solo) d' g g d G / 3-2-5-5-2-5",
+"C-Dur / e' c' g c / 3-1-5-1",
+"C-Dur / e'' c'' g' c / 3-1-5-1",
+"C-Dur / e' e' c' c' / 3-3-1-1",
+"C-Dur / g' e' c' c / 5-3-1-1",
+"C-Dur / g' g' e' c / 5-5-3-1",
+"c-Moll / c'' es' c / 1-3-1",
+"c-Moll / g'(Solo) g' es' c' c / 5-3-1-1",
+"D-Dur / - - - a' - d / 5-1",
+"D-Dur / - - - a / 5",
+"D-Dur / - - d' - / 1",
+"D-Dur / - a - - / 5",
+"D-Dur / - d'- - / 1",
+"D-Dur / - fis' a d / 3-5-1",
+"D-Dur / a' (Solo) a a a a / 5-5-5-5",
+"D-Dur / a' (Solo) a' fis' d' d D / 5-3-1-1-1",
+"D-Dur / a (Solo) d' d' d' d | 1-1-1-1",
+"D-Dur / a / 5",
+"D-Dur / a a a a / 5-5-5-5",
+"D-Dur / a' a' a a / 5-5-5-5",
+"D-Dur / a' a d' d' / 5-5-1-1",
+"D-Dur / a' fis' - - / 5-3",
+"D-Dur / a' fis' a d / 5-3-5-1",
+"D-Dur / a' fis' d' A / 5-3-1-5",
+"D-Dur / a' fis' d' d / 5-3-1-1",
+"D-Dur / a' fis' d' d D / 5-3-1-1-1",
+"D-Dur / d' (Solo) / 1",
+"D-Dur / d' / 1",
+"D-Dur / d' a fis / 1-5-3",
+"D-Dur / d' d' d' d' / 1-1-1-1",
+"D-Dur / d' d' fis d / 1-1-3-1",
+"D-Dur / fis' d' a a d / 3-1-5-5-1",
+"D-Dur / fis' d' a d / 3-1-5-1",
+"D-Dur / fis'' d'' a d / 3-1-5-1",
+"D-Dur / fis' fis' fis fis / 3-3-3-3",
+"D-Dur / h (Solo) g' e' c' A / 4-2-7-5",
+"D-Dur -> E-Dur / - - - d / 1",
+"Des-Dur / as as as as / 5-5-5-5",
+"Des-Dur / as' as' as as / 5-5-5-5",
+"Des-Dur / as' f' des' des / 5-3-1-1",
+"Des-Dur / f' des' as des / 3-1-5-1",
+"d-Moll / a' f' d' d / 5-3-1-1",
+"d-Moll / d' d' d d / 1-1-1-1",
+"d-Moll / f' d' a d / 3-1-5-1",
+"d-Moll->e-Moll->fis-Moll / d' d' d' A / 1-1-1-5",
+"E-Dorisch / e' h g e /",
+"E-Dur / a' (Solo) gis' e' h e / 4-3-1-5-1",
+"E-Dur / gis' (Solo) gis' e' h e / 3-3-1-5-1",
+"E-Dur / h (Solo) cis'' a' e' A / 5-6-4-1-4",
+"E-Dur / h' h' h h / 5-5-5-5",
+"E-Dur / h h h h /5-5-5-5",
+"e-Moll / g' e' h e /3-1-5-1",
+"Es-Dur / - g' b g es / 3-5-3-1",
+"Es-Dur / b' / 5",
+"Es-Dur / b b as f / 5-5-4-2",
+"Es-Dur / b b b b / 5-5-5-5",
+"Es-Dur / b' es' c' g / 5-1-6-3",
+"Es-Dur / b' g' b g / 5-3-5-3",
+"Es-Dur / b' g' es' B / 5-3-1-5",
+"Es-Dur / c'' as' es' es / 6-4-1-1",
+"Es-Dur / es' b g es / 1-5-3-1",
+"Es-Dur / es' es' es es / 1-1-1-1",
+"Es-Dur / es'' g' es / 1-3-1",
+"Es-Dur / g' es' b es / 3-1-5-1",
+"Es-Dur / g' es' b es / 3-1-5-1 B-Dur / f (Solo) b' d' f b / 5 (Solo) 1-3-5-1",
+"Es-Dur Beg: B-Dur / b' f' d' b / 1-5-3",
+"F-Dur / - - f F / 1-1",
+"F-Dur / - c' f f / 5-1-1",
+"F-Dur / a a a a / 3-3-3-3",
+"F-Dur / a' f' c' a / 3-1-5-3",
+"F-Dur / a' f' c' f / 3-1-5-1",
+"F-Dur / c' a f f / 5-3-1-1",
+"F-Dur / c'' a' f' f / 5-3-1-1",
+"F-Dur / c' a' f' f f / 5-3-1-1-1",
+"F-Dur / c' c' a f / 5-5-3-1",
+"F-Dur / c' c' c' - / 5-5-5",
+"F-Dur / c' c' c' c' / 5-1",
+"F-Dur / c' c' c c / 5-5-5-5",
+"F-Dur / c' c' c' c / 5-5-5-5",
+"F-Dur / c' c' c' c' / 5-5-5-5",
+"F-Dur / c' c' c' f / 5-5-5-1",
+"F-Dur / c' f' a a / 5-1-3-1",
+"F-Dur / e' - - f / 2-2-1-1",
+"F-Dur / f' (Solo) b' e' c' g c / 1-4-7-5-2-5",
+"F-Dur / f' / 1",
+"F-Dur / f' c' a / 1-5-3",
+"F-Dur / f' c' a f / 1-5-3-1",
+"F-Dur / f' c' a f F / 1-5-3-1-1",
+"F-Dur / f' c' f / 1 5 1",
+"F-Dur / f' d' f g / 1-6-1-2",
+"F-Dur / f' f' - - / 1-1",
+"F-Dur / f' f' d' B / 1-1-6-4",
+"F-Dur / f' f' f f / 1-1-1-1",
+"F-Dur->G-Dur / c' (Solo) / f' c' a f /1-5-3-1",
+"G.Dur / g' d' h g G / 1-5-3-1-1",
+"G-Dur / - - h d G / 3-5-1",
+"G-Dur / d' - - - / 5",
+"G-Dur / d'' (Solo) h' g' d' d' g / 3-1-5-5-1",
+"G-Dur / d' a g h G / 5-2-1-3-1",
+"G-Dur / d' d' - - / 1-1",
+"G-Dur / d' d' - - / 5-5",
+"G-Dur / d' d' d' - / 5-5-5",
+"G-Dur / d' d' d c / 5-5-5-6",
+"G-Dur / d' d' d d / 5-5-5-5",
+"G-Dur / d' d' d' d / 5-5-5-5",
+"G-Dur / d' d' d' d' / 5-5-5-5",
+"G-Dur / d' d' h g / 5-5-3-1",
+"G-Dur / d'' fis' d' d / 5-7-5-5",
+"G-Dur / d' h d' h / 5-3-5-3",
+"G-Dur / d' h g G / 5-3-1-1",
+"G-Dur / d'' h' g' g / 5-3-1-1",
+"G-Dur / g' d' h g / 1-5-3-1",
+"G-Dur / g' d' h g G /1-5-3-1-1",
+"G-Dur / g' g' g' - / 1-1-1",
+"G-Dur / g' g' g g / 1-1-1-1",
+"G-Dur / h' (Solo) c'' fis' d' d / 3-4-7-5-5",
+"G-Dur / h' d' g' g / 3-5-1-1",
+"G-Dur / h' g' d' d G / 3-1-5-5-1",
+"G-Dur / h' g' d' g / 3-1-5-1",
+"G-Dur / h h g g / 3-3-1-1",
+"g-Moll / g' g' g g / 1-1-1-1",
+"H-Dur / fis' / 5",
+"H-Dur / fis' fis fis Fis / 5-5-5-5"
 	];
 	
 const songSelect = document.getElementById("songSelect");
