@@ -1,0 +1,198 @@
+  body { font-family: sans-serif; padding: 20px; }
+  select, button { font-size: 16px; margin: 5px 0; }
+  .notation { margin-left: 10px; font-weight: bold; }
+	  
+	.modal-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #007acc;
+		color: white;
+		padding: 5px 12px;
+		font-weight: bold;
+	}
+
+	.modal-title {
+		font-size: 1rem;
+	}
+
+	.modal-close {
+		background: none;
+		border: none;
+		color: white;
+		cursor: pointer;
+		font-size: 1rem;
+	}
+
+	/* Modal Body */
+	.modal-body {
+		padding: 10px 15px;
+	}  
+	.modal {
+	  display: none;
+	  position: fixed;
+	  inset: 0;
+	  background: rgba(0,0,0,0.5);
+	}
+
+	.modal.open {
+	  display: block;
+	}
+
+	.modal-content {
+		background-color: white;
+		border: 1px solid #ccc;      /* sauberer Border */
+		border-radius: 8px;           /* leicht abgerundete Ecken */
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* leichter Schatten */
+		max-width: 550px;             /* optional, max. Breite */
+		margin: 40px auto;            /* zentriert auf der Seite */
+		padding: 0;                   /* Padding wird vom Header/Body/Footer übernommen */
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;             /* damit die abgerundeten Ecken sauber bleiben */
+	}
+		
+	.modal-header-container {
+		display: flex;              /* Nebeneinander anordnen */
+		align-items: center;        /* vertikal zentrieren */
+		gap: 20px;                  /* Abstand zwischen den Divs */
+		/*margin-top: 10px;
+		margin-bottom: 10px; */
+	}
+
+	.modal-header-left {
+		flex: 1;                    /* nimmt den verfügbaren Platz ein */
+	}
+
+	.modal-header-right {
+		display: flex;              
+		justify-content: flex-end;  /* rechts ausrichten */
+		align-items: center;        /* Button + Text vertikal zentrieren */
+	}
+
+	.modal-header-left2 {
+		flex: 2;                    /* nimmt den verfügbaren Platz ein */
+	}
+
+	.modal-header-right2 {
+		flex: 1; /* nimmt 1/3 der Breite */
+		display: flex;
+		flex-direction: column; /* vertikal anordnen */
+		justify-content: flex-end; /* alles nach unten schieben */
+		height: 100%; /* wichtig, damit unten funktioniert */
+		margin-right: 20px;
+	}
+
+	#tones-modal .label-text::before {
+		display: none !important;
+	}	
+
+	.label-text {
+		margin-left: 5px;           /* Abstand zwischen Button und Text */
+		font-size: 0.9em;           /* kleinere Schriftgröße, optional */
+	}
+
+	.music-btn {
+	  background: #0073aa;
+	  color: white;
+	  border: none;
+	  padding: 8px 12px;
+	  font-size: 1rem;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 6px;
+	  cursor: pointer;
+	  border-radius: 4px;
+	}
+
+	.music-btn img {
+	  display: inline-block;
+	}	
+
+	.radio-group {
+		display: flex;
+		flex-direction: column; /* Untereinander */
+		/*gap: 10px; /* Abstand zwischen den Labels */
+		margin-left: 10px;
+		/* margin-top: 20px; */
+		margin-bottom: 10px;
+	}
+
+	.radio-group label {
+		/*font-size: 1rem; /* Kleinere Schriftgröße */
+		cursor: pointer;
+		display: flex;
+		align-items: center; /* Buttons und Text vertikal zentrieren */
+	}
+
+	.radio-group input[type="radio"] {
+		margin-right: 10px; /* Abstand zwischen Radio und Text */
+	}
+	.radio-line {
+	  display: block;
+	  cursor: pointer;
+	}
+
+	#abc-triad-output,
+	#abc-triadwithaccord-output
+	#abc-notes-output,
+	#abc-noteswithaccord-output,
+	#abc-triadandnotes-output.modal,
+	#abc-triadandnoteswithaccord-output {
+		overflow: visible; /* wichtig, sonst wird der abgeschnittene Teil nicht sichtbar */
+		display: inline-block;
+	}
+
+	#abc-triad-container,
+	#abc-triadwithaccord-container,
+	#abc-notes-container,
+	#abc-noteswithaccord-container,
+	#abc-triadandnotes-container,
+	#abc-triadandnoteswithaccord-container {
+		display: flex;
+		align-items: center;
+		gap: 10px; /* Abstand Controls ↔ Noten */
+	}
+
+	#abc-triad-controls,
+	#abc-triadwithaccord-controls,
+	#abc-notes-controls,
+	#abc-noteswithaccord-controls,
+	#abc-triadandnotes-controls,
+	#abc-triadandnoteswithaccord-controls {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		align-items: center;
+	}
+
+	/* #abc-triadandnoteswithaccord-controls button {
+		width: 28px;
+		height: 28px;
+		padding: 0;
+		border: none;
+		background: #0a6ebd;
+		color: #fff;
+		font-size: 14px;
+		line-height: 1;
+		cursor: pointer;
+		border-radius: 4px;
+	} */
+
+#playKammerton-btn {
+	appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
+}
+/*
+	.player-btn::before {
+		content: "▶";
+		font-size: 14px;
+	}
+*/		
+	.player-btn:focus {
+		background: #0a6ebd;
+		outline: none;
+	}

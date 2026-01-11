@@ -180,16 +180,18 @@ if ($zip_file_creation) {
 
 get_header();
 
-// cshero_generetor_layout();
-// /**
-//  * Don't display page header if header layout is set as classic blog.
-//  */
-// do_action('hestia_before_single_page_wrapper');
-// hestia_no_content_get_header();
-
-// do_action( 'hestia_page_builder_blank_before_content' );
-
+get_template_part('partials/tonetest_abc');
 ?>
+
+<!-- <script type="module">
+import { initTonesModal, openTonesModal } from '/wp-content/themes/wp_consilium/assets/js/tonetest_abc.js';
+
+// Open Tones Modal muss global sein
+window.openTonesModal = openTonesModal;
+
+// Init Modal prüfen
+initTonesModal();
+</script> -->
 
 <?php
 
@@ -229,6 +231,7 @@ $checkboxArray = array();
 </script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/shared_file_custom-autocomplete.js"></script>
 
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/tonetest_abc.js"></script>
 
 <?php
 $home = home_url( $wp->request );
@@ -488,7 +491,7 @@ error_log("element " . print_r($element, true));
 error_log("file_id " . print_r($file_id, true));							
 
 							$row = '<div class="row1">';
-
+error_log("AAAAA BEFORE  addInfoColumn");	
 							addInfoColumn($row, $data["headrow"], $dataRowArray);
 
 							if(in_array("Id", $headRow)) {

@@ -58,12 +58,19 @@ function getCheckboxField($file_id, $cat_name, $name, $value, &$checkboxArray, $
 
 function addInfoColumn(&$table, $headRow, $dataArray){
 	// Info button
+  	error_log("AAAAAA addInfoColumn START ");
+	$tonartString = null;
+
 	$info = "Titel: " . $dataArray["title"] . "\n";
 	$headrowIndexOffset = 2;
 	for ($n = 1; $n < $dataArray["custom_fields_cntint"]; $n++) {
 		$index = $n + $headrowIndexOffset;
 		if($dataArray["custom_field"][$n] != null){
 			$info .= $headRow[$index] . ": " . $dataArray["custom_field"][$n] . "\n";
+
+			if($headRow[$index] == "Tonart/-angabe (SATB)"){
+				$tonartString = $dataArray["custom_field"][$n];
+			}
 		}
 	}
 
@@ -85,6 +92,19 @@ function addInfoColumn(&$table, $headRow, $dataArray){
   </button>
 
   <div class="info-tooltip">' . $info . '</div>';
+
+  error_log("AAAAAA addInfoColumn BEFORE ADD openTonesModal button " . print_r($tonartString, true));
+
+	// Tonangabe
+	$file_id = $dataArray['file_id'];
+	$tonartStringSafe = str_replace(
+    ["'"],           // zu ersetzende Zeichen
+    ["__"],    // Ersatz
+    $tonartString
+);
+
+	// Button mit single quotes außen, json_encode für JS String
+	$table .= "<button onclick='openTonesModal($file_id, " . json_encode($tonartStringSafe, JSON_UNESCAPED_SLASHES) . ")'>Tonangabe</button>";
 
 	// Link button
   	$linkUrl = get_site_url() . "/shared-files/" . $dataArray["file_id"] . "/"; 

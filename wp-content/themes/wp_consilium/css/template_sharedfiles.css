@@ -64,7 +64,7 @@ select[aria-disabled="true"] {
 .row1 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 70px;   /* erste Spalte */
+  grid-template-columns: 120px;   /* erste Spalte */
   grid-auto-columns: 250px;      /* alle weiteren Spalten */
   width: 100%; /* Breite richtet sich nach Inhalt */
   border-bottom: 1px solid #e6e8ec;

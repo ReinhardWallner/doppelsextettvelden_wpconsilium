@@ -1641,6 +1641,40 @@ console.log('DOMContentLoaded SUBMIT doExcel', doExcel);
 }
 add_action('wp_enqueue_scripts', 'asta_child_sharedfiles_template_custom_scripts');
 
+function wpconsilium_enqueue_tones_modal() {
+	$uri = get_theme_file_uri('/assets/js/tonetest_abc.js');
+	error_log("TTTTT wpconsilium_enqueue_tones_modal" . print_r($uri, true));
+		$uri2 = get_stylesheet_directory_uri() . '/assets/js/tonetest_abc.js';
+	error_log("TTTTT wpconsilium_enqueue_tones_modal" . print_r($uri2, true));
+	// CSS
+	wp_enqueue_style(
+		'tonetest_abc.js-css',
+		get_stylesheet_directory_uri() . '/assets/css/tonetest_abc.css',
+		[],
+		'1.0'
+	);
+
+	// externe libs
+	wp_enqueue_script(
+		'abcjs',
+		'https://cdn.jsdelivr.net/npm/abcjs/dist/abcjs-basic-min.js',
+		[],
+		null,
+		true
+	);
+
+	// // dein Modul
+	// wp_enqueue_script(
+	// 	'tonetest_abc',
+	// 	get_stylesheet_directory_uri() . '/assets/js/tonetest_abc.js',
+	// 	[],
+	// 	time(),
+	// 	false // ⚠️ Header, nicht Footer
+	// );
+	// wp_script_add_data('tonetest_abc', 'type', 'module');
+}
+
+add_action('wp_enqueue_scripts', 'wpconsilium_enqueue_tones_modal');
 
 function tempsharedfiles_enqueue_update_form_styles() {
     // Prüfe, ob eine bestimmte Seitenvorlage verwendet wird
