@@ -423,33 +423,6 @@ function initTonesModal() {
 			await onAudioContextResumed(abcKammertonObj);
 		}
 	});
-  // document.getElementById("playKammerton-btn").addEventListener("touchstart", async (e) => {
-  //   if (abcKammertonObj) onAudioContextResumed(abcKammertonObj);
-  // });
-// addEventListener("touchstart", async (e) => {
-// 	e.preventDefault();
-// 	if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-// 	if (audioContext.state === "suspended") await audioContext.resume();
-// 	if (abcKammertonObj) onAudioContextResumed(abcKammertonObj);
-// });
-
-  // document.getElementById("playKammerton-btn").addEventListener("click", async (e) => {
-  //   e.preventDefault();
-  //   // if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  //   // if (audioContext.state === "suspended") await audioContext.resume();
-  //   if (abcKammertonObj) onAudioContextResumed(abcKammertonObj);
-	// });
-
-
-  // const btn = document.getElementById("playKammerton-btn");
-  // btn.addEventListener("pointerdown", (e) => {
-  //   e.preventDefault();
-
-  //   if (!abcKammertonObj) return;
-
-  //   // unlockAudioContext();   // 🔑 DAS ist der Fix
-  //   onAudioContextResumed(abcKammertonObj);
-  // });
 
 
 	// Triad
@@ -579,9 +552,9 @@ function openTonesModal(file_id, tonartString) {
 	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: 0.6, add_classes: true })[0];
 	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: 0.6 })[0];
 	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: 0.6 })[0];
-	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.6 })[0];
-	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.6 })[0];
-	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.6 })[0];
+	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.4 })[0];
+	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.4 })[0];
+	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.4 })[0];
 
 	let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
   	console.log("Tones abcKammerton", abcKammerton);

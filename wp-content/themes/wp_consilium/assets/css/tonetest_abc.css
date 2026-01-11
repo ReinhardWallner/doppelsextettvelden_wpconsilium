@@ -13,7 +13,7 @@
 	}
 
 	.modal-title {
-		font-size: 1rem;
+		font-size: 1.5rem;
 	}
 
 	.modal-close {
@@ -151,7 +151,7 @@
 	#abc-triadandnoteswithaccord-container {
 		display: flex;
 		align-items: center;
-		gap: 10px; /* Abstand Controls ↔ Noten */
+		gap: 0px; /* Abstand Controls ↔ Noten */
 	}
 
 	#abc-triad-controls,
@@ -164,34 +164,40 @@
 		flex-direction: column;
 		gap: 4px;
 		align-items: center;
+		margin-top: 12px;
 	}
 
-	/* #abc-triadandnoteswithaccord-controls button {
+	.player-btn-wrap {
 		width: 28px;
+		height: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 10px;
+	}
+
+	.player-btn-wrap button {
+		width: 28px;      /* Android-Touchgröße */
 		height: 28px;
 		padding: 0;
 		border: none;
 		background: #0a6ebd;
-		color: #fff;
-		font-size: 14px;
-		line-height: 1;
-		cursor: pointer;
-		border-radius: 4px;
-	} */
-
-#playKammerton-btn {
-	appearance: none;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-
-}
-/*
-	.player-btn::before {
-		content: "▶";
-		font-size: 14px;
+		border-radius: 6px;
+		display: flex;
+  		align-items: center;
+	  	justify-content: center;
 	}
-*/		
+
+	.player-btn svg {
+  		display: block;
+	}
+
+	.player-btn-wrap svg {
+		width: 8px;
+		height: 8px;
+		fill: white;
+	}
+
 	.player-btn:focus {
 		background: #0a6ebd;
 		outline: none;
