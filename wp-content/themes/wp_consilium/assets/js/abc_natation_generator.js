@@ -38,9 +38,12 @@ function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playA
     if(playNotes){
         // notes
         triadLine1 += abcNotes.slice(0, abcNotes.length - 2).join('');
-        if(triadLine1.length > 2){
+        if(abcNotes.length > 2){
+          for(i=2; i < abcNotes.length; i++){
             triadLine1 += "z";
+          }
         }
+        triadLine1 += " | ";
 
         for(i=0; i < abcNotes.length - 2; i++){
             triadLine2 += "z";

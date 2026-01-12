@@ -4,7 +4,9 @@ echo '<div id="tonesModal" class="modal">
   <div class="modal-content">
 	<div class="modal-header">
 		<span class="modal-title">Tonangabe</span>
-		<button class="modal-close" onclick="closeTonesModal()">✖️</button>
+		<button class="modal-close" onclick="closeTonesModal()">
+			<span class="x-symbol">×</span>
+		</button>
 	</div>	
 
 	<div class="modal-body">	
@@ -192,7 +194,7 @@ echo '<div id="tonesModal" class="modal">
 		</div>	
 
 		<div class="modal-actions" style="display: flex; justify-content: flex-end; margin: 10px;">
-			<button id="cancelPlayTones" style="text-transform: none;">Schließen</button>
+			<button id="cancelPlayTones" class="button">Schließen</button>
 		</div>
 	</div>
   </div>

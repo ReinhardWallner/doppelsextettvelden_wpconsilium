@@ -22,6 +22,14 @@
 		color: white;
 		cursor: pointer;
 		font-size: 1rem;
+		text-shadow: 0 0 2px black;
+		padding: 3px 15px 1px 15px !important;
+	}
+
+	.x-symbol {
+		color: white;      /* jetzt wirklich weiß */
+		font-size: 24px;   
+		font-weight: bold;
 	}
 
 	/* Modal Body */
@@ -50,6 +58,15 @@
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;             /* damit die abgerundeten Ecken sauber bleiben */
+	}
+
+	.modal-content input[type="radio"] + span:before,
+	.modal-content input[type="checkbox"] + span:before {
+		background: transparent !important;
+		border: none !important;
+		box-shadow: none !important;
+		width: 0 !important;
+		height: 0 !important;
 	}
 		
 	.modal-header-container {

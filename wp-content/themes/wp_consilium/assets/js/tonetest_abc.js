@@ -336,7 +336,7 @@ function getSingleToneNotation(key, abcNotes, title, midiProgramNr){
     ${triadLine1}
     `;
 }
-
+//"", 0, false, false, true);
 function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playAccordPrior, playTriad, playNotes){
     let triadLine1 = "";
     let triadLine2 = "";
@@ -353,9 +353,12 @@ function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playA
     if(playNotes){
         // notes
         triadLine1 += abcNotes.slice(0, abcNotes.length - 2).join('');
-        if(triadLine1.length > 2){
+        if(abcNotes.length > 2){
+          for(i=2; i < abcNotes.length; i++){
             triadLine1 += "z";
+          }
         }
+        triadLine1 += " | ";
 
         for(i=0; i < abcNotes.length - 2; i++){
             triadLine2 += "z";
@@ -549,12 +552,21 @@ function openTonesModal(file_id, tonartString) {
    	console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
 
 
-	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: 0.6, add_classes: true })[0];
-	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: 0.6 })[0];
-	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: 0.6 })[0];
-	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: 0.4 })[0];
-	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: 0.4 })[0];
-	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: 0.4 })[0];
+  const isMobile = window.matchMedia("(pointer: coarse)").matches;
+  let scale1 = 0.6;
+  let scale2 = 0.6;
+  let scale3 = 0.6;
+  if(isMobile){
+    scale2 = 0.5;
+    scale3 = 0.45
+  }
+
+	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: scale1, add_classes: true })[0];
+	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: scale1 })[0];
+	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: scale1 })[0];
+	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: scale1 })[0];
+	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: scale2 })[0];
+	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: scale3 })[0];
 
 	let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
   	console.log("Tones abcKammerton", abcKammerton);

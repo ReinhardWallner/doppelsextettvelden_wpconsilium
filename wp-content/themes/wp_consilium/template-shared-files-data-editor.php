@@ -352,12 +352,12 @@ if (!$isReadonlyUser){
 
 $searchFields .= '<div class="rows-per-page-div"><label style="margin-right: 10px; margin-left: 20px;">' . esc_html__('Rows per page', 'wp_consilium') . '</label><input type="text" name="elementsPerPage" id="elementsPerPage" style="width: 70px;" value="' . $posts_per_page . '" onblur="elementsPerPageChange(this.name, this.value)"/></div>';
 $searchFields .= '<div class="button-wrapper">';
-$searchFields .= '<button type="button" name="downloadZipBtn" style="float:right" onclick="onZipFileCreationClick()">' . esc_html__('Download ZIP', 'wp_consilium') . '</button>';
+$searchFields .= '<button type="button" name="downloadZipBtn" class="button" style="float:right" onclick="onZipFileCreationClick()">' . esc_html__('Download ZIP', 'wp_consilium') . '</button>';
 $searchFields .= '<input type="hidden" name="excelImportFilename" id="excelImportFilename"/>';
 $searchFields .= '<input type="hidden" name="doExcelExport" id="doExcelExport"/>';
 
 // Download Excel Liste
-$searchFields .= '<button type="button" name="excepExportBtn" style="float:right" onclick="onExcelExportclick()">' . esc_html__('Excel Export', 'wp_consilium') . '</button>';
+$searchFields .= '<button type="button" name="excepExportBtn" class="button" style="float:right" onclick="onExcelExportclick()">' . esc_html__('Excel Export', 'wp_consilium') . '</button>';
 $searchFields .= '<input type="hidden" name="zipfilename" id="zipfilename"/>';
 $searchFields .= '<input type="hidden" name="createzipFile" id="createzipFile"/>';
 $searchFields .= '</div></div>';
