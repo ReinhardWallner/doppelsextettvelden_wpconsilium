@@ -68,6 +68,11 @@
 		width: 0 !important;
 		height: 0 !important;
 	}
+
+	input[type="radio"] + span,
+	input[type="checkbox"] + span {
+		text-transform: none;
+	}
 		
 	.modal-header-container {
 		display: flex;              /* Nebeneinander anordnen */

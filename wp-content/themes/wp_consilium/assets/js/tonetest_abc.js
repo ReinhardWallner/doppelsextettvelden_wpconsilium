@@ -350,7 +350,7 @@ function getTriadNotation(key, triadNotes, abcNotes, title, midiProgramNr, playA
         triadLine2 += "zzzzzz |";
     }
 
-    if(playNotes){
+    if(playNotes && abcNotes){
         // notes
         triadLine1 += abcNotes.slice(0, abcNotes.length - 2).join('');
         if(abcNotes.length > 2){
@@ -502,7 +502,6 @@ function openTonesModal(file_id, tonartString) {
     }
 
     console.log("OOOOO openTonesModal file_id, tonartString", file_id, tonartString);
-      // const songString = getSelectedSong();
     const songString = tonartString;
     const song = songString.replace(/\([^)]*\)/g, "");
     var keySignature = getKeySignature(song);
@@ -514,68 +513,126 @@ function openTonesModal(file_id, tonartString) {
     const tonartToeneLabel = document.getElementById("tonart-toene");
     tonartToeneLabel.textContent = tonesUnCleared;
 
-    let correctedKeySignature = getCorrectedKeySignature(keySignature);
-
-    console.log("triad Notes keySignature, correctedKeySignature, keySignatureAbc", keySignature, correctedKeySignature);
-    let keySignatureAbc = musikalischeTonartToAbc(correctedKeySignature);
-    console.log("triad Notes keySignatureAbc", keySignatureAbc);
-
-    let triadNotes = getTriadNotes(scalesMapTonartenMusikalisch, correctedKeySignature);
-    // console.log("triad Notes triadNotes", triadNotes);
-    let helm = getNotesHelmholz(triadNotes);
-    console.log("triad Notes Helmholtz", helm);
-    let triadAbcNotes = getAbcNotesFromHelmholtz(helm, true);
-   	console.log("triad Tones triadAbcNotes", triadAbcNotes);
-
-  	console.log("Tones", tones);
-    let notes = getNotesScientific(tones);
-    console.log("Tones scientific", notes);
-    let helmTones = getNotesHelmholz(notes);
-   	console.log("Tones helmNotes", helmTones);
+    let abcNotationTriad = null;
+    let abcNotationTriadWithAccord = null;
+    let abcNotationNotes = null;
+    let abcNotationNotesWithAccord = null;
+    let abcNotationTriadAndNotes = null;
+    let abcNotationTriadAndNotesWithAccord = null;
     
-   	let abcTones = getAbcNotesFromHelmholtz(helmTones, true);
-   	console.log("Tones abcTones", abcTones);
+    abcNotationTriadObj = null;
+    abcNotationTriadWithAccordObj = null;
+    abcNotationNotesObj = null;
+    abcNotationNotesWithAccordObj = null;
+    abcNotationTriadNotesObj = null;
+    abcNotationTriadNotesWithAccordObj = null;
+    let abcTones = null;
+    let triadNotes = null;
 
-	let abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, false);
-   	console.log("Tones abcNotationTriad", abcNotationTriad);
-	let abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, false);
-   	console.log("Tones abcNotationTriadWithAccord", abcNotationTriadWithAccord);
+    try {
+      let correctedKeySignature = getCorrectedKeySignature(keySignature);
 
-	let abcNotationNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, false, true);
-   	console.log("Tones abcNotationNotes", abcNotationNotes);
-	let abcNotationNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, false, true);
-   	console.log("Tones abcNotationNotesWithAccord", abcNotationNotesWithAccord);
-	
-	let abcNotationTriadAndNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, true);
-   	console.log("Tones abcNotationTriadAndNotes", abcNotationTriadAndNotes);
-	let abcNotationTriadAndNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, true);
-   	console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
+      console.log("triad Notes keySignature, correctedKeySignature, keySignatureAbc", keySignature, correctedKeySignature);
+      let keySignatureAbc = musikalischeTonartToAbc(correctedKeySignature);
+      console.log("triad Notes keySignatureAbc", keySignatureAbc);
 
+      triadNotes = getTriadNotes(scalesMapTonartenMusikalisch, correctedKeySignature);
+      console.log("triad Notes triadNotes", triadNotes);
+      let helm = getNotesHelmholz(triadNotes);
+      console.log("triad Notes Helmholtz", helm);
+      let triadAbcNotes = getAbcNotesFromHelmholtz(helm, true);
+      console.log("triad Tones triadAbcNotes", triadAbcNotes);
 
-  const isMobile = window.matchMedia("(pointer: coarse)").matches;
-  let scale1 = 0.6;
-  let scale2 = 0.6;
-  let scale3 = 0.6;
-  if(isMobile){
-    scale2 = 0.5;
-    scale3 = 0.45
-  }
+      console.log("Tones", tones);
+      if(tones){
+        let notes = getNotesScientific(tones);
+        console.log("Tones scientific", notes);
+        let helmTones = getNotesHelmholz(notes);
+        console.log("Tones helmNotes", helmTones);
+        
+        abcTones = getAbcNotesFromHelmholtz(helmTones, true);
+        console.log("Tones abcTones", abcTones);
+      }
 
-	abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: scale1, add_classes: true })[0];
-	abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: scale1 })[0];
-	abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: scale1 })[0];
-	abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: scale1 })[0];
-	abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: scale2 })[0];
-	abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: scale3 })[0];
+      abcNotationTriad = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, false);
+      console.log("Tones abcNotationTriad", abcNotationTriad);
+      abcNotationTriadWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, false);
+      console.log("Tones abcNotationTriadWithAccord", abcNotationTriadWithAccord);
 
-	let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
-  	console.log("Tones abcKammerton", abcKammerton);
-	abcKammertonObj = window.ABCJS.renderAbc("abc-kammerton-output", abcKammerton, { scale: 0.6 })[0];
+      abcNotationNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, false, true);
+      console.log("Tones abcNotationNotes", abcNotationNotes);
+      abcNotationNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, false, true);
+      console.log("Tones abcNotationNotesWithAccord", abcNotationNotesWithAccord);
+    
+      abcNotationTriadAndNotes = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, false, true, true);
+      console.log("Tones abcNotationTriadAndNotes", abcNotationTriadAndNotes);
+      abcNotationTriadAndNotesWithAccord = getTriadNotation(keySignatureAbc, triadAbcNotes, abcTones, "", 0, true, true, true);
+      console.log("Tones abcNotationTriadAndNotesWithAccord", abcNotationTriadAndNotesWithAccord);
+    } catch(e) {
+      console.log("Exception ", e);
+    }
 
-	// midiBuffer = new ABCJS.synth.CreateSynth();
-	// audioContext = new AudioContext();
-       
-  tonesModal.classList.add("open");
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    let scale1 = 0.6;
+    let scale2 = 0.6;
+    let scale3 = 0.6;
+    if(isMobile){
+      scale2 = 0.5;
+      scale3 = 0.4;
+    }
+
+    if(!triadNotes){
+      abcNotationTriad = "";
+      abcNotationTriadWithAccord = "";
+      abcNotationNotes = "";
+      abcNotationNotesWithAccord = "";
+      abcNotationTriadAndNotes = "";
+      abcNotationTriadAndNotesWithAccord = "";
+    } else if(!abcTones){
+      abcNotationNotes = "";
+      abcNotationNotesWithAccord = "";
+      abcNotationTriadAndNotes = "";
+      abcNotationTriadAndNotesWithAccord = "";
+    }
+
+    abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: scale1, add_classes: true })[0];
+    abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: scale1 })[0];
+    abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: scale1 })[0];
+    abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: scale1 })[0];
+    abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: scale2 })[0];
+    abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: scale3 })[0];
+
+    let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
+      console.log("Tones abcKammerton", abcKammerton);
+    abcKammertonObj = window.ABCJS.renderAbc("abc-kammerton-output", abcKammerton, { scale: 0.6 })[0];
+
+    tonesModal.classList.add("open");
+
+    setTimeout(() => {
+      if(!abcTones){
+        console.log("DISABLE 1", document.getElementById("akkordUndDreiKlang"))
+        document.getElementById("akkordUndDreiKlang").checked = true;
+        console.log("DISABLE 2", document.getElementById("akkordUndDreiKlang"))
+
+        document.getElementById("nurTonangabe").disabled = true;
+        document.getElementById("akkordUndTonangabe").disabled = true;
+        document.getElementById("dreiklangUndTonangabe").disabled = true;
+        document.getElementById("akkordDreiklangUndTonangabe").disabled = true;
+      } else{
+        console.log("Enable 1", document.getElementById("akkordUndDreiKlang"))
+        document.getElementById("akkordDreiklangUndTonangabe").checked = true;
+        console.log("Enable 2", document.getElementById("akkordUndDreiKlang"))
+
+        document.getElementById("nurTonangabe").disabled = false;
+        document.getElementById("akkordUndTonangabe").disabled = false;
+        document.getElementById("dreiklangUndTonangabe").disabled = false;
+        document.getElementById("akkordDreiklangUndTonangabe").disabled = false;
+      }
+
+      console.log("before updateVisibleAbcContainer ");
+      let checked = document.querySelector('input[name="ton_abspielen"]:checked');
+      updateVisibleAbcContainer(checked.value);
+    }, 100);
 }
 
 function hideAllAbcContainers() {
@@ -681,7 +738,7 @@ function closeTonesModal() {
   const initiallyChecked = document.querySelector('input[name="ton_abspielen"]:checked');
 
   if (initiallyChecked) {
-	updateVisibleAbcContainer(initiallyChecked.value);
+	  updateVisibleAbcContainer(initiallyChecked.value);
   }  
   
 function getSelectedSong(){
