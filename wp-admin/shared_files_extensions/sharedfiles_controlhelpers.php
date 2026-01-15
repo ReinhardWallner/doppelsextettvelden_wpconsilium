@@ -104,7 +104,62 @@ function addInfoColumn(&$table, $headRow, $dataArray){
 );
 
 	// Button mit single quotes außen, json_encode für JS String
-	$table .= "<button onclick='openTonesModal($file_id, " . json_encode($tonartStringSafe, JSON_UNESCAPED_SLASHES) . ")'>Tonangabe</button>";
+	// $table .= "<button onclick='openTonesModal($file_id, " . json_encode($tonartStringSafe, JSON_UNESCAPED_SLASHES) . ")'>Tonangabe</button>";
+	$table .= "<button class='btn-pitch' onclick='openTonesModal($file_id, " . json_encode($tonartStringSafe, JSON_UNESCAPED_SLASHES) . ")'>
+<svg width='28' height='28' viewBox='0 -50 90 605' preserveAspectRatio='xMidYMid meet'>
+  <g transform='rotate(35 0 210)'>
+    <!-- Overlay für dickere Stimmgabel -->
+    <path
+      d='M 23 405
+         A 30 30 0 1 0 67 405
+         L 67 305
+         A 40 40 0 0 0 100 265
+         L 100 5
+         A 10 10 0 0 0 90 0
+         L 75 0
+         A 10 10 0 0 0 65 5
+         L 65 250
+         A 20 20 0 0 1 25 250
+         L 25 5
+         A 10 10 0 0 0 20 0
+         L 0 0
+         A 10 10 0 0 0 -10 5
+         L -10 265
+         A 40 40 0 0 0 23 305
+         Z'
+      fill='none'
+      stroke='lightblue'
+      stroke-width='18'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+    />
+
+    <!-- Hauptpfad -->
+    <path
+      d='M 23 405
+         A 30 30 0 1 0 67 405
+         L 67 305
+         A 40 40 0 0 0 100 265
+         L 100 5
+         A 10 10 0 0 0 90 0
+         L 75 0
+         A 10 10 0 0 0 65 5
+         L 65 250
+         A 20 20 0 0 1 25 250
+         L 25 5
+         A 10 10 0 0 0 20 0
+         L 0 0
+         A 10 10 0 0 0 -10 5
+         L -10 265
+         A 40 40 0 0 0 23 305
+         Z'
+      fill='#5A6B7C'
+      stroke='black'
+      stroke-width='8'
+    />
+  </g>
+</svg>
+	</button>";
 
 	// Link button
   	$linkUrl = get_site_url() . "/shared-files/" . $dataArray["file_id"] . "/"; 

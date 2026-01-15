@@ -571,7 +571,7 @@ function openTonesModal(file_id, tonartString) {
     } catch(e) {
       console.log("Exception ", e);
     }
-
+console.log("AFTER catch ");
     const isMobile = window.matchMedia("(pointer: coarse)").matches;
     let scale1 = 0.6;
     let scale2 = 0.6;
@@ -595,43 +595,53 @@ function openTonesModal(file_id, tonartString) {
       abcNotationTriadAndNotesWithAccord = "";
     }
 
-    abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: scale1, add_classes: true })[0];
-    abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: scale1 })[0];
-    abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: scale1 })[0];
-    abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: scale1 })[0];
-    abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: scale2 })[0];
-    abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: scale3 })[0];
+    console.log("before window.ABCJS.renderAbc ", abcNotationTriadNotesObj);
+    // if(abcNotationTriad)
+      abcNotationTriadObj = window.ABCJS.renderAbc("abc-triad-output", abcNotationTriad, { scale: scale1, add_classes: true })[0];
+    // if(abcNotationTriadWithAccord)
+      abcNotationTriadWithAccordObj = window.ABCJS.renderAbc("abc-triadwithaccord-output", abcNotationTriadWithAccord, { scale: scale1 })[0];
+    // if(abcNotationNotes)
+      abcNotationNotesObj = window.ABCJS.renderAbc("abc-notes-output", abcNotationNotes, { scale: scale1 })[0];
+    // if(abcNotationNotesWithAccord)
+      abcNotationNotesWithAccordObj = window.ABCJS.renderAbc("abc-noteswithaccord-output", abcNotationNotesWithAccord, { scale: scale1 })[0];
+    // if(abcNotationTriadAndNotes)
+      abcNotationTriadNotesObj = window.ABCJS.renderAbc("abc-triadandnotes-output", abcNotationTriadAndNotes, { scale: scale2 })[0];
+    // if(abcNotationTriadAndNotesWithAccord)
+      abcNotationTriadNotesWithAccordObj = window.ABCJS.renderAbc("abc-triadandnoteswithaccord-output", abcNotationTriadAndNotesWithAccord, { scale: scale3 })[0];
 
     let abcKammerton = getSingleToneNotation("C", ["A"], "", 0);
       console.log("Tones abcKammerton", abcKammerton);
     abcKammertonObj = window.ABCJS.renderAbc("abc-kammerton-output", abcKammerton, { scale: 0.6 })[0];
 
+    // midiBuffer = new ABCJS.synth.CreateSynth();
+    // audioContext = new AudioContext();
+        
     tonesModal.classList.add("open");
 
     setTimeout(() => {
-      if(!abcTones){
-        console.log("DISABLE 1", document.getElementById("akkordUndDreiKlang"))
-        document.getElementById("akkordUndDreiKlang").checked = true;
-        console.log("DISABLE 2", document.getElementById("akkordUndDreiKlang"))
+    if(!abcTones){
+      console.log("DISABLE 1", document.getElementById("akkordUndDreiKlang"))
+      document.getElementById("akkordUndDreiKlang").checked = true;
+      console.log("DISABLE 2", document.getElementById("akkordUndDreiKlang"))
 
-        document.getElementById("nurTonangabe").disabled = true;
-        document.getElementById("akkordUndTonangabe").disabled = true;
-        document.getElementById("dreiklangUndTonangabe").disabled = true;
-        document.getElementById("akkordDreiklangUndTonangabe").disabled = true;
-      } else{
-        console.log("Enable 1", document.getElementById("akkordUndDreiKlang"))
-        document.getElementById("akkordDreiklangUndTonangabe").checked = true;
-        console.log("Enable 2", document.getElementById("akkordUndDreiKlang"))
+      document.getElementById("nurTonangabe").disabled = true;
+      document.getElementById("akkordUndTonangabe").disabled = true;
+      document.getElementById("dreiklangUndTonangabe").disabled = true;
+      document.getElementById("akkordDreiklangUndTonangabe").disabled = true;
+    } else{
+      console.log("Enable 1", document.getElementById("akkordUndDreiKlang"))
+      document.getElementById("akkordDreiklangUndTonangabe").checked = true;
+      console.log("Enable 2", document.getElementById("akkordUndDreiKlang"))
 
-        document.getElementById("nurTonangabe").disabled = false;
-        document.getElementById("akkordUndTonangabe").disabled = false;
-        document.getElementById("dreiklangUndTonangabe").disabled = false;
-        document.getElementById("akkordDreiklangUndTonangabe").disabled = false;
-      }
+      document.getElementById("nurTonangabe").disabled = false;
+      document.getElementById("akkordUndTonangabe").disabled = false;
+      document.getElementById("dreiklangUndTonangabe").disabled = false;
+      document.getElementById("akkordDreiklangUndTonangabe").disabled = false;
+    }
 
-      console.log("before updateVisibleAbcContainer ");
-      let checked = document.querySelector('input[name="ton_abspielen"]:checked');
-      updateVisibleAbcContainer(checked.value);
+    console.log("before updateVisibleAbcContainer ");
+    let checked = document.querySelector('input[name="ton_abspielen"]:checked');
+    updateVisibleAbcContainer(checked.value);
     }, 100);
 }
 

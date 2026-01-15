@@ -64,7 +64,7 @@ select[aria-disabled="true"] {
 .row1 {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 120px;   /* erste Spalte */
+  grid-template-columns: 100px;   /* erste Spalte */
   grid-auto-columns: 250px;      /* alle weiteren Spalten */
   width: 100%; /* Breite richtet sich nach Inhalt */
   border-bottom: 1px solid #e6e8ec;
@@ -475,6 +475,12 @@ margin-bottom: .25rem;
     white-space: nowrap; /* verhindert Zeilenumbruch im Button selbst */
   }
 
+  .button {
+    font-family: Arial, Verdana, sans-serif !important;
+    text-transform: none !important;
+  }
+
+
   /* Mobile Styles */
   @media (max-width: 600px) {
     /* Nur die obere Zeile über Logo/Menu */
@@ -707,7 +713,7 @@ margin-bottom: .25rem;
     position: relative;
     display: inline-flex !important;
     align-items: center;
-    gap: 8px;
+    gap: 0px;
     white-space: nowrap;
   }
 
@@ -721,6 +727,8 @@ margin-bottom: .25rem;
     min-width: 22px;
     min-height: 22px;
 
+    margin-top: 2px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -729,6 +737,9 @@ margin-bottom: .25rem;
     color: #535353;
     border-radius: 50%;
     cursor: pointer;
+
+    font-family: Arial, Verdana, sans-serif !important;
+    text-transform: none !important;
   }
 
   button.info-icon svg {
@@ -791,6 +802,43 @@ margin-bottom: .25rem;
     pointer-events: auto;
   }
 
+  .note-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent !important;
+		border: none;
+		border-style: none !important;
+		border-radius: 12px !important;
+		border-width: 0 !important;
+		padding: 0px 3px 7px 3px !important;
+		margin-top: 5px;
+		font-size: 1.2rem;
+		cursor: pointer;
+		transition: transform 0.1s ease, background-color 0.2s ease;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent; /* Mobile Tipp-Highlight entfernen */
+	}
+	
+	  /* Hover & Active Effekte */
+	.note-button:hover {
+		background-color: #45a049;
+	}
+	
+	.note-button:active {
+		transform: scale(0.95);
+	}
+	
+	  /* Notensymbol etwas größer */
+	.note-button .icon {
+		font-size: 1.5rem;
+	}
+
+  .btn-pitch{
+    background-color: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+  }
 
   .btn-title {
     display: inline-flex;          /* Icon sauber zentrieren */
