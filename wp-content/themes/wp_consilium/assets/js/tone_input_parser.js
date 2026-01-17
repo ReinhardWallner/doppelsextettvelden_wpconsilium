@@ -3,9 +3,14 @@ function getKeySignature(input) {
 
     const parts = input.split("/");
     if(parts.length > 0)
-        return parts[0].trim();
+        return getFirstKeySignature(parts[0].trim());
 
     return null;
+}
+
+function getFirstKeySignature(str) {
+  if (!str) return "";
+  return str.split("->")[0];
 }
 
 function getTones(input, clearEmptyTones) {
