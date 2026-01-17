@@ -1642,10 +1642,6 @@ console.log('DOMContentLoaded SUBMIT doExcel', doExcel);
 add_action('wp_enqueue_scripts', 'asta_child_sharedfiles_template_custom_scripts');
 
 function wpconsilium_enqueue_tones_modal() {
-	$uri = get_theme_file_uri('/assets/js/tonetest_abc.js');
-	error_log("TTTTT wpconsilium_enqueue_tones_modal" . print_r($uri, true));
-		$uri2 = get_stylesheet_directory_uri() . '/assets/js/tonetest_abc.js';
-	error_log("TTTTT wpconsilium_enqueue_tones_modal" . print_r($uri2, true));
 	// CSS
 	wp_enqueue_style(
 		'tonetest_abc.js-css',
@@ -1662,16 +1658,6 @@ function wpconsilium_enqueue_tones_modal() {
 		null,
 		true
 	);
-
-	// // dein Modul
-	// wp_enqueue_script(
-	// 	'tonetest_abc',
-	// 	get_stylesheet_directory_uri() . '/assets/js/tonetest_abc.js',
-	// 	[],
-	// 	time(),
-	// 	false // ⚠️ Header, nicht Footer
-	// );
-	// wp_script_add_data('tonetest_abc', 'type', 'module');
 }
 
 add_action('wp_enqueue_scripts', 'wpconsilium_enqueue_tones_modal');
@@ -1701,16 +1687,6 @@ function tempsharedfiles_enqueue_update_form_styles() {
 add_action('wp_enqueue_scripts', 'tempsharedfiles_enqueue_update_form_styles');
 
 add_action( 'init', function() {
-    
-    // $mo = get_stylesheet_directory() . '/languages/de_DE.mo';
-    // if ( file_exists( $mo ) ) {
-    //     $loaded = load_textdomain( 'astra-child', $mo );
-    //     error_log( 'IIIII Manuelles Laden astra-child: ' . ( $loaded ? 'OK' : 'FAILED' ) );
-    // } else {
-    //     error_log( 'IIIII MO Datei nicht gefunden: ' . $mo );
-    // }
-	// $mo = WP_LANG_DIR . '/wp_consilium-de_DE.mo';
-
-	load_theme_textdomain( 'wp_consilium', get_stylesheet_directory() . '/languages' );
+    load_theme_textdomain( 'wp_consilium', get_stylesheet_directory() . '/languages' );
 });
 ?>

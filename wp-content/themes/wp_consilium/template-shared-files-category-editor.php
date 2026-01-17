@@ -105,10 +105,10 @@ $searchFields .= '<label for="sf_category" class="sf_category_label">' . esc_htm
 $searchFields .= $categoryDropdowm;
 // $searchFields .= '<div class="select-with-button">';
 $searchFields .= '</div><div class="buttons-row-category">';
-$searchFields .= ' <button type="button" id="addNewCategory" title="' . esc_html__('Create category', 'wp_consilium') . '" class="small-button">' . esc_html__('Create', 'wp_consilium') . '</button>';
-$searchFields .= ' <button type="button" id="deleteSelectedCategory" title="' . esc_html__('Delete category', 'wp_consilium') . '" disabled="true" class="small-button">' . esc_html__('Delete', 'wp_consilium') . '</button>';
+$searchFields .= ' <button type="button" id="addNewCategory" class="button" title="' . esc_html__('Create category', 'wp_consilium') . '" class="small-button">' . esc_html__('Create', 'wp_consilium') . '</button>';
+$searchFields .= ' <button type="button" id="deleteSelectedCategory" class="button" title="' . esc_html__('Delete category', 'wp_consilium') . '" disabled="true" class="small-button">' . esc_html__('Delete', 'wp_consilium') . '</button>';
 $searchFields .= '    <div class="mobile-spacer"></div>';
-$searchFields .= ' <button type="button" class="reset-button" id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
+$searchFields .= ' <button type="button" class="button reset-button"id="reloadCurrentPage" title="' . esc_html__('Discard changes', 'wp_consilium') . '" disabled="true" class="button">' . esc_html__('Discard changes', 'wp_consilium') . '</button></div>';
 $searchFields .= '</div></form>';
 
 $adminUrl = get_admin_url();

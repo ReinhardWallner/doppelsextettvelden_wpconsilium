@@ -232,6 +232,9 @@ $checkboxArray = array();
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/shared_file_custom-autocomplete.js"></script>
 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/tonetest_abc.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/tone_input_parser.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/tonarten_helper.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/abc_notation_generator.js"></script>
 
 <?php
 $home = home_url( $wp->request );
