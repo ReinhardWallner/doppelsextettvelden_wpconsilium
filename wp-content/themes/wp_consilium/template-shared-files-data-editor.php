@@ -549,6 +549,10 @@ error_log("tags " . print_r($element, true));
 
 	$table .= '</form>';
 
+	if (!$isReadonlyUser){
+		$imgPath = get_template_directory_uri() . "/images/tonleiter.png";
+		$table .= '<div class="tonleiter"><img src="' . $imgPath . '" style="height: 150px;" alt="Tonleiter für die Tonangabe"></div>';
+	}
 
 	// Pagination buttons
 	$pagination_active = 1;

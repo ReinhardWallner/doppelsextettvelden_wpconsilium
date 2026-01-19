@@ -19,7 +19,7 @@ function getTones(input, clearEmptyTones) {
     const parts = input.split("/");
     if(parts.length > 1) {
         if(clearEmptyTones) {
-            return parts[1].replaceAll("-", "").trim();
+            return parts[1].replaceAll("-", " ").trim();
         } else{
             return parts[1].trim();
         }
