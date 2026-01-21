@@ -33,6 +33,10 @@ button:disabled {
     /* optional zur besseren Erkennbarkeit */
 }
 
+.tonleiter {
+  margin-top: 40px !important;
+}
+
 input[type="submit"]:disabled {
     cursor: not-allowed;
     /* oder z.B. 'default', 'help', 'wait', etc. */
@@ -599,6 +603,10 @@ margin-bottom: .25rem;
 
     .shared-files-pagination-improved {
       border: 0px;
+    }
+
+    .tonleiter {
+      margin-top: 0px !important;
     }
   }
 
